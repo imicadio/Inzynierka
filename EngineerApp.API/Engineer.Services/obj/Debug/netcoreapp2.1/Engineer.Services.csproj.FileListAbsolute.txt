@@ -1,0 +1,16 @@
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Services.deps.json
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Services.dll
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.csprojAssemblyReference.cache
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.csproj.CoreCompileInputs.cache
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.AssemblyInfoInputs.cache
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.AssemblyInfo.cs
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Services.runtimeconfig.json
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Services.runtimeconfig.dev.json
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Services.pdb
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Models.dll
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Repositories.dll
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Repositories.pdb
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\bin\Debug\netcoreapp2.1\Engineer.Models.pdb
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.csproj.CopyComplete
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.dll
+H:\github\Inzynierka\EngineerApp.API\Engineer.Services\obj\Debug\netcoreapp2.1\Engineer.Services.pdb
