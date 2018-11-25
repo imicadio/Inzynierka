@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EngineerApp.API.Migrations
 {
-    public partial class UserRoles : Migration
+    public partial class TestTraining : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -58,6 +58,19 @@ namespace EngineerApp.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TypeOfTrainings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypeOfTrainings", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,6 +203,104 @@ namespace EngineerApp.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TrainingDays",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateStart = table.Column<DateTime>(nullable: false),
+                    DateEnd = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    TrainerId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TrainingDays", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TrainingDays_AspNetUsers_TrainerId",
+                        column: x => x.TrainerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_TrainingDays_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Exercises",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TypeOfTrainingId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Exercises", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Exercises_TypeOfTrainings_TypeOfTrainingId",
+                        column: x => x.TypeOfTrainingId,
+                        principalTable: "TypeOfTrainings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ExerciseTrainings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TrainingDayId = table.Column<int>(nullable: false),
+                    ExerciseId = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ExerciseTrainings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ExerciseTrainings_Exercises_ExerciseId",
+                        column: x => x.ExerciseId,
+                        principalTable: "Exercises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ExerciseTrainings_TrainingDays_TrainingDayId",
+                        column: x => x.TrainingDayId,
+                        principalTable: "TrainingDays",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Series",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ExerciseTrainingId = table.Column<int>(nullable: false),
+                    SerialNumber = table.Column<int>(nullable: false),
+                    Number = table.Column<int>(nullable: false),
+                    Unit = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Series", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Series_ExerciseTrainings_ExerciseTrainingId",
+                        column: x => x.ExerciseTrainingId,
+                        principalTable: "ExerciseTrainings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -230,8 +341,38 @@ namespace EngineerApp.API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Exercises_TypeOfTrainingId",
+                table: "Exercises",
+                column: "TypeOfTrainingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseTrainings_ExerciseId",
+                table: "ExerciseTrainings",
+                column: "ExerciseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ExerciseTrainings_TrainingDayId",
+                table: "ExerciseTrainings",
+                column: "TrainingDayId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_UserId",
                 table: "Photos",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Series_ExerciseTrainingId",
+                table: "Series",
+                column: "ExerciseTrainingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainingDays_TrainerId",
+                table: "TrainingDays",
+                column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrainingDays_UserId",
+                table: "TrainingDays",
                 column: "UserId");
         }
 
@@ -256,7 +397,22 @@ namespace EngineerApp.API.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
+                name: "Series");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "ExerciseTrainings");
+
+            migrationBuilder.DropTable(
+                name: "Exercises");
+
+            migrationBuilder.DropTable(
+                name: "TrainingDays");
+
+            migrationBuilder.DropTable(
+                name: "TypeOfTrainings");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

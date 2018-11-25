@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Engineer.Models.Models.Trainings;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Engineer.Models.Models
@@ -20,5 +22,11 @@ namespace Engineer.Models.Models
         public string Country { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
+
+        [InverseProperty("UserPlan")]
+        public ICollection<TrainingDay> Users { get; set; }
+
+        [InverseProperty("TrainerPlan")]
+        public ICollection<TrainingDay> Trainers { get; set; }
     }
 }

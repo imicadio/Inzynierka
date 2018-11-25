@@ -3,6 +3,7 @@ using Engineer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,7 +36,10 @@ namespace Engineer.Repositories.Repositories
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Include(p => p.Photos)
+                .Include(p => p.Trainers)
+                .FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
@@ -50,6 +54,11 @@ namespace Engineer.Repositories.Repositories
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public User GetByUserId(int id)
+        {
+            return _context.Users.Include(u => u.Users).SingleOrDefault(x => x.Id == id);
         }
     }
 }

@@ -11,6 +11,8 @@ using Engineer.Repositories.Interfaces;
 using Engineer.Repositories.Repositories;
 using Engineer.Repositories.Seed;
 using Engineer.Services;
+using Engineer.Services.Interface;
+using Engineer.Services.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -43,6 +45,8 @@ namespace EngineerApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ITrainingService, TrainingService>();            
+
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("EngineerApp.API")));
             IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
             {
@@ -85,7 +89,7 @@ namespace EngineerApp.API
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<Seed>();
+            services.AddTransient<Seed>();            
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
@@ -111,6 +115,7 @@ namespace EngineerApp.API
 
                 c.AddSecurityRequirement(security);
             });
+            services.AddTransient<ITrainingRepository, TrainingRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

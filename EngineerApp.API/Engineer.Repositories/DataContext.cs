@@ -1,4 +1,5 @@
 ﻿using Engineer.Models.Models;
+using Engineer.Models.Models.Trainings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,14 @@ namespace Engineer.Repositories
 
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
+
+        // Training
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseTraining> ExerciseTrainings { get; set; }
+        public DbSet<Serie> Series { get; set; }
+        public DbSet<TrainingDay> TrainingDays { get; set; }
+        public DbSet<TypeOfTraining> TypeOfTrainings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

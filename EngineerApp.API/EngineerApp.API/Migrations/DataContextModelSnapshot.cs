@@ -69,6 +69,103 @@ namespace EngineerApp.API.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.Exercise", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("TypeOfTrainingId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeOfTrainingId");
+
+                    b.ToTable("Exercises");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("ExerciseId");
+
+                    b.Property<int>("TrainingDayId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseId");
+
+                    b.HasIndex("TrainingDayId");
+
+                    b.ToTable("ExerciseTrainings");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.Serie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ExerciseTrainingId");
+
+                    b.Property<int>("Number");
+
+                    b.Property<int>("SerialNumber");
+
+                    b.Property<int>("Unit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExerciseTrainingId");
+
+                    b.ToTable("Series");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.TrainingDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateEnd");
+
+                    b.Property<DateTime>("DateStart");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("TrainerId");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TrainingDays");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.TypeOfTraining", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeOfTrainings");
+                });
+
             modelBuilder.Entity("Engineer.Models.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -232,6 +329,46 @@ namespace EngineerApp.API.Migrations
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.Exercise", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Trainings.TypeOfTraining", "TypeOfTraining")
+                        .WithMany("Exercises")
+                        .HasForeignKey("TypeOfTrainingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Trainings.Exercise", "Exercise")
+                        .WithMany("ExerciseTrainings")
+                        .HasForeignKey("ExerciseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Engineer.Models.Models.Trainings.TrainingDay", "TrainingDay")
+                        .WithMany("ExerciseTrainings")
+                        .HasForeignKey("TrainingDayId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.Serie", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Trainings.ExerciseTraining", "ExerciseTraining")
+                        .WithMany("Series")
+                        .HasForeignKey("ExerciseTrainingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.TrainingDay", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.User", "TrainerPlan")
+                        .WithMany("Trainers")
+                        .HasForeignKey("TrainerId");
+
+                    b.HasOne("Engineer.Models.Models.User", "UserPlan")
+                        .WithMany("Users")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.UserRole", b =>
