@@ -78,6 +78,8 @@ namespace EngineerApp.API
                 options.AddPolicy("RequireTrainerRole", policy => policy.RequireRole("Trainer"));
             });
 
+            services.AddCors();
+
             services.AddMvc(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -89,8 +91,7 @@ namespace EngineerApp.API
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddTransient<Seed>();            
-            services.AddCors();
+            services.AddTransient<Seed>();   
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             // Mapper.Reset();
