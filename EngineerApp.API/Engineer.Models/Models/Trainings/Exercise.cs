@@ -16,6 +16,6 @@ namespace Engineer.Models.Models.Trainings
         [ForeignKey(nameof(TypeOfTrainingId))]
         public TypeOfTraining TypeOfTraining { get; set; }
         
-        public ICollection<ExerciseTraining> ExerciseTrainings { get; set; }
+        //public ICollection<ExerciseTraining> ExerciseTrainings { get; set; }
     }
 }

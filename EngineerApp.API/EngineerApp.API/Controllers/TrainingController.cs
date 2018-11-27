@@ -21,8 +21,9 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTraining(int idUser, int idTrainer, AddTrainingBindingModel model)
+        public async Task<IActionResult> AddTraining(int idUser, int idTrainer, [FromBody]AddTrainingBindingModel model)
         {
+
             var result = await _trainingService.InsertTraining(idUser, idTrainer, model);
 
             if (result.ErrorOccurred)

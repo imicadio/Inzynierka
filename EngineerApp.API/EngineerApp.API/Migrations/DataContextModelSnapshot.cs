@@ -94,13 +94,9 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("ExerciseId");
-
                     b.Property<int>("TrainingDayId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExerciseId");
 
                     b.HasIndex("TrainingDayId");
 
@@ -341,11 +337,6 @@ namespace EngineerApp.API.Migrations
 
             modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
                 {
-                    b.HasOne("Engineer.Models.Models.Trainings.Exercise", "Exercise")
-                        .WithMany("ExerciseTrainings")
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Engineer.Models.Models.Trainings.TrainingDay", "TrainingDay")
                         .WithMany("ExerciseTrainings")
                         .HasForeignKey("TrainingDayId")

@@ -11,8 +11,11 @@ namespace Engineer.Repositories.Interfaces
         TrainingDay GetById(int id);
         TrainingDay GetByName(string name);
         IEnumerable<TrainingDay> GetAll();
-        Task InsertAsync(TrainingDay trainingDay);
+        Task<TrainingDay> InsertAsync(TrainingDay trainingDay);
         Task EditAsync(TrainingDay trainingDay);
         Task DeletetAsync(TrainingDay trainingDay);
+
+        Task<ExerciseTraining> InsertExerciseTrainingAsync(ExerciseTraining exerciseTraining);
+        Task<Serie> InsertSerieAsync(Serie serie);
     }
 }

@@ -14,5 +14,7 @@ namespace Engineer.Models.Dto.Training
         [Required]
         [StringLength(40, ErrorMessage = "Nazwa treningu powinna zawierać od 3 do 40 znaków", MinimumLength = 3)]
         public string Name { get; set; }
+
+        public List<AddExerciseTrainingBindingModel> ExerciseTrainingBindingModels { get; set; }
     }
 }

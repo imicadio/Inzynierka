@@ -84,13 +84,11 @@ namespace Engineer.Services.Repository
         {
             var response = new ResponseDto<BaseModelDto>();
 
-            var training = _trainingRepository.GetByName(model.Name);
-
             var userId = _repoUser.GetByUserId(idUser);
 
             var trainerId = _repoUser.GetByUserId(idTrainer);
 
-            training = new TrainingDay()
+            TrainingDay training = new TrainingDay()
             {
                 Name = model.Name,
                 UserPlan = userId,
@@ -98,7 +96,43 @@ namespace Engineer.Services.Repository
                 ExerciseTrainings = new List<ExerciseTraining>()
             };
 
-            await _trainingRepository.InsertAsync(training);
+            var insertTraining =  await _trainingRepository.InsertAsync(training);
+
+            if (insertTraining == null)
+            {
+                response.Errors.Add("Wystąpił błąd podczas dodawania projektu");
+                return response;
+            }
+
+            ExerciseTraining exerciseTraining = new ExerciseTraining()
+            {
+                TrainingDay = insertTraining,
+                Description = model.ExerciseTrainingBindingModels.Single().Description,
+                Series = new List<Serie>()
+            };
+
+            var addExerciseTraining = await _trainingRepository.InsertExerciseTrainingAsync(exerciseTraining);
+
+            if (addExerciseTraining == null)
+            {
+                response.Errors.Add("addExerciseTraining błąd podczas dodawania projektu");
+                return response;
+            }
+
+            Serie serieAdd = new Serie()
+            {
+                ExerciseTraining = exerciseTraining,
+                SerialNumber = model.ExerciseTrainingBindingModels.Single().SerieBindingModels.Single().SerialNumber,
+                Unit = model.ExerciseTrainingBindingModels.Single().SerieBindingModels.Single().Unit
+            };
+
+            var addSeries = await _trainingRepository.InsertSerieAsync(serieAdd);
+
+            if (serieAdd == null)
+            {
+                response.Errors.Add("serieAdd błąd podczas dodawania projektu");
+                return response;
+            }
 
             return response;
         }
