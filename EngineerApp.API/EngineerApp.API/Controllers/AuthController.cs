@@ -11,6 +11,7 @@ using Engineer.Models.Models;
 using Engineer.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,12 +43,13 @@ namespace EngineerApp.API.Controllers
         {
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
-            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);            
 
-            var userToReturn = _mapper.Map<UserForDetailDto>(userToCreate);
+            var userToReturn = _mapper.Map<UserForDetailDto>(userToCreate);           
 
             if (result.Succeeded)
             {
+                _userManager.AddToRoleAsync(userToCreate, "Trainer").Wait();
                 return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
             }
 

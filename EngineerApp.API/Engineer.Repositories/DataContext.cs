@@ -17,11 +17,10 @@ namespace Engineer.Repositories
         public DbSet<Photo> Photos { get; set; }
 
         // Training
-        public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseTraining> ExerciseTrainings { get; set; }
-        public DbSet<Serie> Series { get; set; }
+        public DbSet<Serie> Series { get; set; }        
         public DbSet<TrainingDay> TrainingDays { get; set; }
-        public DbSet<TypeOfTraining> TypeOfTrainings { get; set; }
+        public DbSet<TrainingPlan> TrainingPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

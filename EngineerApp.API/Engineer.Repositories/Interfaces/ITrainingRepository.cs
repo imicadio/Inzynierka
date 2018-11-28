@@ -8,13 +8,14 @@ namespace Engineer.Repositories.Interfaces
 {
     public interface ITrainingRepository
     {
-        TrainingDay GetById(int id);
-        TrainingDay GetByName(string name);
-        IEnumerable<TrainingDay> GetAll();
-        Task<TrainingDay> InsertAsync(TrainingDay trainingDay);
-        Task EditAsync(TrainingDay trainingDay);
-        Task DeletetAsync(TrainingDay trainingDay);
+        TrainingPlan GetById(int id);
+        TrainingPlan GetByName(string name);
+        IEnumerable<TrainingPlan> GetAll();
+        Task<TrainingPlan> InsertAsync(TrainingPlan trainingPlan);
+        Task EditAsync(TrainingPlan trainingPlan);
+        Task DeletetAsync(TrainingPlan trainingPlan);
 
+        Task<TrainingDay> InsertTrainingDayAsync(TrainingDay trainingDay);
         Task<ExerciseTraining> InsertExerciseTrainingAsync(ExerciseTraining exerciseTraining);
         Task<Serie> InsertSerieAsync(Serie serie);
     }

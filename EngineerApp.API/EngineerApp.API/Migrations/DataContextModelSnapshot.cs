@@ -69,23 +69,6 @@ namespace EngineerApp.API.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Engineer.Models.Models.Trainings.Exercise", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("TypeOfTrainingId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TypeOfTrainingId");
-
-                    b.ToTable("Exercises");
-                });
-
             modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
                 {
                     b.Property<int>("Id")
@@ -130,6 +113,25 @@ namespace EngineerApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Day");
+
+                    b.Property<int>("TrainingPlanId");
+
+                    b.Property<string>("TypeOfTraining");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainingPlanId");
+
+                    b.ToTable("TrainingDays");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.TrainingPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<DateTime>("DateEnd");
 
                     b.Property<DateTime>("DateStart");
@@ -146,20 +148,7 @@ namespace EngineerApp.API.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TrainingDays");
-                });
-
-            modelBuilder.Entity("Engineer.Models.Models.Trainings.TypeOfTraining", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypeOfTrainings");
+                    b.ToTable("TrainingPlans");
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.User", b =>
@@ -327,14 +316,6 @@ namespace EngineerApp.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Engineer.Models.Models.Trainings.Exercise", b =>
-                {
-                    b.HasOne("Engineer.Models.Models.Trainings.TypeOfTraining", "TypeOfTraining")
-                        .WithMany("Exercises")
-                        .HasForeignKey("TypeOfTrainingId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
                 {
                     b.HasOne("Engineer.Models.Models.Trainings.TrainingDay", "TrainingDay")
@@ -352,6 +333,14 @@ namespace EngineerApp.API.Migrations
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.Trainings.TrainingDay", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Trainings.TrainingPlan", "TrainingPlan")
+                        .WithMany("TrainingDays")
+                        .HasForeignKey("TrainingPlanId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Trainings.TrainingPlan", b =>
                 {
                     b.HasOne("Engineer.Models.Models.User", "TrainerPlan")
                         .WithMany("Trainers")

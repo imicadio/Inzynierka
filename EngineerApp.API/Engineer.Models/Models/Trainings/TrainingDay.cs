@@ -10,21 +10,13 @@ namespace Engineer.Models.Models.Trainings
     {
         [Key]
         public int Id { get; set; }
-        public DateTime DateStart { get; set; }
-        public DateTime DateEnd { get; set; }
-        public string Name { get; set; }
-        //public Day Day { get; set; }
+        public string Day { get; set; }
+        public int TrainingPlanId { get; set; }
+        public string TypeOfTraining { get; set; }      
+
+        [ForeignKey(nameof(TrainingPlanId))]
+        public TrainingPlan TrainingPlan { get; set; }
 
         public ICollection<ExerciseTraining> ExerciseTrainings { get; set; }
-
-        // many-to-one User
-        public int? TrainerId { get; set; }
-        [ForeignKey("TrainerId")]
-        public User TrainerPlan { get; set; }
-
-        // many-to-one User
-        public int? UserId { get; set; }
-        [ForeignKey("UserId")]
-        public User UserPlan { get; set; }
     }
 }

@@ -24,9 +24,9 @@ namespace Engineer.Models.Models
         public ICollection<UserRole> UserRoles { get; set; }
 
         [InverseProperty("UserPlan")]
-        public ICollection<TrainingDay> Users { get; set; }
+        public ICollection<TrainingPlan> Users { get; set; }
 
         [InverseProperty("TrainerPlan")]
-        public ICollection<TrainingDay> Trainers { get; set; }
+        public ICollection<TrainingPlan> Trainers { get; set; }
     }
 }

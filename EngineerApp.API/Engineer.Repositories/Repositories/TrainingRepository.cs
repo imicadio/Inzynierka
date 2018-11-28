@@ -18,42 +18,47 @@ namespace Engineer.Repositories.Repositories
             _context = context;
         }
 
-        public async Task DeletetAsync(TrainingDay trainingDay)
+        public async Task DeletetAsync(TrainingPlan trainingPlan)
         {
-            _context.TrainingDays.Remove(trainingDay);
+            _context.TrainingPlans.Remove(trainingPlan);
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditAsync(TrainingDay trainingDay)
+        public async Task EditAsync(TrainingPlan trainingPlan)
         {
-            _context.TrainingDays.Update(trainingDay);
+            _context.TrainingPlans.Update(trainingPlan);
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<TrainingDay> GetAll()
+        public IEnumerable<TrainingPlan> GetAll()
         {
-            return _context.TrainingDays
-                .Include(x => x.ExerciseTrainings)
-                    .ThenInclude(y => y.Series);
+            return _context.TrainingPlans
+                .Include(x => x.TrainingDays)
+                    .ThenInclude(y => y.ExerciseTrainings)
+                        .ThenInclude(z => z.Series);
         }
 
-        public TrainingDay GetById(int id)
+        public TrainingPlan GetById(int id)
         {
-            return _context.TrainingDays
-                .Include(x => x.ExerciseTrainings)
+            return _context.TrainingPlans
+                .Include(x => x.TrainingDays)
+                    .ThenInclude(y => y.ExerciseTrainings)
+                            .ThenInclude(z => z.Series)
                 .SingleOrDefault(s => s.Id == id);
         }
 
-        public TrainingDay GetByName(string name)
+        public TrainingPlan GetByName(string name)
         {
-            return _context.TrainingDays
-                .Include(x => x.ExerciseTrainings)
+            return _context.TrainingPlans
+                .Include(x => x.TrainingDays)
+                    .ThenInclude(y => y.ExerciseTrainings)
+                        .ThenInclude(z => z.Series)
                 .SingleOrDefault(s => s.Name == name);
         }
 
-        public async Task<TrainingDay> InsertAsync(TrainingDay trainingDay)
+        public async Task<TrainingPlan> InsertAsync(TrainingPlan trainingDay)
         {
-            var result = await _context.TrainingDays.AddAsync(trainingDay);
+            var result = await _context.TrainingPlans.AddAsync(trainingDay);
             await _context.SaveChangesAsync();
             return result.Entity;
         }
@@ -68,6 +73,13 @@ namespace Engineer.Repositories.Repositories
         public async Task<Serie> InsertSerieAsync(Serie serie)
         {
             var result = await _context.Series.AddAsync(serie);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+        }
+
+        public async Task<TrainingDay> InsertTrainingDayAsync(TrainingDay trainingDay)
+        {
+            var result = await _context.TrainingDays.AddAsync(trainingDay);
             await _context.SaveChangesAsync();
             return result.Entity;
         }

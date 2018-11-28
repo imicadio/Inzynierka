@@ -1,7 +1,46 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
-    <div *ngFor="let training of trainings.object.trainings" class="col-lg-2 col-md-3 col-sm-6">
-      <h1>{{ training.name }}</h1>
+    <div *ngFor="let training of trainings?.object?.trainings" class="col-lg-2 col-md-3 col-sm-6">
+      <h1>{{ training?.name }}</h1>
     </div>
   </div>
-</div>
+</div> -->
+
+<table mat-table [dataSource]="trainings?.object?.trainings" class="mat-elevation-z8">
+  
+  <!-- Position Column -->
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> # </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Name Description -->
+  <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.exerciseTrainings[0]?.description?.length > 20 ? (element.exerciseTrainings[0]?.description | slice:0:40) + '...' : element.exerciseTrainings[0]?.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Action">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <div class="action-button">
+              <i matTooltip="Szczegóły akcji" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
+                  zoom_in
+              </i>                                
+          </div>
+      </mat-cell>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+  
+  

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Engineer.Models;
+using Engineer.Models.BindingModel.Training;
 using Engineer.Models.Dto.Training;
 using Engineer.Models.Models.Trainings;
 using Engineer.Repositories.Interfaces;
@@ -42,7 +43,7 @@ namespace Engineer.Services.Repository
             return response;
         }
 
-        public Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, EditTrainingBindingModel model)
+        public Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, TrainingPlanBindingModel model)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +81,7 @@ namespace Engineer.Services.Repository
             return response;
         }
 
-        public async Task<ResponseDto<BaseModelDto>> InsertTraining(int idUser, int idTrainer, AddTrainingBindingModel model)
+        public async Task<ResponseDto<BaseModelDto>> InsertTraining(int idUser, int idTrainer, TrainingPlanBindingModel model)
         {
             var response = new ResponseDto<BaseModelDto>();
 
@@ -88,12 +89,11 @@ namespace Engineer.Services.Repository
 
             var trainerId = _repoUser.GetByUserId(idTrainer);
 
-            TrainingDay training = new TrainingDay()
+            TrainingPlan training = new TrainingPlan()
             {
                 Name = model.Name,
                 UserPlan = userId,
-                TrainerPlan = trainerId,
-                ExerciseTrainings = new List<ExerciseTraining>()
+                TrainerPlan = trainerId
             };
 
             var insertTraining =  await _trainingRepository.InsertAsync(training);
@@ -104,34 +104,39 @@ namespace Engineer.Services.Repository
                 return response;
             }
 
-            ExerciseTraining exerciseTraining = new ExerciseTraining()
+            foreach (TrainingDayBindingModel item in model.TrainingDayBindingModels)
             {
-                TrainingDay = insertTraining,
-                Description = model.ExerciseTrainingBindingModels.Single().Description,
-                Series = new List<Serie>()
-            };
+                TrainingDay trainingDay = new TrainingDay()
+                {
+                    Day = item.Day,
+                    TrainingPlanId = insertTraining.Id
+                };
 
-            var addExerciseTraining = await _trainingRepository.InsertExerciseTrainingAsync(exerciseTraining);
+                var insertDay = await _trainingRepository.InsertTrainingDayAsync(trainingDay);
 
-            if (addExerciseTraining == null)
-            {
-                response.Errors.Add("addExerciseTraining błąd podczas dodawania projektu");
-                return response;
-            }
+                foreach (ExerciseTrainingBindingModel exercise in item.ExerciseTrainingBindingModels)
+                {
+                    ExerciseTraining exerciseTraining = new ExerciseTraining()
+                    {
+                        TrainingDayId = insertDay.Id,
+                        Description = exercise.Description
+                    };
 
-            Serie serieAdd = new Serie()
-            {
-                ExerciseTraining = exerciseTraining,
-                SerialNumber = model.ExerciseTrainingBindingModels.Single().SerieBindingModels.Single().SerialNumber,
-                Unit = model.ExerciseTrainingBindingModels.Single().SerieBindingModels.Single().Unit
-            };
+                    var insertExercise = await _trainingRepository.InsertExerciseTrainingAsync(exerciseTraining);
 
-            var addSeries = await _trainingRepository.InsertSerieAsync(serieAdd);
+                    foreach (SerieBindingModel serie in exercise.SerieBindingModels)
+                    {
+                        Serie series = new Serie()
+                        {
+                            ExerciseTrainingId = insertExercise.Id,
+                            SerialNumber = serie.SerialNumber,
+                            Number = serie.Number,
+                            Unit = serie.Unit
+                        };
 
-            if (serieAdd == null)
-            {
-                response.Errors.Add("serieAdd błąd podczas dodawania projektu");
-                return response;
+                        var insertSerie = await _trainingRepository.InsertSerieAsync(series);
+                    }
+                }
             }
 
             return response;

@@ -4,6 +4,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './components/authorization/login/login.component';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -13,7 +14,8 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'dashboard', component: DashboardComponent },
-            { path: 'training', component: TrainingListComponent }
+            { path: 'training', component: TrainingListComponent },
+            { path: 'training/:id', component: TrainingDetailComponent }
         ]
 
     },
