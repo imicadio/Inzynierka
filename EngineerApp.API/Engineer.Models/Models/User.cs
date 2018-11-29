@@ -1,4 +1,5 @@
-﻿using Engineer.Models.Models.Trainings;
+﻿using Engineer.Models.Models.Diets;
+using Engineer.Models.Models.Trainings;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -28,5 +29,11 @@ namespace Engineer.Models.Models
 
         [InverseProperty("TrainerPlan")]
         public ICollection<TrainingPlan> Trainers { get; set; }
+
+        [InverseProperty("UserDiet")]
+        public ICollection<DietPlan> UsersDiet { get; set; }
+
+        [InverseProperty("TrainerDiet")]
+        public ICollection<DietPlan> TrainersDiet { get; set; }
     }
 }

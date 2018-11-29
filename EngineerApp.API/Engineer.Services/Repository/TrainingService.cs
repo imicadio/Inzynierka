@@ -43,9 +43,23 @@ namespace Engineer.Services.Repository
             return response;
         }
 
-        public Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, TrainingPlanBindingModel model)
+        public async Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, TrainingPlanBindingModel model)
         {
-            throw new NotImplementedException();
+            var response = new ResponseDto<BaseModelDto>();
+
+            var training = _trainingRepository.GetById(trainingId);
+
+            if (training == null)
+            {
+                response.Errors.Add("Trening, który chcesz zmodyfikować nie istnieje.");
+                return response;
+            }
+
+            training.Name = model.Name;
+
+            await _trainingRepository.EditAsync(training);
+
+            return response;
         }
 
         public ResponseDto<TrainingDto> GetTraining(int trainingId)

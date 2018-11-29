@@ -10,11 +10,11 @@ namespace Engineer.Models.Dto.Training
         //public DateTime DateStart { get; set; }
         //public DateTime DateEnd { get; set; }
         public string Name { get; set; }
-        public List<ExerciseTrainingDto> ExerciseTrainings { get; set; }
+        public List<TrainingDayDto> TrainingDays { get; set; }
         
         public TrainingDto()
         {
-            ExerciseTrainings = new List<ExerciseTrainingDto>();
+            TrainingDays = new List<TrainingDayDto>();
         }
     }
 }

@@ -8,5 +8,12 @@ namespace Engineer.Models.Dto.Training
     {
         public int Id { get; set; }
         public string Description { get; set; }
+
+        public List<SerieDto> Series { get; set; }
+
+        public ExerciseTrainingDto()
+        {
+            Series = new List<SerieDto>();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Engineer.Models.Models;
+using Engineer.Models.Models.Diets;
 using Engineer.Models.Models.Trainings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -21,6 +22,12 @@ namespace Engineer.Repositories
         public DbSet<Serie> Series { get; set; }        
         public DbSet<TrainingDay> TrainingDays { get; set; }
         public DbSet<TrainingPlan> TrainingPlans { get; set; }
+
+        // Diets
+        public DbSet<DietDay> DietDays { get; set; }
+        public DbSet<DietDetail> DietDetails { get; set; }
+        public DbSet<DietPlan> DietPlans { get; set; }
+        public DbSet<DietProduct> DietProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

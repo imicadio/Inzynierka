@@ -63,5 +63,17 @@ namespace EngineerApp.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut("{trainingId}")]
+        public async Task<IActionResult> EditTraining(int trainingId, TrainingPlanBindingModel model)
+        {
+            var result = await _trainingService.EditTraining(trainingId, model);
+            if (result.ErrorOccurred)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
     }
 }

@@ -19,6 +19,90 @@ namespace EngineerApp.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietDay", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DietPlanId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DietPlanId");
+
+                    b.ToTable("DietDays");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comments");
+
+                    b.Property<int>("DietDayId");
+
+                    b.Property<string>("Dish");
+
+                    b.Property<TimeSpan>("Hour");
+
+                    b.Property<string>("Meal");
+
+                    b.Property<string>("Recipe");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DietDayId");
+
+                    b.ToTable("DietDetails");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("TrainerDietId");
+
+                    b.Property<int?>("UserDietId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainerDietId");
+
+                    b.HasIndex("UserDietId");
+
+                    b.ToTable("DietPlans");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DietDetailId");
+
+                    b.Property<string>("HomeMeasure");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<string>("Unit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DietDetailId");
+
+                    b.ToTable("DietProducts");
+                });
+
             modelBuilder.Entity("Engineer.Models.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -306,6 +390,41 @@ namespace EngineerApp.API.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietDay", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Diets.DietPlan", "DietPlan")
+                        .WithMany("DietDays")
+                        .HasForeignKey("DietPlanId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietDetail", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Diets.DietDay", "DietDay")
+                        .WithMany("DietDetails")
+                        .HasForeignKey("DietDayId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietPlan", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.User", "TrainerDiet")
+                        .WithMany("TrainersDiet")
+                        .HasForeignKey("TrainerDietId");
+
+                    b.HasOne("Engineer.Models.Models.User", "UserDiet")
+                        .WithMany("UsersDiet")
+                        .HasForeignKey("UserDietId");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Diets.DietProduct", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Diets.DietDetail", "DietDetail")
+                        .WithMany("DietProducts")
+                        .HasForeignKey("DietDetailId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.Photo", b =>
