@@ -35,5 +35,11 @@ namespace Engineer.Models.Models
 
         [InverseProperty("TrainerDiet")]
         public ICollection<DietPlan> TrainersDiet { get; set; }
+
+        [InverseProperty("TrainerPupil")]
+        public ICollection<Pupil> TrainersPupil { get; set; }
+
+        [InverseProperty("PupilTrainer")]
+        public Pupil PupilsTrainer { get; set; }
     }
 }

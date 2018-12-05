@@ -55,7 +55,31 @@ namespace Engineer.Services.Repository
                 return response;
             }
 
-            training.Name = model.Name;
+            training.Name = model.Name;            
+
+            foreach (TrainingDayBindingModel item in model.TrainingDayBindingModels)
+            {
+                if (training.TrainingDays.FirstOrDefault().Day != item.Day)
+                    training.TrainingDays.FirstOrDefault().Day = item.Day;
+                            
+                foreach (ExerciseTrainingBindingModel exercise in item.ExerciseTrainingBindingModels)
+                {
+                    if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Description != exercise.Description)
+                        training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Description = exercise.Description;
+
+                    foreach (SerieBindingModel serie in exercise.SerieBindingModels)
+                    {
+                        if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().SerialNumber != serie.SerialNumber)
+                            training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().SerialNumber = serie.SerialNumber;
+
+                        if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Number != serie.Number)
+                            training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Number = serie.Number;
+
+                        if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Unit != serie.Unit)
+                            training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Unit = serie.Unit;
+                    }
+                }
+            }
 
             await _trainingRepository.EditAsync(training);
 
@@ -101,7 +125,27 @@ namespace Engineer.Services.Repository
 
             var userId = _repoUser.GetByUserId(idUser);
 
+            if (userId == null)
+            {
+                response.Errors.Add("Użytkownik, którego chcesz dodać nie istnieje");
+                return response;
+            }
+
             var trainerId = _repoUser.GetByUserId(idTrainer);
+
+            if (trainerId == null)
+            {
+                response.Errors.Add("Wystąpil błąd, spróbuj ponownie później");
+                return response;
+            }
+
+            var verifyUser = _repoUser.VerifyPupilTrainer(trainerId.Id, userId.Id);
+
+            if (verifyUser == null)
+            {
+                response.Errors.Add("Trener nie posiada uprawień dla tego podopiecznego");
+                return response;
+            }
 
             TrainingPlan training = new TrainingPlan()
             {
@@ -133,6 +177,7 @@ namespace Engineer.Services.Repository
                     ExerciseTraining exerciseTraining = new ExerciseTraining()
                     {
                         TrainingDayId = insertDay.Id,
+                        Name = exercise.Name,
                         Description = exercise.Description
                     };
 

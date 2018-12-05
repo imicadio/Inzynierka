@@ -16,6 +16,7 @@ namespace Engineer.Repositories
 
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Pupil> Pupils { get; set; }
 
         // Training
         public DbSet<ExerciseTraining> ExerciseTrainings { get; set; }

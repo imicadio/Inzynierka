@@ -1,10 +1,8 @@
 ﻿using Engineer.Models.Models;
 using Engineer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Engineer.Repositories.Repositories
@@ -59,6 +57,11 @@ namespace Engineer.Repositories.Repositories
         public User GetByUserId(int id)
         {
             return _context.Users.Include(u => u.Users).SingleOrDefault(x => x.Id == id);
+        }
+
+        public Pupil VerifyPupilTrainer(int trainerId, int pupilId)
+        {
+            return _context.Pupils.FirstOrDefault(x => x.TrainerId == trainerId && x.PupilId == pupilId);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Engineer.Models.Models.Trainings
         [Key]
         public int Id { get; set; }
         public int TrainingDayId { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         
         [ForeignKey(nameof(TrainingDayId))]

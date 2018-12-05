@@ -128,6 +128,27 @@ namespace EngineerApp.API.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("Engineer.Models.Models.Pupil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("PupilId");
+
+                    b.Property<int?>("TrainerId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PupilId")
+                        .IsUnique()
+                        .HasFilter("[PupilId] IS NOT NULL");
+
+                    b.HasIndex("TrainerId");
+
+                    b.ToTable("Pupils");
+                });
+
             modelBuilder.Entity("Engineer.Models.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -160,6 +181,8 @@ namespace EngineerApp.API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Name");
 
                     b.Property<int>("TrainingDayId");
 
@@ -433,6 +456,17 @@ namespace EngineerApp.API.Migrations
                         .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Pupil", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.User", "PupilTrainer")
+                        .WithOne("PupilsTrainer")
+                        .HasForeignKey("Engineer.Models.Models.Pupil", "PupilId");
+
+                    b.HasOne("Engineer.Models.Models.User", "TrainerPupil")
+                        .WithMany("TrainersPupil")
+                        .HasForeignKey("TrainerId");
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
