@@ -6,6 +6,7 @@ namespace Engineer.Models.Dto.Training
 {
     public class TrainingDayDto
     {
+        public int Id { get; set; }
         public string Day { get; set; }
         public string TypeOfTraining { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Engineer.Models.BindingModel.Training;
+using Engineer.Models.BindingModel.Training.Edit;
 using Engineer.Models.Dto.Training;
 using Engineer.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
@@ -64,10 +65,56 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{trainingId}")]
-        public async Task<IActionResult> EditTraining(int trainingId, TrainingPlanBindingModel model)
+        [HttpGet("TrainingUsers/{userId}")]
+        public IActionResult GetTrainingUsers(int userId)
+        {
+            var result = _trainingService.GetTrainingUsers(userId);
+            if (result.ErrorOccurred)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpPut("Training/{trainingId}")]
+        public async Task<IActionResult> EditTraining(int trainingId, EditTrainingPlanBindingModel model)
         {
             var result = await _trainingService.EditTraining(trainingId, model);
+            if (result.ErrorOccurred)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut("day/{dayId}")]
+        public async Task<IActionResult> EditDay(int dayId, EditTrainingDayBindingModel model)
+        {
+            var result = await _trainingService.EditDay(dayId, model);
+            if (result.ErrorOccurred)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut("exercise/{exerciseId}")]
+        public async Task<IActionResult> EditExercise(int exerciseId, EditExerciseTrainingBindingModel model)
+        {
+            var result = await _trainingService.EditExercise(exerciseId, model);
+            if (result.ErrorOccurred)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut("serie/{serieId}")]
+        public async Task<IActionResult> EditSerie(int serieId, EditSerieBindingModel model)
+        {
+            var result = await _trainingService.EditSerie(serieId, model);
             if (result.ErrorOccurred)
             {
                 return BadRequest(result);

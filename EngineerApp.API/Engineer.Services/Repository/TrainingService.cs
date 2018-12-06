@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Engineer.Models;
 using Engineer.Models.BindingModel.Training;
+using Engineer.Models.BindingModel.Training.Edit;
 using Engineer.Models.Dto.Training;
 using Engineer.Models.Models.Trainings;
 using Engineer.Repositories.Interfaces;
@@ -43,7 +44,67 @@ namespace Engineer.Services.Repository
             return response;
         }
 
-        public async Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, TrainingPlanBindingModel model)
+        public async Task<ResponseDto<BaseModelDto>> EditDay(int dayId, EditTrainingDayBindingModel model)
+        {
+            var response = new ResponseDto<BaseModelDto>();
+
+            var day = _trainingRepository.GetDayById(dayId);
+
+            if (day == null)
+            {
+                response.Errors.Add("Dzień, który chcesz zmodyfikować nie istnieje.");
+                return response;
+            }
+
+            day.Day = model.Day;
+
+            await _trainingRepository.EditAsyncDay(day);
+
+            return response;
+        }
+
+        public async Task<ResponseDto<BaseModelDto>> EditExercise(int exerciseId, EditExerciseTrainingBindingModel model)
+        {
+            var response = new ResponseDto<BaseModelDto>();
+
+            var exercise = _trainingRepository.GetExerciseById(exerciseId);
+
+            if (exercise == null)
+            {
+                response.Errors.Add("Cwiczenie, który chcesz zmodyfikować nie istnieje.");
+                return response;
+            }
+
+            exercise.Name = model.Name;
+            exercise.Description = model.Description;
+
+            await _trainingRepository.EditAsyncExercise(exercise);
+
+            return response;
+        }
+
+        public async Task<ResponseDto<BaseModelDto>> EditSerie(int serieId, EditSerieBindingModel model)
+        {
+            var response = new ResponseDto<BaseModelDto>();
+
+            var serie = _trainingRepository.GetSerieById(serieId);
+
+            if (serie == null)
+            {
+                response.Errors.Add("Seria, który chcesz zmodyfikować nie istnieje.");
+                return response;
+            }
+
+            serie.SerialNumber = model.SerialNumber;
+            serie.Number = model.Number;
+            serie.Unit = model.Unit;
+
+            await _trainingRepository.EditAsyncSerie(serie);
+
+            return response;
+        }
+
+        public async Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, EditTrainingPlanBindingModel model)
         {
             var response = new ResponseDto<BaseModelDto>();
 
@@ -55,31 +116,7 @@ namespace Engineer.Services.Repository
                 return response;
             }
 
-            training.Name = model.Name;            
-
-            foreach (TrainingDayBindingModel item in model.TrainingDayBindingModels)
-            {
-                if (training.TrainingDays.FirstOrDefault().Day != item.Day)
-                    training.TrainingDays.FirstOrDefault().Day = item.Day;
-                            
-                foreach (ExerciseTrainingBindingModel exercise in item.ExerciseTrainingBindingModels)
-                {
-                    if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Description != exercise.Description)
-                        training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Description = exercise.Description;
-
-                    foreach (SerieBindingModel serie in exercise.SerieBindingModels)
-                    {
-                        if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().SerialNumber != serie.SerialNumber)
-                            training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().SerialNumber = serie.SerialNumber;
-
-                        if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Number != serie.Number)
-                            training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Number = serie.Number;
-
-                        if (training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Unit != serie.Unit)
-                            training.TrainingDays.FirstOrDefault().ExerciseTrainings.FirstOrDefault().Series.FirstOrDefault().Unit = serie.Unit;
-                    }
-                }
-            }
+            training.Name = model.Name;         
 
             await _trainingRepository.EditAsync(training);
 
@@ -117,6 +154,19 @@ namespace Engineer.Services.Repository
             response.Object.Trainings = _mapper.Map<List<TrainingDto>>(trainings);
 
             return response;
+        }
+
+        public ResponseDto<TrainingsDto> GetTrainingUsers(int userId)
+        {            
+            var response = new ResponseDto<TrainingsDto>
+            {
+                Object = new TrainingsDto()
+            };
+
+            var trainings = _trainingRepository.GetAllTrainingUser(userId).ToList();
+            response.Object.Trainings = _mapper.Map<List<TrainingDto>>(trainings);
+
+            return response;            
         }
 
         public async Task<ResponseDto<BaseModelDto>> InsertTraining(int idUser, int idTrainer, TrainingPlanBindingModel model)
@@ -199,6 +249,6 @@ namespace Engineer.Services.Repository
             }
 
             return response;
-        }
+        }        
     }
 }

@@ -45,7 +45,8 @@ namespace EngineerApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ITrainingService, TrainingService>();            
+            services.AddTransient<ITrainingService, TrainingService>();
+            services.AddTransient<ITrainerService, TrainerService>();
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("EngineerApp.API")));
             IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
@@ -117,6 +118,7 @@ namespace EngineerApp.API
                 c.AddSecurityRequirement(security);
             });
             services.AddTransient<ITrainingRepository, TrainingRepository>();
+            services.AddTransient<ITrainerRepository, TrainerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -56,24 +56,6 @@ namespace EngineerApp.API.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPost("AddUser")]
-        public async Task<IActionResult> AddUser([FromBody]UserForRegisterDto userForRegisterDto)
-        {
-            var userToCreate = _mapper.Map<User>(userForRegisterDto);
-
-            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
-
-            var userToReturn = _mapper.Map<UserForDetailDto>(userToCreate);
-
-            if (result.Succeeded)
-            {
-                _userManager.AddToRoleAsync(userToCreate, "User").Wait();
-                return CreatedAtRoute("GetUser", new { controller = "Users", id = userToCreate.Id }, userToReturn);
-            }
-
-            return BadRequest(result.Errors);
-        }
-
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForLoginDto userForLoginDto)

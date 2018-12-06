@@ -6,6 +6,7 @@ namespace Engineer.Models.Dto.Training
 {
     public class TrainingsDto : BaseModelDto
     {
+        public int Id { get; set; }
         public List<TrainingDto> Trainings { get; set; }
         public TrainingsDto()
         {
