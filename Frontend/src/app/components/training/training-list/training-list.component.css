@@ -2,3 +2,7 @@ table {
     width: 100%;
   }
   
+.material-icons {
+  line-height: inherit;
+  cursor: pointer;
+}

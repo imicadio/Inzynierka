@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineerApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181205233031_Testo01")]
-    partial class Testo01
+    [Migration("20181208184000_DietFixed")]
+    partial class DietFixed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,7 +50,7 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<string>("Dish");
 
-                    b.Property<TimeSpan>("Hour");
+                    b.Property<DateTime>("Hour");
 
                     b.Property<string>("Meal");
 

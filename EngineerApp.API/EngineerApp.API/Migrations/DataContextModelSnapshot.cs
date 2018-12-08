@@ -48,7 +48,7 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<string>("Dish");
 
-                    b.Property<TimeSpan>("Hour");
+                    b.Property<DateTime>("Hour");
 
                     b.Property<string>("Meal");
 

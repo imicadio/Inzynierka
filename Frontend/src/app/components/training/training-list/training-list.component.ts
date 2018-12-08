@@ -10,7 +10,7 @@ import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 })
 export class TrainingListComponent implements OnInit {
   trainings: Training[];
-  displayedColumns = ["Id", "Name", "Description", "Action"];
+  displayedColumns = ["Id", "Name", "Action"];
 
   constructor(private trainingService: TrainingService, private alertify: AlertifyService) { }
 

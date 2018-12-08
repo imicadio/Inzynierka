@@ -47,6 +47,7 @@ namespace EngineerApp.API
         {
             services.AddTransient<ITrainingService, TrainingService>();
             services.AddTransient<ITrainerService, TrainerService>();
+            services.AddTransient<IDietService, DietService>();
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("EngineerApp.API")));
             IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
@@ -119,6 +120,7 @@ namespace EngineerApp.API
             });
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<ITrainerRepository, TrainerRepository>();
+            services.AddTransient<IDietRepository, DietRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

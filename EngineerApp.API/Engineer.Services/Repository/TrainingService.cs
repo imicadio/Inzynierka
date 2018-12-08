@@ -57,6 +57,7 @@ namespace Engineer.Services.Repository
             }
 
             day.Day = model.Day;
+            day.TypeOfTraining = model.TypeOfTraining;
 
             await _trainingRepository.EditAsyncDay(day);
 
@@ -208,7 +209,7 @@ namespace Engineer.Services.Repository
 
             if (insertTraining == null)
             {
-                response.Errors.Add("Wystąpił błąd podczas dodawania projektu");
+                response.Errors.Add("Wystąpił błąd podczas dodawania treningu");
                 return response;
             }
 
@@ -217,6 +218,7 @@ namespace Engineer.Services.Repository
                 TrainingDay trainingDay = new TrainingDay()
                 {
                     Day = item.Day,
+                    TypeOfTraining = item.TypeOfTraining,
                     TrainingPlanId = insertTraining.Id
                 };
 

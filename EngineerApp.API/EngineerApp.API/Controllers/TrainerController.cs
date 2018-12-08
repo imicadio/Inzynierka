@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Engineer.Models.Dto.User;
 using Engineer.Services.Interface;
@@ -24,6 +25,9 @@ namespace EngineerApp.API.Controllers
         [HttpPost("AddUser")]
         public async Task<IActionResult> InsertPupil(int id, UserForRegisterDto user)
         {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var result = await _trainerService.InsertPupil(id, user);
 
             if (result.ErrorOccurred)

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EngineerApp.API.Migrations
 {
-    public partial class Testo01 : Migration
+    public partial class DietFixed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -320,7 +320,7 @@ namespace EngineerApp.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Meal = table.Column<string>(nullable: true),
-                    Hour = table.Column<TimeSpan>(nullable: false),
+                    Hour = table.Column<DateTime>(nullable: false),
                     Dish = table.Column<string>(nullable: true),
                     Recipe = table.Column<string>(nullable: true),
                     Comments = table.Column<string>(nullable: true),

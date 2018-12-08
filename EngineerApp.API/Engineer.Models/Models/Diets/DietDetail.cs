@@ -11,7 +11,7 @@ namespace Engineer.Models.Models.Diets
         [Key]
         public int Id { get; set; }
         public string Meal { get; set; }
-        public TimeSpan Hour { get; set; }
+        public DateTime Hour { get; set; }
         public string Dish { get; set; }
         public string Recipe { get; set; }
         public string Comments { get; set; }
