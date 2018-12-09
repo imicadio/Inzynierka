@@ -27,5 +27,6 @@ namespace Engineer.Repositories.Interfaces
         Task EditAsyncProduct(DietProduct dietProduct);
 
         Task DeleteAsyncDiet(DietPlan dietPlan);
+        Task DeleteAsyncDay(DietDay dietDay);
     }
 }

@@ -18,6 +18,12 @@ namespace Engineer.Repositories.Repositories
             _context = context;
         }
 
+        public async Task DeleteAsyncDay(TrainingDay trainingDay)
+        {
+            _context.TrainingDays.Remove(trainingDay);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task DeletetAsync(TrainingPlan trainingPlan)
         {
             _context.TrainingPlans.Remove(trainingPlan);

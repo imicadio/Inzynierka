@@ -85,7 +85,7 @@ namespace Engineer.Services.Repository
             return response;
         }
 
-        public async Task<ResponseDto<BaseModelDto>> EditDiet(int id, EditDietPlanBindingModel model)
+        public async Task<ResponseDto<BaseModelDto>> EditDiet(int id, DietPlanBindingModel model)
         {
             var response = new ResponseDto<BaseModelDto>();
 
@@ -97,9 +97,74 @@ namespace Engineer.Services.Repository
                 return response;
             }
 
+            // Modyfikacja nazwy diety - PUT
             diet.Name = model.Name;
 
             await _dietRepository.EditAsyncDiet(diet);
+
+            // Kaskadowe usuwanie dni dietetycznych
+            // Lista przechowuje Id dni, które zostaną usunięte
+            List<int> listId = new List<int>();
+
+            foreach (DietDay day in diet.DietDays)
+            {
+                var dietDay = _dietRepository.GetDayById(day.Id);
+
+                listId.Add(dietDay.Id);
+            }
+
+            // Kaskadowe usuwanie dni dietetycznych
+            for (int i = 0; i < listId.Count(); i++)
+            {
+                var dietDay = _dietRepository.GetDayById(listId[i]);
+
+                if (dietDay == null)
+                {
+                    response.Errors.Add("Dzień, który chcesz usunąć nie istnieje");
+                    return response;
+                }
+
+                await _dietRepository.DeleteAsyncDay(dietDay);
+            }
+
+            foreach (DietDayBindingModel day in model.DietDayBindingModels)
+            {
+                DietDay dietDay = new DietDay()
+                {
+                    DietPlanId = diet.Id,
+                    Name = day.Name
+                };
+
+                var insertDay = await _dietRepository.InserAsyncDay(dietDay);
+
+                foreach (DietDetailBindingModel detail in day.DietDetailBindingModels)
+                {
+                    DietDetail dietDetail = new DietDetail()
+                    {
+                        DietDayId = insertDay.Id,
+                        Meal = detail.Meal,
+                        Hour = detail.Hour,
+                        Dish = detail.Dish,
+                        Recipe = detail.Recipe,
+                        Comments = detail.Comments
+                    };
+
+                    var insertDetail = await _dietRepository.InsertAsyncDetail(dietDetail);
+
+                    foreach (DietProductBindingModel product in detail.DietProductBindingModels)
+                    {
+                        DietProduct dietProduct = new DietProduct()
+                        {
+                            DietDetailId = insertDetail.Id,
+                            HomeMeasure = product.HomeMeasure,
+                            Quantity = product.Quantity,
+                            Name = product.Name
+                        };
+
+                        var insertProduct = await _dietRepository.InsertAsyncProduct(dietProduct);
+                    }
+                }
+            }
 
             return response;
         }

@@ -28,5 +28,6 @@ namespace Engineer.Repositories.Interfaces
         Task EditAsyncSerie(Serie serie);
 
         Task DeletetAsync(TrainingPlan trainingPlan);
+        Task DeleteAsyncDay(TrainingDay trainingDay);
     }
 }

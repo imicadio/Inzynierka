@@ -17,7 +17,7 @@ namespace Engineer.Services.Interface
 
         Task<ResponseDto<BaseModelDto>> InsertDiet(int idUser, int idTrainer, DietPlanBindingModel model);
                 
-        Task<ResponseDto<BaseModelDto>> EditDiet(int id, EditDietPlanBindingModel model);
+        Task<ResponseDto<BaseModelDto>> EditDiet(int id, DietPlanBindingModel model);
         Task<ResponseDto<BaseModelDto>> EditDay(int id, EditDietDayBindingModel model);
         Task<ResponseDto<BaseModelDto>> EditDetail(int id, EditDietDetailBindingModel model);
         Task<ResponseDto<BaseModelDto>> EditProduct(int id, EditDietProductBindingModel model);

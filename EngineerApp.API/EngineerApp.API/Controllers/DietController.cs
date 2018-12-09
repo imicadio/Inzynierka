@@ -76,8 +76,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("plan")]
-        public async Task <IActionResult> EditDiet(int dietId, int trainerId, EditDietPlanBindingModel model)
+        [HttpPut]
+        public async Task <IActionResult> EditDiet(int dietId, int trainerId, DietPlanBindingModel model)
         {
             var result = await _dietService.EditDiet(dietId, model);
 
@@ -89,43 +89,43 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("day")]
-        public async Task<IActionResult> EditDay(int dayId, EditDietDayBindingModel model)
-        {
-            var result = await _dietService.EditDay(dayId, model);
+        //[HttpPut("day")]
+        //public async Task<IActionResult> EditDay(int dayId, EditDietDayBindingModel model)
+        //{
+        //    var result = await _dietService.EditDay(dayId, model);
 
-            if (result.ErrorOccurred)
-            {
-                return BadRequest(result);
-            }
+        //    if (result.ErrorOccurred)
+        //    {
+        //        return BadRequest(result);
+        //    }
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
-        [HttpPut("detail")]
-        public async Task<IActionResult> EditDetail(int detailId, EditDietDetailBindingModel model)
-        {
-            var result = await _dietService.EditDetail(detailId, model);
+        //[HttpPut("detail")]
+        //public async Task<IActionResult> EditDetail(int detailId, EditDietDetailBindingModel model)
+        //{
+        //    var result = await _dietService.EditDetail(detailId, model);
 
-            if (result.ErrorOccurred)
-            {
-                return BadRequest(result);
-            }
+        //    if (result.ErrorOccurred)
+        //    {
+        //        return BadRequest(result);
+        //    }
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
 
-        [HttpPut("prodyct")]
-        public async Task<IActionResult> EditProduct(int id, EditDietProductBindingModel model)
-        {
-            var result = await _dietService.EditProduct(id, model);
+        //[HttpPut("prodyct")]
+        //public async Task<IActionResult> EditProduct(int id, EditDietProductBindingModel model)
+        //{
+        //    var result = await _dietService.EditProduct(id, model);
 
-            if (result.ErrorOccurred)
-            {
-                return BadRequest(result);
-            }
+        //    if (result.ErrorOccurred)
+        //    {
+        //        return BadRequest(result);
+        //    }
 
-            return Ok(result);
-        }
+        //    return Ok(result);
+        //}
     }
 }

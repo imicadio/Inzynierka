@@ -13,7 +13,7 @@ namespace Engineer.Services.Interface
     {
         Task<ResponseDto<BaseModelDto>> DeleteTraining(int trainingId);
         Task<ResponseDto<BaseModelDto>> InsertTraining(int idUser, int idTrainer, TrainingPlanBindingModel model);
-        Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, EditTrainingPlanBindingModel model);
+        Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, TrainingPlanBindingModel model);
         ResponseDto<TrainingDto> GetTraining(int trainingId);
         ResponseDto<TrainingsDto> GetTrainings();
         ResponseDto<TrainingsDto> GetTrainingUsers(int userId);

@@ -105,7 +105,7 @@ namespace Engineer.Services.Repository
             return response;
         }
 
-        public async Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, EditTrainingPlanBindingModel model)
+        public async Task<ResponseDto<BaseModelDto>> EditTraining(int trainingId, TrainingPlanBindingModel model)
         {
             var response = new ResponseDto<BaseModelDto>();
 
@@ -117,9 +117,72 @@ namespace Engineer.Services.Repository
                 return response;
             }
 
-            training.Name = model.Name;         
+            // Modyfikacja treningu - PUT
+            training.Name = model.Name;            
 
             await _trainingRepository.EditAsync(training);
+            
+            // Kaskadowe usuwanie dni treningowych
+            // Lista przechowuje Id dni, które zostaną usunięte
+            List<int> listId = new List<int>();
+
+            foreach (TrainingDay day in training.TrainingDays)
+            {
+                var trainingDay = _trainingRepository.GetDayById(day.Id);
+
+                listId.Add(trainingDay.Id);
+            }
+
+            // Kaskadowe usuwanie dni treningowych
+            for (int i = 0; i < listId.Count(); i++)
+            {
+                var trainingDay = _trainingRepository.GetDayById(listId[i]);
+
+                if (trainingDay == null)
+                {
+                    response.Errors.Add("Dzień, który chcesz usunąć nie istnieje");
+                    return response;
+                }
+
+                await _trainingRepository.DeleteAsyncDay(trainingDay);
+            }
+
+            foreach (TrainingDayBindingModel item in model.TrainingDayBindingModels)
+            {
+                TrainingDay trainingDay = new TrainingDay()
+                {
+                    Day = item.Day,
+                    TypeOfTraining = item.TypeOfTraining,
+                    TrainingPlanId = training.Id
+                };
+
+                var insertDay = await _trainingRepository.InsertTrainingDayAsync(trainingDay);
+
+                foreach (ExerciseTrainingBindingModel exercise in item.ExerciseTrainingBindingModels)
+                {
+                    ExerciseTraining exerciseTraining = new ExerciseTraining()
+                    {
+                        TrainingDayId = insertDay.Id,
+                        Name = exercise.Name,
+                        Description = exercise.Description
+                    };
+
+                    var insertExercise = await _trainingRepository.InsertExerciseTrainingAsync(exerciseTraining);
+
+                    foreach (SerieBindingModel serie in exercise.SerieBindingModels)
+                    {
+                        Serie series = new Serie()
+                        {
+                            ExerciseTrainingId = insertExercise.Id,
+                            SerialNumber = serie.SerialNumber,
+                            Number = serie.Number,
+                            Unit = serie.Unit
+                        };
+
+                        var insertSerie = await _trainingRepository.InsertSerieAsync(series);
+                    }
+                }
+            }
 
             return response;
         }

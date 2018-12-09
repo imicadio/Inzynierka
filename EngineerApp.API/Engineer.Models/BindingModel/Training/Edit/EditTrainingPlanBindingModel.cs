@@ -7,8 +7,16 @@ namespace Engineer.Models.BindingModel.Training.Edit
 {
     public class EditTrainingPlanBindingModel
     {
-        [Required]
-        [StringLength(40, ErrorMessage = "Nazwa treningu powinna zawierać od 3 do 40 znaków", MinimumLength = 3)]
-        public string Name { get; set; }     
+        public int Id { get; set; }
+        //[Required]
+        //[StringLength(40, ErrorMessage = "Nazwa treningu powinna zawierać od 3 do 40 znaków", MinimumLength = 3)]
+        public string Name { get; set; }
+
+        //public List<EditTrainingDayBindingModel> EditTrainingDayBindingModels { get; set; }
+
+        //public EditTrainingPlanBindingModel()
+        //{
+        //    EditTrainingDayBindingModels = new List<EditTrainingDayBindingModel>();
+        //}
     }
 }
