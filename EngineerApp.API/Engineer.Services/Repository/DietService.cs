@@ -118,7 +118,7 @@ namespace Engineer.Services.Repository
 
             product.HomeMeasure = model.HomeMeasure;
             product.Quantity = model.Quantity;
-            product.Unit = model.Unit;
+            product.Name = model.Name;
 
             await _dietRepository.EditAsyncProduct(product);
 
@@ -243,7 +243,7 @@ namespace Engineer.Services.Repository
                             DietDetailId = insertDetail.Id,
                             HomeMeasure = product.HomeMeasure,
                             Quantity = product.Quantity,
-                            Unit = product.Unit
+                            Name = product.Name
                         };
 
                         var insertProduct = await _dietRepository.InsertAsyncProduct(dietProduct);

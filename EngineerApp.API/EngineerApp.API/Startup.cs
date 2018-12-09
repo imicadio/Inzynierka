@@ -152,6 +152,13 @@ namespace EngineerApp.API
 
             // seeder.SeedUser();
 
+            //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = scope.ServiceProvider.GetService<DataContext>();
+            //    context.Database.Migrate();
+            //    context.SeddDataBase();
+            //}
+
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseMvc();

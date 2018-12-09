@@ -92,9 +92,9 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<string>("HomeMeasure");
 
-                    b.Property<int>("Quantity");
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Unit");
+                    b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 

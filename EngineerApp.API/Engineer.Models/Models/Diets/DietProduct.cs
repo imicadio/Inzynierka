@@ -11,7 +11,7 @@ namespace Engineer.Models.Models.Diets
         [Key]
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public string Unit { get; set; }
+        public string Name { get; set; }
         public string HomeMeasure { get; set; }
         public int DietDetailId { get; set; }
 
