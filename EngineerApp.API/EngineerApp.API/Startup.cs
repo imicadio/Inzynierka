@@ -150,7 +150,7 @@ namespace EngineerApp.API
 
             // app.UseHttpsRedirection();
 
-            // seeder.SeedUser();
+            //seeder.SeedUser();
 
             //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             //{

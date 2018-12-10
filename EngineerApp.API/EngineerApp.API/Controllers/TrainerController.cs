@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EngineerApp.API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class TrainerController : BaseController
     {
         private readonly ITrainerService _trainerService;

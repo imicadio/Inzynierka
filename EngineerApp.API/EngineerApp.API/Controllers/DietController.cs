@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Engineer.Models.BindingModel.Diet;
 using Engineer.Models.BindingModel.Diet.Edit;
@@ -12,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EngineerApp.API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class DietController : BaseController
     {
         private readonly IDietService _dietService;
@@ -54,9 +55,13 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "RequireTrainerRole")]
         [HttpPost]
         public async Task<IActionResult> AddDiet(int idUser, int idTrainer, [FromBody]DietPlanBindingModel model)
         {
+            if (idTrainer != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var result = await _dietService.InsertDiet(idUser, idTrainer, model);
 
             if (result.ErrorOccurred)
@@ -65,9 +70,13 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "RequireTrainerRole")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDiet(int id)
+        public async Task<IActionResult> DeleteDiet(int id, int trainerId)
         {
+            if (trainerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var result = await _dietService.DeleteDiet(id);
 
             if (result.ErrorOccurred)
@@ -76,9 +85,13 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "RequireTrainerRole")]
         [HttpPut]
         public async Task <IActionResult> EditDiet(int dietId, int trainerId, DietPlanBindingModel model)
         {
+            if (trainerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
             var result = await _dietService.EditDiet(dietId, model);
 
             if (result.ErrorOccurred)

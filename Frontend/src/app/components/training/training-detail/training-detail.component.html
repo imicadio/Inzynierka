@@ -1,3 +1,23 @@
 <h1>
-  {{training?.object.id}}
+  <strong>Pland treningowy:</strong><br> 
+  {{training?.object.name}}
 </h1>
+
+<div *ngFor="let day of training?.object?.trainingDays">
+  <div class="box">
+    <div class="title">
+      <h3>{{day.day}}</h3>
+      <h6>Rodzaj treningu: {{day.typeOfTraining}}</h6>
+    </div>    
+    <div class="exercises" *ngFor="let exercise of day?.exerciseTrainings">
+      <div class="exercise">
+        <h5>Nazwa ćwiczenia: {{exercise.name}}</h5>      
+        <h5>Zastrzeżenia: {{exercise.description}}</h5>
+      </div>
+      <div class="serie" >
+        <p *ngFor="let serie of exercise?.series">liczba powtórzeń: {{serie?.number}}</p>
+       </div>
+    </div>
+  </div>
+  <hr>
+</div>

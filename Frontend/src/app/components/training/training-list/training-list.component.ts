@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Training } from 'src/app/models/training';
 import { TrainingService } from 'src/app/services/training/training.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-training-list',
@@ -12,7 +13,7 @@ export class TrainingListComponent implements OnInit {
   trainings: Training[];
   displayedColumns = ["Id", "Name", "Action"];
 
-  constructor(private trainingService: TrainingService, private alertify: AlertifyService) { }
+  constructor(private trainingService: TrainingService, private alertify: AlertifyService, public authService: AuthService) { }
 
   ngOnInit() {
     this.loadTrainings();
@@ -24,6 +25,16 @@ export class TrainingListComponent implements OnInit {
       console.log(trainings);
     }, error => {
       this.alertify.error(error);
+    });
+  }
+
+  deleteTraining(id: number) {
+    this.trainingService.deleteTraining(id, this.authService.decodedToken.nameid).subscribe(()=>{
+      this.alertify.success('Pomyślnie usunięto trening');
+    }, error => {
+      this.alertify.error(error);
+      console.log(this.authService.decodedToken.nameid);
+      console.log(id);
     });
   }
 

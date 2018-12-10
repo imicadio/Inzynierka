@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EngineerApp.API.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class TrainingController : BaseController
     {
         private readonly ITrainingService _trainingService;
@@ -27,8 +27,8 @@ namespace EngineerApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTraining(int idUser, int idTrainer, [FromBody]TrainingPlanBindingModel model)
         {
-            //if (idTrainer != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            //    return Unauthorized();
+            if (idTrainer != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
             var result = await _trainingService.InsertTraining(idUser, idTrainer, model);
 
@@ -39,7 +39,9 @@ namespace EngineerApp.API.Controllers
         }
 
         [Authorize(Policy = "RequireTrainerRole")]
-        [HttpDelete("{trainingId}")]
+        [HttpDelete 
+            
+            ]
         public async Task<IActionResult> DeleteTraining(int trainingId, int trainerId)
         {
             if (trainerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
@@ -88,10 +90,10 @@ namespace EngineerApp.API.Controllers
 
         [Authorize(Policy = "RequireTrainerRole")]
         [HttpPut]
-        public async Task<IActionResult> EditTraining(int trainingId, TrainingPlanBindingModel model)
+        public async Task<IActionResult> EditTraining(int trainingId, int trainerId, TrainingPlanBindingModel model)
         {
-            //if (trainerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            //    return Unauthorized();
+            if (trainerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
 
             var result = await _trainingService.EditTraining(trainingId, model);
             if (result.ErrorOccurred)

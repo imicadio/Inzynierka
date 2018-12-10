@@ -30,9 +30,15 @@
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element">
           <div class="action-button">
-              <i matTooltip="Szczegóły akcji" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
-                  zoom_in
-              </i>                                
+            <i matTooltip="Szczegóły treningu" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
+                zoom_in
+            </i>  
+            <i *appHasRole="['Trainer']" matTooltip="Edytuj trening" [routerLink]="['/training/', element.id]" class="material-icons edit-icon">
+              edit
+            </i>  
+            <i *appHasRole="['Trainer']" (click)="deleteTraining(element.id)" matTooltip="Usuń trening" class="material-icons delete-icon">
+              delete_sweep
+            </i>                               
           </div>
       </td>
   </ng-container>
