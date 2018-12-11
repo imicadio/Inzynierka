@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using Engineer.Models;
 using Engineer.Models.Dto.User;
 using Engineer.Models.Models;
@@ -13,14 +14,14 @@ using System.Threading.Tasks;
 namespace Engineer.Services.Repository
 {
     public class TrainerService : ITrainerService
-    {        
+    {
         private readonly ITrainerRepository _trainerRepository;
         private readonly IMapper _mapper;
         private readonly IDatingRepository _repoUser;
         private readonly UserManager<User> _userManager;
 
         public TrainerService(ITrainerRepository trainerRepository, IMapper mapper, IDatingRepository repoUser, UserManager<User> userManager)
-        {            
+        {
             _trainerRepository = trainerRepository;
             _mapper = mapper;
             _repoUser = repoUser;
@@ -53,8 +54,8 @@ namespace Engineer.Services.Repository
 
                 Pupil newPupil = new Pupil()
                 {
-                    PupilTrainer = trainer,
-                    TrainerPupil = pupil
+                    TrainerId = trainer.Id,
+                    PupilId = pupil.Id
                 };
 
                 var addPupil = await _trainerRepository.InertPupil(newPupil);

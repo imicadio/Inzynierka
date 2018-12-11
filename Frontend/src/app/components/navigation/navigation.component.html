@@ -7,10 +7,10 @@
         <a class="nav-link" [routerLink]="['/training']">Treningi</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/lists']">Diety</a>
+        <a class="nav-link" [routerLink]="['/diet']">Diety</a>
       </li>
       <li *appHasRole="['Trainer']" class="nav-item" routerLinkActive="active">
-        <a class="nav-link disabled" [routerLink]="['/admin']">Trainer</a>
+        <a class="nav-link disabled" [routerLink]="['/trainer']">Trainer</a>
       </li>
     </ul>
 
@@ -23,7 +23,7 @@
       </a>
     
       <div class="dropdown-menu" *dropdownMenu>
-        <a class="dropdown-item" [routerLink]="['/member/edit']"><i class="fa fa-user"></i> user</a>
+        <a class="dropdown-item" [routerLink]="['/user/edit']"><i class="fa fa-user"></i> user</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
       </div>

@@ -24,6 +24,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule } from '@angular/material';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
+import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
+import { DietListComponent } from './components/diet/diet-list/diet-list.component';
+import { DietDetailComponent } from './components/diet/diet-detail/diet-detail.component';
+import { DietService } from './services/diet/diet.service';
+import { AddUserComponent } from './components/trainer/add-user/add-user.component';
+import { TrainerService } from './services/trainer/trainer.service';
+import { TrainerDashboardComponent } from './components/trainer/trainer-dashboard/trainer-dashboard.component';
+import { DietDetailResolver } from './resolvers/diet-detail.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -37,7 +45,9 @@ export function tokenGetter() {
     NotFoundComponent,
     HasRoleDirective,
     TrainingListComponent, 
-    TrainingDetailComponent
+    TrainingDetailComponent, 
+    DietListComponent, 
+    DietDetailComponent, AddUserComponent, TrainerDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +82,11 @@ export function tokenGetter() {
     ErrorInterceptorProvider, 
     AlertifyService,
     AuthGuard,
-    TrainingService
+    TrainingService,
+    TrainingDetailResolver,
+    DietService,
+    TrainerService,
+    DietDetailResolver
   ],
   bootstrap: [AppComponent],
   exports:[HasRoleDirective]

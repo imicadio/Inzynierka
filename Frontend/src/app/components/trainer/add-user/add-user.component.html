@@ -1,0 +1,75 @@
+<form [formGroup]="userForm" (ngSubmit)="register()">
+  <h2 class="text-center text-primary">Dodaj nowego użytkownika</h2>
+  <hr>
+
+  <div class="form-group">
+    <label class="control-label" style="margin-right:10px">I am a: </label>
+    <label class="radio-inline">
+      <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+    </label>
+    <label class="radio-inline ml-3">
+      <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+    </label>
+  </div>
+
+  <div class="form-group">
+    <input type="text"
+    [ngClass]="{'is-invalid': userForm.get('username').errors && userForm.get('username').touched}"
+    class="form-control" 
+    formControlName="username" 
+    placeholder="Username">
+    <div class="invalid-feedback">Please choose a username</div>
+  </div>  
+
+  <div class="form-group">
+    <input type="password" 
+    [ngClass]="{'is-invalid': userForm.get('password').errors && userForm.get('password').touched}"
+    class="form-control" 
+    formControlName="password" 
+    placeholder="Password"
+    autocomplete="off">
+    <div class="invalid-feedback" 
+      *ngIf="userForm.get('password').hasError('required') 
+      && userForm.get('password').touched">
+      Password is required
+    </div>
+    <div class="invalid-feedback" 
+      *ngIf="userForm.get('password').hasError('minlength') 
+      && userForm.get('password').touched">
+      Password must be at least 4 characters
+    </div>
+    <div class="invalid-feedback" 
+      *ngIf="userForm.get('password').hasError('maxlength') 
+      && userForm.get('password').touched">
+      Password cannot exceed 8 characters
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="password" 
+    [ngClass]="{'is-invalid': 
+    userForm.get('confirmPassword').errors && userForm.get('confirmPassword').touched
+    || userForm.get('confirmPassword').touched && userForm.hasError('mismatch')}"
+    class="form-control" 
+    formControlName="confirmPassword" 
+    placeholder="Confirm password">
+    <div class="invalid-feedback" 
+      *ngIf="userForm.get('confirmPassword').hasError('required') 
+      && userForm.get('confirmPassword').touched">
+      Password is required
+    </div>
+    <div class="invalid-feedback" 
+      *ngIf="userForm.hasError('mismatch') 
+      && userForm.get('confirmPassword').touched">
+      Password must match
+    </div>
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success" [disabled]="!userForm.valid" type="submit">Register</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+  </div>
+  
+</form>
+<p>{{ userForm.value | json }}</p>
+<p>{{ userForm.status | json}}</p>

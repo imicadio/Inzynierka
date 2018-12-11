@@ -5,6 +5,8 @@ import { LoginComponent } from './components/authorization/login/login.component
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
+import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
+import { TrainerDashboardComponent } from './components/trainer/trainer-dashboard/trainer-dashboard.component';
 
 export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -15,7 +17,8 @@ export const appRoutes: Routes = [
         children: [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'training', component: TrainingListComponent },
-            { path: 'training/:id', component: TrainingDetailComponent }
+            { path: 'training/:id', component: TrainingDetailComponent, resolve: {training: TrainingDetailResolver} },
+            { path: 'trainer', component: TrainerDashboardComponent, data: { roles: ['Trainer'] } }
         ]
 
     },

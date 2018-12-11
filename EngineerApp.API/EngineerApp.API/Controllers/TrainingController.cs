@@ -39,9 +39,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [Authorize(Policy = "RequireTrainerRole")]
-        [HttpDelete 
-            
-            ]
+        [HttpDelete]
         public async Task<IActionResult> DeleteTraining(int trainingId, int trainerId)
         {
             if (trainerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div *ngIf="!registerMode" style="text-align: center">
+    <h5 class="text-primary mb-5">Dodaj nowego użytkownika</h5>
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Dodaj</button>
+    </div>
+  </div>
+
+  <div *ngIf="registerMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-add-user (cancelRegister)="cancelRegisterMode($event)"></app-add-user>
+      </div>
+    </div>
+  </div>
+</div>

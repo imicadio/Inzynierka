@@ -33,7 +33,7 @@ export class TrainingService {
     return this.http.put(this.baseUrl + 'Training?trainingId=' + trainingId + '&trainerId=' + trainerId, {});
   }
 
-  addUser(trainerId: number, user: User) {
-    return this.http.post(this.baseUrl + 'Training/AddUser?id=' + trainerId, user);
-  }
+  // addUser(trainerId: number, user: User) {
+  //   return this.http.post(this.baseUrl + 'Training/AddUser?id=' + trainerId, user);
+  // }
 }
