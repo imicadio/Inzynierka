@@ -25,9 +25,9 @@ export class TrainingService {
     return this.http.delete(this.baseUrl + 'Training?trainingId=' + trainingId + '&trainerId=' + trainerId);
   }
 
-  addTraining(trainingId: number, trainerId: number, training: Training) {
-    return this.http.post(this.baseUrl + 'Training?trainingId=' + trainingId + '&trainerId=' + trainerId, training);
-  }
+  // addTraining(trainerId: number, training: Training) {
+  //   return this.http.post(this.baseUrl + 'Training?trainingId=' + trainingId + '&trainerId=' + trainerId, training);
+  // }
 
   editTraining(trainingId: number, trainerId: number) {
     return this.http.put(this.baseUrl + 'Training?trainingId=' + trainingId + '&trainerId=' + trainerId, {});

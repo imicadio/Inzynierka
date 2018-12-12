@@ -4,12 +4,26 @@
     <div class="text-center">
       <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Dodaj</button>
     </div>
-  </div>
-
+  </div>  
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
       <div class="col-4">
         <app-add-user (cancelRegister)="cancelRegisterMode($event)"></app-add-user>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!trainingMode" style="text-align: center">
+    <h5 class="text-primary mt-5 mb-5">Dodaj nowy trening</h5>
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg mr-2" (click)="trainingToggle()">Dodaj</button>
+    </div>
+  </div>  
+
+  <div *ngIf="trainingMode" class="container">
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-add-training (cancelTraining)="cancelTrainingMode($event)"></app-add-training>
       </div>
     </div>
   </div>

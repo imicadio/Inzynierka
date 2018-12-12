@@ -21,7 +21,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule } from '@angular/material';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
 import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
@@ -32,6 +32,7 @@ import { AddUserComponent } from './components/trainer/add-user/add-user.compone
 import { TrainerService } from './services/trainer/trainer.service';
 import { TrainerDashboardComponent } from './components/trainer/trainer-dashboard/trainer-dashboard.component';
 import { DietDetailResolver } from './resolvers/diet-detail.resolver';
+import { AddTrainingComponent } from './components/trainer/add-training/add-training.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -47,7 +48,7 @@ export function tokenGetter() {
     TrainingListComponent, 
     TrainingDetailComponent, 
     DietListComponent, 
-    DietDetailComponent, AddUserComponent, TrainerDashboardComponent
+    DietDetailComponent, AddUserComponent, TrainerDashboardComponent, AddTrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +57,9 @@ export function tokenGetter() {
     FormsModule,
     CommonModule,
     BrowserModule,
+    MatCardModule,
+    MatDialogModule,
+    MatButtonModule,
     BrowserAnimationsModule,    
     ReactiveFormsModule,    
     RouterModule,    

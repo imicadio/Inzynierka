@@ -1,4 +1,8 @@
-export class ExerciseTrainings {
-    public name: string;
-    public description: string;
+import { Series } from "./Series";
+
+export interface ExerciseTrainings {
+    id: number;
+    name: string;
+    description: string;
+    serie: Series[];
 }

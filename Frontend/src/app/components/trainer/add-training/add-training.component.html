@@ -1,0 +1,93 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <h2 class="text-center text-primary">Dodaj Nowy trening</h2>
+  <hr>
+
+  Value: {{ myForm.value | json }}
+
+    <hr>
+
+    <mat-form-field class="full">
+        <input matInput placeholder="Podaj nazwe treningu" formControlName="name">
+    </mat-form-field>
+
+    <div formArrayName="trainingDayBindingModels">
+
+        <div *ngFor="let days of myForm['controls'].trainingDayBindingModels['controls']; let ix=index" [formGroupName]="ix">
+
+            <mat-form-field class="xs">
+                <input matInput placeholder="Dzień treningowy" formControlName="day">
+            </mat-form-field>
+
+            <mat-form-field class="xs">
+                <input matInput placeholder="Rodzaj treningu" formControlName="typeOfTraining">
+            </mat-form-field>
+
+            <input type="button" (click)="deleteX(ix)" value="Usuń dzień treningowy">
+
+            <!-- exercisex -->
+
+            <div formArrayName="exerciseTrainingBindingModels">
+
+                <div *ngFor="let exercises of days['controls'].exerciseTrainingBindingModels['controls']; let iy=index" [formGroupName]="iy">
+        
+                    <mat-form-field class="xs">
+                        <input matInput placeholder="Nazwa ćwiczenia" formControlName="name">
+                    </mat-form-field>
+        
+                    <mat-form-field class="xs">
+                        <input matInput placeholder="Opis ćwiczenia" formControlName="description">
+                    </mat-form-field>   
+                    
+                    <input type="button" (click)="deleteY(ix)" value="usuń ćwiczenie">
+
+                    <!-- series -->
+
+                    <div formArrayName="serieBindingModels">
+
+                        <div *ngFor="let serie of exercises['controls'].serieBindingModels['controls']; let iz=index" [formGroupName]="iz">
+                
+                            <mat-form-field class="xs">
+                                <input matInput placeholder="Libcza powtórzeń" formControlName="serialNumber">
+                            </mat-form-field>
+
+                            <mat-form-field class="xs">
+                                <input matInput placeholder="Numer" formControlName="number">
+                            </mat-form-field>
+
+                            <mat-form-field class="xs">
+                                <input matInput placeholder="Jednostka" formControlName="unit">
+                            </mat-form-field>
+                            
+                            <input type="button" (click)="deleteZ(ix, iy)" value="usuń serie">
+        
+                        </div>
+                        
+                    </div>
+                    
+                    <input type="button" (click)="addZ(ix ,iy)" value="dodaj serie">
+                    <!-- end series -->
+
+                </div>
+                
+            </div>
+
+
+            <input type="button" (click)="addY(ix)" value="dodaj ćwiczenie">
+
+            
+            <!-- end exercises -->
+
+        </div>
+
+    </div>    
+
+    <input type="button" (click)="addX()" value="dodaj dzień">
+
+
+<button mat-raised-button color="warn" type="submit">Add</button>
+
+</form>
+
+
+
+  

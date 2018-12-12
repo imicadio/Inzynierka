@@ -1,7 +1,8 @@
 import { ExerciseTrainings } from "./ExerciseTrainings";
+import { TrainingDays } from "./TrainingDays";
 
-export class Training {
-    public id: number;
-    public name: string;
-    public exerciseTrainings: ExerciseTrainings[];
+export interface Training {
+    id: number;
+    name: string;
+    trainingDays: TrainingDays[];
 }

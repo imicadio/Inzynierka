@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TrainerDashboardComponent implements OnInit {
   registerMode = false;
+  trainingMode = false;
 
   constructor(private http: HttpClient) { }
 
@@ -18,8 +19,15 @@ export class TrainerDashboardComponent implements OnInit {
     this.registerMode = true;
   }
 
+  trainingToggle() { 
+    this.trainingMode = true;
+  }
+
   cancelRegisterMode(registerMode: boolean) {
     this.registerMode = registerMode;
   }
 
+  cancelTrainingMode(trainingMode: boolean) {
+    this.trainingMode = trainingMode;
+  }
 }
