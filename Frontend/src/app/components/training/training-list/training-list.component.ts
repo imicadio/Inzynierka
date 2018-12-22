@@ -32,6 +32,7 @@ export class TrainingListComponent implements OnInit {
   deleteTraining(id: number) {
     this.trainingService.deleteTraining(id, this.authService.decodedToken.nameid).subscribe(()=>{
       this.alertify.success('Pomyślnie usunięto trening');
+      this.loadTrainings();
     }, error => {
       this.alertify.error(error);      
     });

@@ -148,7 +148,7 @@ namespace EngineerApp.API
             }
 
 
-            // app.UseHttpsRedirection();
+            ////app.UseHttpsRedirection();
 
             //seeder.SeedUser();
 

@@ -90,14 +90,14 @@ export class AddTrainingComponent implements OnInit {
     control.removeAt(ix);
   }
 
-  deleteY(ix) {
+  deleteY(ix, iy) {
     const control = (<FormArray>this.myForm.controls['trainingDayBindingModels']).at(ix).get('exerciseTrainingBindingModels') as FormArray;
-    control.removeAt(ix);
+    control.removeAt(iy);
   }
 
-  deleteZ(ix, iy) {
+  deleteZ(ix, iy, iz) {
     const control = ((<FormArray>this.myForm.controls['trainingDayBindingModels']).at(ix).get('exerciseTrainingBindingModels') as FormArray).at(iy).get('serieBindingModels') as FormArray;
-    control.removeAt(iy);
+    control.removeAt(iz);
   }
 
   onSubmit() {

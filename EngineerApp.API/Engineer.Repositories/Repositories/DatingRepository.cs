@@ -56,7 +56,7 @@ namespace Engineer.Repositories.Repositories
 
         public User GetByUserId(int id)
         {
-            return _context.Users.Include(u => u.Users).SingleOrDefault(x => x.Id == id);
+            return _context.Users.SingleOrDefault(x => x.Id == id);
         }
 
         public Pupil VerifyPupilTrainer(int trainerId, int pupilId)

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EngineerApp.API.Migrations
 {
-    public partial class Seed : Migration
+    public partial class Test02 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -173,6 +173,8 @@ namespace EngineerApp.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
+                    DateStart = table.Column<DateTime>(nullable: false),
+                    DateEnd = table.Column<DateTime>(nullable: false),
                     UserDietId = table.Column<int>(nullable: true),
                     TrainerDietId = table.Column<int>(nullable: true)
                 },
@@ -252,6 +254,8 @@ namespace EngineerApp.API.Migrations
                     DateStart = table.Column<DateTime>(nullable: false),
                     DateEnd = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
+                    TrainerName = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
                     TrainerId = table.Column<int>(nullable: true),
                     UserId = table.Column<int>(nullable: true)
                 },
@@ -299,8 +303,8 @@ namespace EngineerApp.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Day = table.Column<string>(nullable: true),
-                    TrainingPlanId = table.Column<int>(nullable: false),
-                    TypeOfTraining = table.Column<string>(nullable: true)
+                    TypeOfTraining = table.Column<string>(nullable: true),
+                    TrainingPlanId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -386,10 +390,10 @@ namespace EngineerApp.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ExerciseTrainingId = table.Column<int>(nullable: false),
                     SerialNumber = table.Column<int>(nullable: false),
                     Number = table.Column<int>(nullable: false),
-                    Unit = table.Column<int>(nullable: false)
+                    Unit = table.Column<string>(nullable: true),
+                    ExerciseTrainingId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

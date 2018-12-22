@@ -167,6 +167,8 @@ namespace Engineer.Services.Repository
                         Description = exercise.Description
                     };
 
+                    int numberSerial = 1;
+
                     var insertExercise = await _trainingRepository.InsertExerciseTrainingAsync(exerciseTraining);
 
                     foreach (SerieBindingModel serie in exercise.SerieBindingModels)
@@ -174,12 +176,14 @@ namespace Engineer.Services.Repository
                         Serie series = new Serie()
                         {
                             ExerciseTrainingId = insertExercise.Id,
-                            SerialNumber = serie.SerialNumber,
+                            SerialNumber = numberSerial,
                             Number = serie.Number,
                             Unit = serie.Unit
                         };
 
                         var insertSerie = await _trainingRepository.InsertSerieAsync(series);
+
+                        numberSerial++;
                     }
                 }
             }
@@ -263,9 +267,13 @@ namespace Engineer.Services.Repository
 
             TrainingPlan training = new TrainingPlan()
             {
-                Name = model.Name,
+                Name = model.Name,                
+                DateStart = model.DateStart,
+                DateEnd = model.DateEnd,
                 UserPlan = userId,
-                TrainerPlan = trainerId
+                TrainerPlan = trainerId,
+                TrainerName = trainerId.UserName,
+                UserName = userId.UserName
             };
 
             var insertTraining =  await _trainingRepository.InsertAsync(training);
@@ -296,6 +304,8 @@ namespace Engineer.Services.Repository
                         Description = exercise.Description
                     };
 
+                    int numberSerial = 1;
+
                     var insertExercise = await _trainingRepository.InsertExerciseTrainingAsync(exerciseTraining);
 
                     foreach (SerieBindingModel serie in exercise.SerieBindingModels)
@@ -303,12 +313,14 @@ namespace Engineer.Services.Repository
                         Serie series = new Serie()
                         {
                             ExerciseTrainingId = insertExercise.Id,
-                            SerialNumber = serie.SerialNumber,
+                            SerialNumber = numberSerial,
                             Number = serie.Number,
                             Unit = serie.Unit
                         };
 
                         var insertSerie = await _trainingRepository.InsertSerieAsync(series);
+
+                        numberSerial++;
                     }
                 }
             }

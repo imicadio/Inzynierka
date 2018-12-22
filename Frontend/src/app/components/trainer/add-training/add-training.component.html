@@ -38,7 +38,7 @@
                         <input matInput placeholder="Opis ćwiczenia" formControlName="description">
                     </mat-form-field>   
                     
-                    <input type="button" (click)="deleteY(ix)" value="usuń ćwiczenie">
+                    <input type="button" (click)="deleteY(ix, iy)" value="usuń ćwiczenie">
 
                     <!-- series -->
 
@@ -58,7 +58,7 @@
                                 <input matInput placeholder="Jednostka" formControlName="unit">
                             </mat-form-field>
                             
-                            <input type="button" (click)="deleteZ(ix, iy)" value="usuń serie">
+                            <input type="button" (click)="deleteZ(ix, iy, iz)" value="usuń serie">
         
                         </div>
                         

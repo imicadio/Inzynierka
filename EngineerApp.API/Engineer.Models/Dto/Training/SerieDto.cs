@@ -9,6 +9,6 @@ namespace Engineer.Models.Dto.Training
         public int Id { get; set; }
         public int SerialNumber { get; set; }
         public int Number { get; set; }
-        public int Unit { get; set; }
+        public string Unit { get; set; }
     }
 }

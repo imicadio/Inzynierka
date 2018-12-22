@@ -15,7 +15,7 @@
         <h5>Zastrzeżenia: {{exercise.description}}</h5>
       </div>
       <div class="serie" >
-        <p *ngFor="let serie of exercise?.series">liczba powtórzeń: {{serie?.number}}</p>
+        <p *ngFor="let serie of exercise?.series">Seria: {{serie?.serialNumber}} liczba powtórzeń: {{serie?.number}} {{serie?.unit}}</p>
        </div>
     </div>
   </div>

@@ -9,12 +9,12 @@ namespace Engineer.Models.Models.Trainings
     public class Serie
     {
         [Key]
-        public int Id { get; set; }
-        public int ExerciseTrainingId { get; set; }
-        public int SerialNumber { get; set; }
-        public int Number { get; set; }
-        public int Unit { get; set; }
+        public int Id { get; set; }        
+        public int SerialNumber { get; set; }   // numer serii
+        public int Number { get; set; }         // ilosc powtorzen
+        public string Unit { get; set; }           // jednostka - powt., min.
 
+        public int ExerciseTrainingId { get; set; }
         [ForeignKey(nameof(ExerciseTrainingId))]
         public ExerciseTraining ExerciseTraining { get; set; }
     }

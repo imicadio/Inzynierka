@@ -34,41 +34,41 @@ namespace Engineer.Repositories.Seed
                         {
                             new ExerciseTraining(){ Name = "Przysiady", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 15},
-                                    new Serie(){ Number = 2, SerialNumber = 12},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Martwy ciąg", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Wyciskanie na ławce skośnej", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Wyciskanie żołnierskie", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Allahy", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 15},
-                                    new Serie(){ Number = 2, SerialNumber = 15},
-                                    new Serie(){ Number = 3, SerialNumber = 15},
-                                    new Serie(){ Number = 4, SerialNumber = 15}
+                                    new Serie(){ Number = 1, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 15, Unit = "powt."}
                                 }
                             }
                         }
@@ -78,7 +78,7 @@ namespace Engineer.Repositories.Seed
                         {
                             new ExerciseTraining(){ Name = "Rowerek", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 30}
+                                    new Serie(){ Number = 1, SerialNumber = 30, Unit = "min."}
                                 }
                             }
                         }
@@ -88,41 +88,41 @@ namespace Engineer.Repositories.Seed
                         {
                             new ExerciseTraining(){ Name = "Przysiady", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 15},
-                                    new Serie(){ Number = 2, SerialNumber = 12},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Martwy ciąg", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Wyciskanie na ławce skośnej", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Wyciskanie żołnierskie", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Allahy", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 15},
-                                    new Serie(){ Number = 2, SerialNumber = 15},
-                                    new Serie(){ Number = 3, SerialNumber = 15},
-                                    new Serie(){ Number = 4, SerialNumber = 15}
+                                    new Serie(){ Number = 1, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 15, Unit = "powt."}
                                 }
                             }
                         }
@@ -132,7 +132,7 @@ namespace Engineer.Repositories.Seed
                         {
                             new ExerciseTraining(){ Name = "Bieżnia", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 55}
+                                    new Serie(){ Number = 1, SerialNumber = 55, Unit = "min."}
                                 }
                             }
                         }
@@ -142,41 +142,41 @@ namespace Engineer.Repositories.Seed
                         {
                             new ExerciseTraining(){ Name = "Przysiady", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 15},
-                                    new Serie(){ Number = 2, SerialNumber = 12},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Martwy ciąg", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Wyciskanie na ławce skośnej", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10},
-                                    new Serie(){ Number = 4, SerialNumber = 8}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 8, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Wyciskanie żołnierskie", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 12},
-                                    new Serie(){ Number = 2, SerialNumber = 10},
-                                    new Serie(){ Number = 3, SerialNumber = 10}
+                                    new Serie(){ Number = 1, SerialNumber = 12, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 10, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 10, Unit = "powt."}
                                 }
                             },
                             new ExerciseTraining(){ Name = "Allahy", Series = new Serie[]
                                 {
-                                    new Serie(){ Number = 1, SerialNumber = 15},
-                                    new Serie(){ Number = 2, SerialNumber = 15},
-                                    new Serie(){ Number = 3, SerialNumber = 15},
-                                    new Serie(){ Number = 4, SerialNumber = 15}
+                                    new Serie(){ Number = 1, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 2, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 3, SerialNumber = 15, Unit = "powt."},
+                                    new Serie(){ Number = 4, SerialNumber = 15, Unit = "powt."}
                                 }
                             }
                         }

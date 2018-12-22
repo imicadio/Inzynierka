@@ -11,6 +11,8 @@ namespace Engineer.Models.Models.Diets
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
 
         public ICollection<DietDay> DietDays { get; set; }
 

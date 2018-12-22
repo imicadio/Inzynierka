@@ -10,10 +10,10 @@ namespace Engineer.Models.Models.Trainings
     {
         [Key]
         public int Id { get; set; }
-        public string Day { get; set; }
-        public int TrainingPlanId { get; set; }
-        public string TypeOfTraining { get; set; }      
+        public string Day { get; set; }        
+        public string TypeOfTraining { get; set; }
 
+        public int TrainingPlanId { get; set; }
         [ForeignKey(nameof(TrainingPlanId))]
         public TrainingPlan TrainingPlan { get; set; }
 

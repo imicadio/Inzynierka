@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineerApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20181209133332_Seed")]
-    partial class Seed
+    [Migration("20181222004604_Test02")]
+    partial class Test02
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,10 @@ namespace EngineerApp.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateEnd");
+
+                    b.Property<DateTime>("DateStart");
 
                     b.Property<string>("Name");
 
@@ -207,7 +211,7 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<int>("SerialNumber");
 
-                    b.Property<int>("Unit");
+                    b.Property<string>("Unit");
 
                     b.HasKey("Id");
 
@@ -249,7 +253,11 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<int?>("TrainerId");
 
+                    b.Property<string>("TrainerName");
+
                     b.Property<int?>("UserId");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 

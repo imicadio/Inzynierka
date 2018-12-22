@@ -67,6 +67,10 @@ namespace EngineerApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateEnd");
+
+                    b.Property<DateTime>("DateStart");
+
                     b.Property<string>("Name");
 
                     b.Property<int?>("TrainerDietId");
@@ -205,7 +209,7 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<int>("SerialNumber");
 
-                    b.Property<int>("Unit");
+                    b.Property<string>("Unit");
 
                     b.HasKey("Id");
 
@@ -247,7 +251,11 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<int?>("TrainerId");
 
+                    b.Property<string>("TrainerName");
+
                     b.Property<int?>("UserId");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 

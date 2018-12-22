@@ -105,9 +105,9 @@ namespace Engineer.Repositories.Repositories
             return _context.Series.SingleOrDefault(x => x.Id == id);
         }
 
-        public async Task<TrainingPlan> InsertAsync(TrainingPlan trainingDay)
+        public async Task<TrainingPlan> InsertAsync(TrainingPlan trainingPlan)
         {
-            var result = await _context.TrainingPlans.AddAsync(trainingDay);
+            var result = await _context.TrainingPlans.AddAsync(trainingPlan);
             await _context.SaveChangesAsync();
             return result.Entity;
         }

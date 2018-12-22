@@ -8,6 +8,8 @@ namespace Engineer.Models.Dto.Diet
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
 
         public List<DietDayDto> DietDays { get; set; }
 
