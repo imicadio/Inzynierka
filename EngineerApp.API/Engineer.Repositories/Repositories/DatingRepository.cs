@@ -63,5 +63,22 @@ namespace Engineer.Repositories.Repositories
         {
             return _context.Pupils.FirstOrDefault(x => x.TrainerId == trainerId && x.PupilId == pupilId);
         }
+
+        public async Task<Photo> GetMainPhotoForUser(int userId)
+        {
+            return await _context.Photos.Where(u => u.UserId == userId).FirstOrDefaultAsync(p => p.IsMain);
+        }
+
+        public async Task<User> GetUser_(int id, bool isCurrentUser)
+        {
+            var query = _context.Users.Include(p => p.Photos).AsQueryable();
+
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+
+            var user = await query.FirstOrDefaultAsync(u => u.Id == id);
+
+            return user;
+        }
     }
 }

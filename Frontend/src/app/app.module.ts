@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AuthorizationModule } from './components/authorization/authorization.module';
-import { BsDropdownModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule, AlertModule } from 'ngx-bootstrap';
 import { appRoutes } from './route.module';
 
 import { AppComponent } from './app.component';
@@ -21,7 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
 import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
@@ -33,6 +34,10 @@ import { TrainerService } from './services/trainer/trainer.service';
 import { TrainerDashboardComponent } from './components/trainer/trainer-dashboard/trainer-dashboard.component';
 import { DietDetailResolver } from './resolvers/diet-detail.resolver';
 import { AddTrainingComponent } from './components/trainer/add-training/add-training.component';
+import { UserDetailComponent } from './components/user/user-detail/user-detail.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { PhotoEditorComponent } from './components/user/photo-editor/photo-editor.component';
+import { UserService } from './services/user/user.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -48,7 +53,13 @@ export function tokenGetter() {
     TrainingListComponent, 
     TrainingDetailComponent, 
     DietListComponent, 
-    DietDetailComponent, AddUserComponent, TrainerDashboardComponent, AddTrainingComponent
+    DietDetailComponent, 
+    AddUserComponent, 
+    TrainerDashboardComponent, 
+    AddTrainingComponent, 
+    UserDetailComponent, 
+    UserEditComponent, 
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +68,7 @@ export function tokenGetter() {
     FormsModule,
     CommonModule,
     BrowserModule,
+    MatTabsModule,
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
@@ -69,9 +81,16 @@ export function tokenGetter() {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatIconModule,
     MatProgressSpinnerModule,
+    FileUploadModule,
+    AlertModule.forRoot(),
+    BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    BsDropdownModule.forRoot(),      
+    PaginationModule.forRoot(),
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    ModalModule.forRoot(),    
     RouterModule.forRoot(appRoutes),
     JwtModule.forRoot({
       config: {
@@ -90,7 +109,8 @@ export function tokenGetter() {
     TrainingDetailResolver,
     DietService,
     TrainerService,
-    DietDetailResolver
+    DietDetailResolver,
+    UserService
   ],
   bootstrap: [AppComponent],
   exports:[HasRoleDirective]

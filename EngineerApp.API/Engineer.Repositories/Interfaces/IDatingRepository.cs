@@ -16,5 +16,7 @@ namespace Engineer.Repositories.Interfaces
         Task<Photo> GetPhoto(int id);
         User GetByUserId(int id);
         Pupil VerifyPupilTrainer(int trainerId, int pupilId);
+        Task<Photo> GetMainPhotoForUser(int userId);
+        Task<User> GetUser_(int id, bool isCurrentUser);
     }
 }
