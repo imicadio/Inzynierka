@@ -10,5 +10,7 @@ namespace Engineer.Repositories.Interfaces
     {
         Task<User> InsertUser(User user);
         Task<Pupil> InertPupil(Pupil pupils);
+
+        IEnumerable<User> GetAllPupils(int id);
     }
 }

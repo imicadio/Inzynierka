@@ -11,5 +11,7 @@ namespace Engineer.Services.Interface
     public interface ITrainerService
     {
         Task<ResponseDto<BaseModelDto>> InsertPupil(int id, UserForRegisterDto user);
+
+        ResponseDto<UsersDto> GetPupils(int id);
     }
 }

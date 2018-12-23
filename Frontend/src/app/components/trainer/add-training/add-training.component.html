@@ -6,6 +6,14 @@
 
     <hr>
 
+    <h4>mat-select</h4>
+    <mat-form-field>
+    <mat-select placeholder="Podopieczny" [(value)]="selection">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let pupil of pupils?.object?.users" [value]="pupil.id">{{ pupil.userName }}</mat-option>
+    </mat-select>
+    </mat-form-field>
+
     <mat-form-field class="full">
         <input matInput placeholder="Podaj nazwe treningu" formControlName="name">
     </mat-form-field>
@@ -45,13 +53,9 @@
                     <div formArrayName="serieBindingModels">
 
                         <div *ngFor="let serie of exercises['controls'].serieBindingModels['controls']; let iz=index" [formGroupName]="iz">
-                
+                                          
                             <mat-form-field class="xs">
-                                <input matInput placeholder="Libcza powtórzeń" formControlName="serialNumber">
-                            </mat-form-field>
-
-                            <mat-form-field class="xs">
-                                <input matInput placeholder="Numer" formControlName="number">
+                                <input matInput placeholder="Ilość powtórzeń" formControlName="number">
                             </mat-form-field>
 
                             <mat-form-field class="xs">

@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@ang
 import { TrainerService } from 'src/app/services/trainer/trainer.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
-import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-add-training',
@@ -14,17 +15,29 @@ import { Router } from '@angular/router';
 export class AddTrainingComponent implements OnInit {
   @Output() cancelTraining = new EventEmitter();
   myForm: FormGroup;    // inicjalizacja formularza
+  pupils: User[];
+  selection: number;
  
   constructor(
     private trainerService: TrainerService,
     private authService: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
-    private router: Router
+    private userService: UserService
   ) { }
 
   ngOnInit() {
     this.initForm();
+    this.loadUsers();
+  }
+
+  loadUsers() {
+    this.userService.getPupils(this.authService.decodedToken.nameid).subscribe((pupils: User[]) => {
+      this.pupils = pupils;
+      console.log(pupils);
+    }, error => {
+      this.alertify.error(error);
+    })
   }
 
   initForm() {
@@ -101,8 +114,9 @@ export class AddTrainingComponent implements OnInit {
   }
 
   onSubmit() {
-    this.trainerService.addTraining(3, this.authService.decodedToken.nameid, this.myForm.value).subscribe(() => {
+    this.trainerService.addTraining(this.selection.valueOf(), this.authService.decodedToken.nameid, this.myForm.value).subscribe(() => {
       this.alertify.success('Pomyślnie dodano nowy trening!');
+      console.log('zaznaczono użytkownika o id' + this.selection.valueOf());
     }, error => {
       this.alertify.error(error);      
     });

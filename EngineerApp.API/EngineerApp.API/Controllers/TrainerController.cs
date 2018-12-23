@@ -35,5 +35,16 @@ namespace EngineerApp.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetPupils")]
+        public IActionResult GetPupils(int id)
+        {
+            var result = _trainerService.GetPupils(id);
+
+            if (result.ErrorOccurred)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
     }
 }

@@ -22,7 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
 import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
@@ -82,6 +82,7 @@ export function tokenGetter() {
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
+    MatSelectModule,
     MatProgressSpinnerModule,
     FileUploadModule,
     AlertModule.forRoot(),

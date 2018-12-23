@@ -3,7 +3,8 @@ import { Training } from 'src/app/models/training';
 import { TrainingService } from 'src/app/services/training/training.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-training-list',
@@ -11,10 +12,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./training-list.component.css']
 })
 export class TrainingListComponent implements OnInit {
-  trainings: Training[];
+  trainings: Training[];  
   displayedColumns = ["Id", "Name", "Action"];
 
-  constructor(private trainingService: TrainingService, private alertify: AlertifyService, public authService: AuthService, private router: Router) { }
+  constructor(
+    private trainingService: TrainingService, 
+    private alertify: AlertifyService, 
+    public authService: AuthService, 
+    private userService: UserService
+    ) { }
 
   ngOnInit() {
     this.loadTrainings();
@@ -27,7 +33,7 @@ export class TrainingListComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     });
-  }
+  }  
 
   deleteTraining(id: number) {
     this.trainingService.deleteTraining(id, this.authService.decodedToken.nameid).subscribe(()=>{

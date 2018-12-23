@@ -8,6 +8,7 @@ using Engineer.Services.Interface;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +27,19 @@ namespace Engineer.Services.Repository
             _mapper = mapper;
             _repoUser = repoUser;
             _userManager = userManager;
+        }
+
+        public ResponseDto<UsersDto> GetPupils(int id)
+        {
+            var response = new ResponseDto<UsersDto>
+            {
+                Object = new UsersDto()
+            };
+
+            var pupils = _trainerRepository.GetAllPupils(id).ToList();
+            response.Object.Users = _mapper.Map<List<UserForDetailDto>>(pupils);
+
+            return response;
         }
 
         public async Task<ResponseDto<BaseModelDto>> InsertPupil(int id, UserForRegisterDto user)
