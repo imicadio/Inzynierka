@@ -17,6 +17,7 @@ export class AddTrainingComponent implements OnInit {
   myForm: FormGroup;    // inicjalizacja formularza
   pupils: User[];
   selection: number;
+  selectionControl = new FormControl('', [Validators.required]);
  
   constructor(
     private trainerService: TrainerService,
@@ -116,7 +117,7 @@ export class AddTrainingComponent implements OnInit {
   onSubmit() {
     this.trainerService.addTraining(this.selection.valueOf(), this.authService.decodedToken.nameid, this.myForm.value).subscribe(() => {
       this.alertify.success('Pomyślnie dodano nowy trening!');
-      console.log('zaznaczono użytkownika o id' + this.selection.valueOf());
+      // console.log('zaznaczono użytkownika o id' + this.selection.valueOf());
     }, error => {
       this.alertify.error(error);      
     });
