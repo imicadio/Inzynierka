@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-add-training',
@@ -112,6 +113,17 @@ export class AddTrainingComponent implements OnInit {
   deleteZ(ix, iy, iz) {
     const control = ((<FormArray>this.myForm.controls['trainingDayBindingModels']).at(ix).get('exerciseTrainingBindingModels') as FormArray).at(iy).get('serieBindingModels') as FormArray;
     control.removeAt(iz);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.myForm.get('trainingDayBindingModels').controls, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.myForm.get('trainingDayBindingModels').value, event.previousIndex, event.currentIndex);
+  }
+
+  activeNote: string;
+  enter(ix) {
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('day').value;
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('typeOfTraining').value;
   }
 
   onSubmit() {

@@ -38,6 +38,7 @@ import { UserDetailComponent } from './components/user/user-detail/user-detail.c
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
 import { PhotoEditorComponent } from './components/user/photo-editor/photo-editor.component';
 import { UserService } from './services/user/user.service';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -84,6 +85,7 @@ export function tokenGetter() {
     MatIconModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    DragDropModule,
     FileUploadModule,
     AlertModule.forRoot(),
     BsDropdownModule.forRoot(),

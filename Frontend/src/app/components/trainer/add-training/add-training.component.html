@@ -35,10 +35,11 @@
         
         <div class="row">
             <div class="col-12 col-md-6">
-                <div formArrayName="trainingDayBindingModels">
-                    <div *ngFor="let days of myForm['controls'].trainingDayBindingModels['controls']; let ix=index" [formGroupName]="ix" class="trainingDay">                      
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" formArrayName="trainingDayBindingModels">
+                    <div [id]="ix" *ngFor="let days of myForm['controls'].trainingDayBindingModels['controls']; let ix=index" [formGroupName]="ix" class="trainingDay" cdkDrag #elem="cdkDrag" (mouseenter)="enter(ix)">                      
 
                         <div class="row mb-3 mt-3 margin">
+                            <span cdkDragHandle>drag</span>
                             <div class="col-12 mt-3 delete mt-3">                                  
                                 <i *appHasRole="['Trainer']" (click)="deleteX(ix)" matTooltip="Usuń trening" class="material-icons clear-icon">
                                     clear
