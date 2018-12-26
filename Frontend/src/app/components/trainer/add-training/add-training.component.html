@@ -35,11 +35,11 @@
         
         <div class="row">
             <div class="col-12 col-md-6">
-                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)" formArrayName="trainingDayBindingModels">
-                    <div [id]="ix" *ngFor="let days of myForm['controls'].trainingDayBindingModels['controls']; let ix=index" [formGroupName]="ix" class="trainingDay" cdkDrag #elem="cdkDrag" (mouseenter)="enter(ix)">                      
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop1($event)" formArrayName="trainingDayBindingModels">
+                    <div [id]="ix" *ngFor="let days of myForm['controls'].trainingDayBindingModels['controls']; let ix=index" [formGroupName]="ix" class="trainingDay" cdkDrag #elem="cdkDrag" (mouseenter)="enter1(ix)">                      
 
                         <div class="row mb-3 mt-3 margin">
-                            <span cdkDragHandle>drag</span>
+                            <i class="fa fa-arrows" aria-hidden="true" cdkDragHandle></i>
                             <div class="col-12 mt-3 delete mt-3">                                  
                                 <i *appHasRole="['Trainer']" (click)="deleteX(ix)" matTooltip="Usuń trening" class="material-icons clear-icon">
                                     clear
@@ -61,10 +61,11 @@
                         <div class="row">
                             <div class="mb-3">
                                 <div class="col-12">
-                                    <div formArrayName="exerciseTrainingBindingModels">                
-                                        <div *ngFor="let exercises of days['controls'].exerciseTrainingBindingModels['controls']; let iy=index" [formGroupName]="iy" class="exercise">
+                                    <div cdkDropList class="example-list" (cdkDropListDropped)="drop2(ix, $event)" formArrayName="exerciseTrainingBindingModels">                
+                                        <div [id]="iy" *ngFor="let exercises of days['controls'].exerciseTrainingBindingModels['controls']; let iy=index" [formGroupName]="iy" class="exercise" cdkDrag #elem="cdkDrag" (mouseenter)="enter2(ix, iy)">
                                             
                                             <div class="row mb-3 test">
+                                                <i class="fa fa-arrows" aria-hidden="true" cdkDragHandle></i>
                                                 <div class="col-12 delete mt-3">
                                                     <i *appHasRole="['Trainer']" (click)="deleteY(ix, iy)" matTooltip="Usuń ćwiczenie" class="material-icons clear-icon">
                                                         clear
@@ -86,9 +87,10 @@
                                             <!-- series -->  
                                             <div class="row">
                                                 <div class="col-12">           
-                                                    <div formArrayName="serieBindingModels">                
-                                                        <div *ngFor="let serie of exercises['controls'].serieBindingModels['controls']; let iz=index" [formGroupName]="iz" class="serie">   
+                                                    <div cdkDropList class="example-list" (cdkDropListDropped)="drop3(ix, iy, $event)" formArrayName="serieBindingModels">                
+                                                        <div [id]="iz" *ngFor="let serie of exercises['controls'].serieBindingModels['controls']; let iz=index" [formGroupName]="iz" class="serie" cdkDrag #elem="cdkDrag" (mouseenter)="enter3(ix, iy, iz)">   
                                                             <div class="row mb-3 mt-3 test">
+                                                                <i class="fa fa-arrows" aria-hidden="true" cdkDragHandle></i>
                                                                 <div class="col-12 delete mt-3">  
                                                                     <i *appHasRole="['Trainer']" (click)="deleteZ(ix, iy, iz)" matTooltip="Usuń ćwiczenie" class="material-icons clear-icon">
                                                                         clear

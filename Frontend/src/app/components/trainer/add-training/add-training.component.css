@@ -34,3 +34,8 @@
     float: right;
     margin: 10px;
 }
+
+.fa {
+    cursor: pointer;
+    margin: 10px;
+}

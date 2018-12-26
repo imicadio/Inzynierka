@@ -115,15 +115,36 @@ export class AddTrainingComponent implements OnInit {
     control.removeAt(iz);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop1(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.myForm.get('trainingDayBindingModels').controls, event.previousIndex, event.currentIndex);
     moveItemInArray(this.myForm.get('trainingDayBindingModels').value, event.previousIndex, event.currentIndex);
-  }
+  }  
+
+  drop2(ix, event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels').controls, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels').value, event.previousIndex, event.currentIndex);
+  }  
+
+  drop3(ix, iy, event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels')['controls'][iy].get('serieBindingModels').controls, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels')['controls'][iy].get('serieBindingModels').value, event.previousIndex, event.currentIndex);
+    console.log(ix);
+  }  
 
   activeNote: string;
-  enter(ix) {
+  enter1(ix) {
     this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('day').value;
-    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('typeOfTraining').value;
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('typeOfTraining').value;    
+  }
+
+  enter2(ix, iy) {
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels')['controls'][iy].get('name').value;
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels')['controls'][iy].get('description').value;
+  }
+
+  enter3(ix, iy, iz) {
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels')['controls'][iy].get('serieBindingModels')['controls'][iz].get('number').value;
+    this.activeNote = this.myForm.get('trainingDayBindingModels')['controls'][ix].get('exerciseTrainingBindingModels')['controls'][iy].get('serieBindingModels')['controls'][iz].get('unit').value;
   }
 
   onSubmit() {
