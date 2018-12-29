@@ -116,7 +116,7 @@ export class AddTrainingComponent implements OnInit {
   }
 
   drop1(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.myForm.get('trainingDayBindingModels').controls, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.myForm.get('trainingDayBindingModels')['controls'], event.previousIndex, event.currentIndex);
     moveItemInArray(this.myForm.get('trainingDayBindingModels').value, event.previousIndex, event.currentIndex);
   }  
 

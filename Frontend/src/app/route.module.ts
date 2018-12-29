@@ -8,6 +8,7 @@ import { TrainingDetailComponent } from './components/training/training-detail/t
 import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
 import { TrainerDashboardComponent } from './components/trainer/trainer-dashboard/trainer-dashboard.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+import { TrainingEditComponent } from './components/training/training-edit/training-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent },
             { path: 'training', component: TrainingListComponent },
             { path: 'training/:id', component: TrainingDetailComponent, resolve: {training: TrainingDetailResolver} },
+            { path: 'training/edit/:id', component: TrainingEditComponent },
             { path: 'trainer', component: TrainerDashboardComponent, data: { roles: ['Trainer'] } },
             { path: 'user/edit', component: UserEditComponent },
         ]

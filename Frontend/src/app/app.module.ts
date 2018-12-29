@@ -39,6 +39,7 @@ import { UserEditComponent } from './components/user/user-edit/user-edit.compone
 import { PhotoEditorComponent } from './components/user/photo-editor/photo-editor.component';
 import { UserService } from './services/user/user.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { TrainingEditComponent } from './components/training/training-edit/training-edit.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -60,7 +61,7 @@ export function tokenGetter() {
     AddTrainingComponent, 
     UserDetailComponent, 
     UserEditComponent, 
-    PhotoEditorComponent
+    PhotoEditorComponent, TrainingEditComponent
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@
             <i matTooltip="Szczegóły treningu" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
                 zoom_in
             </i>  
-            <i *appHasRole="['Trainer']" matTooltip="Edytuj trening" [routerLink]="['/training/', element.id]" class="material-icons edit-icon">
+            <i *appHasRole="['Trainer']" matTooltip="Edytuj trening" [routerLink]="['/training/edit/', element.id]" class="material-icons edit-icon">
               edit
             </i>  
             <i *appHasRole="['Trainer']" (click)="deleteTraining(element.id)" matTooltip="Usuń trening" class="material-icons delete-icon">
