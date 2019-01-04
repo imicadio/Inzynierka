@@ -16,7 +16,7 @@
   <div *ngIf="!trainingMode" style="text-align: center">
     <h5 class="text-primary mt-5 mb-5">Dodaj nowy trening</h5>
     <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="trainingToggle()">Dodaj</button>
+      <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>
     </div>
   </div>  
 

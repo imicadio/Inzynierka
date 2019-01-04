@@ -1,23 +1,33 @@
 <h1>
-  <strong>Pland treningowy:</strong><br> 
+  <strong>Plan treningowy:</strong><br> 
   {{training?.object.name}}
 </h1>
 
-<div *ngFor="let day of training?.object?.trainingDays">
-  <div class="box">
-    <div class="title">
-      <h3>{{day.day}}</h3>
-      <h6>Rodzaj treningu: {{day.typeOfTraining}}</h6>
-    </div>    
-    <div class="exercises" *ngFor="let exercise of day?.exerciseTrainings">
-      <div class="exercise">
-        <h5>Nazwa ćwiczenia: {{exercise.name}}</h5>      
-        <h5>Zastrzeżenia: {{exercise.description}}</h5>
-      </div>
-      <div class="serie" >
-        <p *ngFor="let serie of exercise?.series">Seria: {{serie?.serialNumber}} liczba powtórzeń: {{serie?.number}} {{serie?.unit}}</p>
-       </div>
-    </div>
+<div class="row">
+  <div class="col-12 box">
+    <mat-tab-group>
+      <mat-tab *ngFor="let day of training?.object?.trainingDays; let i = index;" label="{{ day.day }}">
+      <div class="title text-center mt-5">
+        <h3>{{day.day}}</h3>
+        <h6 class="mb-5">Rodzaj treningu: {{day.typeOfTraining}}</h6>
+        <div class="row">
+            <div class="col-12 exercises" *ngFor="let exercise of day?.exerciseTrainings; let i = index;">
+              <p class="text-left">{{ i+1 }}. {{exercise.name}}</p>
+              <div class="row">
+                <div class="col-12 col-sm-12 col-md-3 mt-3 mb-3 exercise">
+                  <h5><strong>{{exercise.name}}</strong></h5>     
+                  <div class="mt-3 mb-3 text-center serie">
+                    <p *ngFor="let serie of exercise?.series">Seria: {{serie?.serialNumber}} - {{serie?.number}} {{serie?.unit}}</p>
+                  </div>                       
+                </div>              
+                <div class="col-12 col-sm-12 col-md-6 mt-3 mb-3">
+                  <h5>Uwagi: {{exercise.description}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>   
+      </div>  
+      </mat-tab>
+    </mat-tab-group>      
   </div>
-  <hr>
 </div>

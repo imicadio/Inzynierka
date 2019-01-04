@@ -1,0 +1,41 @@
+.trainingDay {
+    background-color: #cfd8dc4d;
+    margin: 20px 0;
+}
+
+.exercise {
+    background-color: #eaeaea;
+    margin: 35px;
+}
+
+.serie {
+    margin: 20px;
+    background-color: #fff;
+}
+
+.margin {
+    margin: 5px;
+}
+
+.test {
+    margin: 20px 0;
+}
+
+.xs {
+    width: 100%;
+}
+
+.delete {
+    text-align: right;
+    cursor: pointer;
+}
+
+.add {
+    float: right;
+    margin: 10px;
+}
+
+.fa {
+    cursor: pointer;
+    margin: 10px;
+}

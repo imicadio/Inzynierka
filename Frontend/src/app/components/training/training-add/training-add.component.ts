@@ -9,11 +9,11 @@ import { User } from 'src/app/models/user';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-add-training',
-  templateUrl: './add-training.component.html',
-  styleUrls: ['./add-training.component.css']
+  selector: 'app-training-add',
+  templateUrl: './training-add.component.html',
+  styleUrls: ['./training-add.component.css']
 })
-export class AddTrainingComponent implements OnInit {
+export class TrainingAddComponent implements OnInit {
   @Output() cancelTraining = new EventEmitter();
   myForm: FormGroup;    // inicjalizacja formularza
   pupils: User[];
@@ -83,7 +83,7 @@ export class AddTrainingComponent implements OnInit {
     return this.fb.group({
       'serialNumber': [],
       'number': [],
-      'unit': []
+      'unit': ['powt.']
     });
   }
 

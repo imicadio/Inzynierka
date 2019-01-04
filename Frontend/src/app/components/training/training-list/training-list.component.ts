@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-training-list',
@@ -13,16 +14,18 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class TrainingListComponent implements OnInit {
   trainings: Training[];  
-  displayedColumns = ["Id", "Name", "Action"];
+  public displayedColumns = new Array<string>();
 
   constructor(
     private trainingService: TrainingService, 
     private alertify: AlertifyService, 
     public authService: AuthService, 
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
     ) { }
 
   ngOnInit() {
+    this.fillTableColumnNames();
     this.loadTrainings();
   }
 
@@ -35,6 +38,17 @@ export class TrainingListComponent implements OnInit {
     });
   }  
 
+  public fillTableColumnNames(): void {
+    this.displayedColumns.push('Id');
+    this.displayedColumns.push('Name');
+    if (this.authService.decodedToken.role == 'Trainer') {
+      this.displayedColumns.push('Podopieczny');
+    }
+    this.displayedColumns.push('Data Rozpoczęcia');
+    this.displayedColumns.push('Data Zakończenia');
+    this.displayedColumns.push('Akcje');
+  }
+
   deleteTraining(id: number) {
     this.trainingService.deleteTraining(id, this.authService.decodedToken.nameid).subscribe(()=>{
       this.alertify.success('Pomyślnie usunięto trening');
@@ -42,6 +56,10 @@ export class TrainingListComponent implements OnInit {
     }, error => {
       this.alertify.error(error);      
     });
+  }
+
+  btnClick() {
+    this.router.navigateByUrl('/training/add');
   }
 
 }

@@ -22,7 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatListModule, MatMenuModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
 import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
@@ -40,6 +40,9 @@ import { PhotoEditorComponent } from './components/user/photo-editor/photo-edito
 import { UserService } from './services/user/user.service';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TrainingEditComponent } from './components/training/training-edit/training-edit.component';
+import { TrainingAddComponent } from './components/training/training-add/training-add.component';
+import { DietEditComponent } from './components/diet/diet-edit/diet-edit.component';
+import { DietAddComponent } from './components/diet/diet-add/diet-add.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -61,7 +64,7 @@ export function tokenGetter() {
     AddTrainingComponent, 
     UserDetailComponent, 
     UserEditComponent, 
-    PhotoEditorComponent, TrainingEditComponent
+    PhotoEditorComponent, TrainingEditComponent, TrainingAddComponent, DietEditComponent, DietAddComponent
   ],
   imports: [
     BrowserModule,
@@ -69,23 +72,47 @@ export function tokenGetter() {
     AuthorizationModule,
     FormsModule,
     CommonModule,
-    BrowserModule,
-    MatTabsModule,
-    MatCardModule,
-    MatDialogModule,
-    MatButtonModule,
+    BrowserModule,    
     BrowserAnimationsModule,    
     ReactiveFormsModule,    
     RouterModule,    
     FormsModule,
     HttpClientModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
     MatIconModule,
-    MatSelectModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
     DragDropModule,
     FileUploadModule,
     AlertModule.forRoot(),

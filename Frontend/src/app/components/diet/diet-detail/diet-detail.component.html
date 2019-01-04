@@ -1,3 +1,72 @@
-<p>
-  diet-detail works!
-</p>
+<h1 class="text-center mt-5 mb-4">
+  <strong>Plan Dietetyczny:</strong><br> 
+  {{diet?.object.name}}
+</h1>
+  
+  <div class="row">
+    <div class="col-12 box">
+      <mat-tab-group>
+        <mat-tab *ngFor="let day of diets?.object?.dietDays; let i = index;" label="{{ day.name }}">
+          <div class="day mt-5">          
+            <h3 class="title">{{day.name}}</h3>
+            <div class="row">
+                <div class="col-12" *ngFor="let detail of day?.dietDetails; let i = index;">
+                  <div class="row">
+                    <div class="col-12 col-sm-8 col-md-10 padding_right"><p class="text-left meal">{{ i+1 }}. {{ detail.meal }}</p></div>
+                    <div class="col-12 col-sm-4 col-md-2 padding_left"><p class="text-center hour"><i class="fa fa-clock-o mr-2" aria-hidden="true"></i>{{ detail?.hour | date:'HH:mm' }}</p></div>
+                  </div>
+                  <!-- <p class="text-left meal">{{ i+1 }}. {{ detail.meal }}</p> -->
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 mt-3 mb-3">
+                      <h5 class="dish">{{ detail?.dish }}</h5>
+                      <p class="dish line_height"><strong>Sposób przygotowania:</strong><br> {{ detail?.recipe }}</p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 mt-3 mb-3 text-center serie">
+                      
+                          <div class="example-container mat-elevation-z8">
+                              <mat-table #table [dataSource]="detail?.dietProducts" [class.isMobile]="isMobile">
+                            
+                                <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+                            
+                                <!-- Position Column -->
+                                <ng-container matColumnDef="Produkt">
+                                  <mat-header-cell *matHeaderCellDef> Produkt </mat-header-cell>
+                                  <mat-cell *matCellDef="let product"> 
+                                    <span class="mobile-label">Produkt:</span>
+                                    {{product.name}} 
+                                  </mat-cell>
+                                </ng-container>
+                            
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="Miara Domowa">
+                                  <mat-header-cell *matHeaderCellDef> Miara Domowa </mat-header-cell>
+                                  <mat-cell *matCellDef="let product"> 
+                                    <span class="mobile-label">Miara Domowa:</span>
+                                    {{product.homeMeasure}} 
+                                  </mat-cell>
+                                </ng-container>
+                            
+                                <!-- Weight Column -->
+                                <ng-container matColumnDef="Waga [g.]">
+                                  <mat-header-cell *matHeaderCellDef> Waga [g.] </mat-header-cell>
+                                  <mat-cell *matCellDef="let product"> 
+                                    <span class="mobile-label">Waga [g.]:</span>
+                                    {{product.quantity}} 
+                                  </mat-cell>
+                                </ng-container>
+                            
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                              </mat-table>
+                            </div>
+                      
+                    </div>  
+                  </div>
+                </div>
+              </div>   
+          </div> 
+        </mat-tab> 
+      </mat-tab-group>      
+    </div>
+  </div>
