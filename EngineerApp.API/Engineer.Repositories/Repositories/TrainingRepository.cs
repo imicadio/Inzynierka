@@ -1,4 +1,7 @@
-﻿using Engineer.Models.Models.Trainings;
+﻿using Engineer.Models.BindingModel;
+using Engineer.Models.Dto;
+using Engineer.Models.Dto.Training;
+using Engineer.Models.Models.Trainings;
 using Engineer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -88,6 +91,56 @@ namespace Engineer.Repositories.Repositories
                     .ThenInclude(y => y.ExerciseTrainings)
                         .ThenInclude(z => z.Series)
                 .SingleOrDefault(s => s.Name == name);
+        }
+
+        public SearchResult<TrainingForSearchDto> GetByParameters(int userId, SearchBindingModel parametes)
+        {
+            IEnumerable<TrainingPlan> trainings;
+
+            if(parametes.Query != null)
+            {
+                trainings = _context.TrainingPlans.Where(b => b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query)).ToList();
+            }
+            else
+            {
+                trainings = _context.TrainingPlans.ToList();
+            }
+
+            var totalPages = (int)Math.Ceiling((decimal)trainings.Count() / parametes.Limit);
+
+            var property = typeof(TrainingPlan).GetProperty(parametes.Sort.FirstCharToUpper());
+
+            if(property == null)
+            {
+                var defaultParameters = new SearchBindingModel();
+                property = typeof(TrainingPlan).GetProperty(defaultParameters.Sort);
+            }
+
+            trainings = parametes.Ascending
+                ? trainings.OrderBy(b => property.GetValue(b))
+                : trainings.OrderByDescending(b => property.GetValue(b));
+
+            trainings = trainings.Skip(parametes.Limit * (parametes.PageNumber - 1)).Take(parametes.Limit);
+
+            var result = new SearchResult<TrainingForSearchDto>();
+            var trainingsForSearch = new List<TrainingForSearchDto>();
+            trainings.ToList().ForEach(b =>
+                trainingsForSearch.Add(new TrainingForSearchDto
+                {
+                    Id = b.Id,
+                    DateStart = b.DateStart,
+                    DateEnd = b.DateEnd,
+                    Name = b.Name,
+                    TrainerName = b.TrainerName,
+                    UserName = b.UserName
+                }
+            ));
+
+            result.CurrentPage = parametes.PageNumber;
+            result.TotalPageCount = totalPages;
+            result.Results = trainingsForSearch;
+
+            return result;
         }
 
         public TrainingDay GetDayById(int id)

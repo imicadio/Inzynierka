@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Engineer.Services
@@ -20,6 +21,6 @@ namespace Engineer.Services
             if (theDateTime.AddYears(age) > DateTime.Today)
                 age--;
             return age;
-        }
+        }        
     }
 }

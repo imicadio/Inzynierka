@@ -42,8 +42,10 @@ h1 > strong {
     width: 58%;
     justify-content: space-between;
 } */
-.exercises{ 
-    background-color: aliceblue; 
+.exercises{      
+    padding: 0;
+    background-color: #fff;
+    margin-bottom: 25px;
 }
 
 .exercises > p {
@@ -53,13 +55,12 @@ h1 > strong {
     border-left: 20px solid;
 }
 
-.exercises:nth-child(2n) {
-    background-color: aliceblue;
-}
-
 h5{
     line-height: 1.4;
+}
 
+.col-12.col-sm-12.col-md-6.mt-3.mb-3.text-left {
+    border-left: 1px solid aliceblue;
 }
 
 /* .exercise {

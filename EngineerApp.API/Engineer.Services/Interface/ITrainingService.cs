@@ -1,6 +1,8 @@
 ﻿using Engineer.Models;
+using Engineer.Models.BindingModel;
 using Engineer.Models.BindingModel.Training;
 using Engineer.Models.BindingModel.Training.Edit;
+using Engineer.Models.Dto;
 using Engineer.Models.Dto.Training;
 using System;
 using System.Collections.Generic;
@@ -21,5 +23,7 @@ namespace Engineer.Services.Interface
         Task<ResponseDto<BaseModelDto>> EditDay(int dayId, EditTrainingDayBindingModel model);
         Task<ResponseDto<BaseModelDto>> EditExercise(int exerciseId, EditExerciseTrainingBindingModel model);
         Task<ResponseDto<BaseModelDto>> EditSerie(int serieId, EditSerieBindingModel model);
+
+        ResponseDto<SearchResult<TrainingForSearchDto>> GetPaginationTrainings(int userId, SearchBindingModel parametes);
     }
 }

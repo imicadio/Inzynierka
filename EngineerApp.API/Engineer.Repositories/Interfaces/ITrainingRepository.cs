@@ -1,4 +1,7 @@
-﻿using Engineer.Models.Models.Trainings;
+﻿using Engineer.Models.BindingModel;
+using Engineer.Models.Dto;
+using Engineer.Models.Dto.Training;
+using Engineer.Models.Models.Trainings;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +11,8 @@ namespace Engineer.Repositories.Interfaces
 {
     public interface ITrainingRepository
     {
+        SearchResult<TrainingForSearchDto> GetByParameters(int userId, SearchBindingModel parametes);
+
         IEnumerable<TrainingPlan> GetAll();
         IEnumerable<TrainingPlan> GetAllTrainingUser(int id);
 

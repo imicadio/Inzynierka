@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Engineer.Models.BindingModel;
 using Engineer.Models.BindingModel.Training;
 using Engineer.Models.BindingModel.Training.Edit;
 using Engineer.Models.Dto.Training;
@@ -99,6 +100,30 @@ namespace EngineerApp.API.Controllers
                 return BadRequest(result);
             }
 
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("test")]
+        public IActionResult GetPaginationTrainings([FromQuery] SearchBindingModel parameters)        
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelStateErrors());
+            }
+
+            parameters.PageNumber = parameters.PageNumber + 1;
+            var rawUserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value;
+            var userId = Convert.ToInt16(rawUserId);
+
+            var result = _trainingService.GetPaginationTrainings(userId, parameters);
+
+            if (result.ErrorOccurred)
+            {
+                return BadRequest(result);
+            }
+            result.Object.CurrentPage = result.Object.CurrentPage - 1;
+            result.Object.TotalPageCount = result.Object.TotalPageCount - 1;
             return Ok(result);
         }
 

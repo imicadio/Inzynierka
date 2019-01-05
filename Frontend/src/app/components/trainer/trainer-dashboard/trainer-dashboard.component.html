@@ -1,8 +1,14 @@
 <div class="container mt-5">
   <div *ngIf="!registerMode" style="text-align: center">
-    <h5 class="text-primary mb-5">Dodaj nowego użytkownika</h5>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Dodaj</button>
+    <div class="row">
+      <div class="col-6 col-sm-6 add_user">
+        <h5 class="text-primary mb-5">Dodaj nowego podopiecznego</h5>
+        <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Podpopieczny</button>
+      </div>
+      <div class="col-6 col-sm-6 add_training">
+        <h5 class="text-primary mb-5">Dodaj nowy trening</h5>
+        <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()"><i class="fa fa-paint-brush" aria-hidden="true"></i>&nbsp;Trening</button>
+      </div>
     </div>
   </div>  
   <div *ngIf="registerMode" class="container">
@@ -13,18 +19,18 @@
     </div>
   </div>
 
-  <div *ngIf="!trainingMode" style="text-align: center">
+  <!-- <div *ngIf="!trainingMode" style="text-align: center">
     <h5 class="text-primary mt-5 mb-5">Dodaj nowy trening</h5>
     <div class="text-center">
       <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>
     </div>
-  </div>  
+  </div>   -->
 
-  <div *ngIf="trainingMode" class="container">
+  <!-- <div *ngIf="trainingMode" class="container">
     <div class="row justify-content-center">
       <div class="col-12">
         <app-add-training (cancelTraining)="cancelTrainingMode($event)"></app-add-training>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

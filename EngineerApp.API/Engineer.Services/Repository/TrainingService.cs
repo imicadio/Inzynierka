@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Engineer.Models;
+using Engineer.Models.BindingModel;
 using Engineer.Models.BindingModel.Training;
 using Engineer.Models.BindingModel.Training.Edit;
+using Engineer.Models.Dto;
 using Engineer.Models.Dto.Training;
 using Engineer.Models.Models.Trainings;
 using Engineer.Repositories.Interfaces;
@@ -189,6 +191,28 @@ namespace Engineer.Services.Repository
             }
 
             return response;
+        }
+
+        public ResponseDto<SearchResult<TrainingForSearchDto>> GetPaginationTrainings(int userId, SearchBindingModel parametes)
+        {
+            var result = new ResponseDto<SearchResult<TrainingForSearchDto>>();
+
+            var trainings = _trainingRepository.GetByParameters(userId, parametes);
+
+            if (trainings.TotalPageCount == 0)
+            {
+                result.Errors.Add("Nie znaleziono takich marek piw");
+                return result;
+            }
+
+            if (parametes.PageNumber > trainings.TotalPageCount)
+            {
+                result.Errors.Add($"Strona {parametes.PageNumber - 1} wykracza poza limit {trainings.TotalPageCount - 1}");
+                return result;
+            }
+
+            result.Object = trainings;
+            return result;
         }
 
         public ResponseDto<TrainingDto> GetTraining(int trainingId)
