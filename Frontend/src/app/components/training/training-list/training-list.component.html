@@ -6,7 +6,7 @@
   </div>
 </div> -->
 
-<table mat-table [dataSource]="trainings?.object?.trainings" class="mat-elevation-z8">
+<table mat-table [dataSource]="trainings1?.data?.results" class="mat-elevation-z8">
   
   <!-- Position Column -->
   <ng-container matColumnDef="Id">
@@ -64,6 +64,9 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table> 
+
+<mat-paginator #paginator [showFirstLastButtons]="true" [length]="resultLengthTraining" [pageSize]="3">
+</mat-paginator>
   
 <div class="text-center mt-4">
   <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>

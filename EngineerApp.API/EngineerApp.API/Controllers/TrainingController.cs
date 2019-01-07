@@ -104,7 +104,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("test")]
+        [HttpGet("Paginated")]
         public IActionResult GetPaginationTrainings([FromQuery] SearchBindingModel parameters)        
         {
             if (!ModelState.IsValid)

@@ -108,6 +108,8 @@ namespace Engineer.Repositories.Repositories
 
             var totalPages = (int)Math.Ceiling((decimal)trainings.Count() / parametes.Limit);
 
+            var countList = (int)Math.Ceiling((decimal)trainings.Count());
+
             var property = typeof(TrainingPlan).GetProperty(parametes.Sort.FirstCharToUpper());
 
             if(property == null)
@@ -134,8 +136,9 @@ namespace Engineer.Repositories.Repositories
                     TrainerName = b.TrainerName,
                     UserName = b.UserName
                 }
-            ));
+            ));          
 
+            result.Count = countList;
             result.CurrentPage = parametes.PageNumber;
             result.TotalPageCount = totalPages;
             result.Results = trainingsForSearch;
