@@ -5,68 +5,78 @@
     </div>
   </div>
 </div> -->
+<div class="row">
+  <div class="col-12">
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Szukaj">
+      </mat-form-field>
+    </div>
+  </div>
+</div>
 
-<table mat-table [dataSource]="trainings1?.data?.results" class="mat-elevation-z8">
-  
-  <!-- Position Column -->
-  <ng-container matColumnDef="Id">
-    <th mat-header-cell *matHeaderCellDef> # </th>
-    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="Name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container *appHasRole="['Trainer']" matColumnDef="Podopieczny">
-      <th mat-header-cell *matHeaderCellDef> Podopieczny</th>
-      <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="trainings1?.data?.results">
+    
+    <!-- Position Column -->
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
     </ng-container>
 
     <!-- Name Column -->
-  <ng-container matColumnDef="Data Rozpoczęcia">
-      <th mat-header-cell *matHeaderCellDef> Data Rozpoczęcia </th>
-      <td mat-cell *matCellDef="let element"> {{ element.dateStart | date:'dd.MM.yyyy' }} </td>
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-     <!-- Name Column -->
-  <ng-container matColumnDef="Data Zakończenia">
-      <th mat-header-cell *matHeaderCellDef> Data Zakończenia </th>
-      <td mat-cell *matCellDef="let element"> {{ element.dateEnd | date:'dd/MM/yyyy' }} </td>
+    <!-- Name Column -->
+    <ng-container *appHasRole="['Trainer']" matColumnDef="Podopieczny">
+        <th mat-header-cell *matHeaderCellDef> Podopieczny</th>
+        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+    <ng-container matColumnDef="Data Rozpoczęcia">
+        <th mat-header-cell *matHeaderCellDef> Data Rozpoczęcia </th>
+        <td mat-cell *matCellDef="let element"> {{ element.dateStart | date:'dd.MM.yyyy' }} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+    <ng-container matColumnDef="Data Zakończenia">
+        <th mat-header-cell *matHeaderCellDef> Data Zakończenia </th>
+        <td mat-cell *matCellDef="let element"> {{ element.dateEnd | date:'dd/MM/yyyy' }} </td>
+      </ng-container>
+
+    <!-- Name Description -->
+    <!-- <ng-container matColumnDef="Description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.exerciseTrainings[0]?.description?.length > 20 ? (element.exerciseTrainings[0]?.description | slice:0:40) + '...' : element.exerciseTrainings[0]?.description}} </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="Akcje">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Action </th>
+        <td mat-cell *matCellDef="let element">
+            <div class="action-button">
+              <i matTooltip="Szczegóły treningu" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
+                  zoom_in
+              </i>  
+              <i *appHasRole="['Trainer']" matTooltip="Edytuj trening" [routerLink]="['/training/edit/', element.id]" class="material-icons edit-icon">
+                edit
+              </i>  
+              <i *appHasRole="['Trainer']" (click)="deleteTraining(element.id)" matTooltip="Usuń trening" class="material-icons delete-icon">
+                delete_sweep
+              </i>                               
+            </div>
+        </td>
     </ng-container>
 
-  <!-- Name Description -->
-  <!-- <ng-container matColumnDef="Description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.exerciseTrainings[0]?.description?.length > 20 ? (element.exerciseTrainings[0]?.description | slice:0:40) + '...' : element.exerciseTrainings[0]?.description}} </td>
-    </ng-container> -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table> 
 
-    <ng-container matColumnDef="Akcje">
-      <th mat-header-cell *matHeaderCellDef class="text-center"> Action </th>
-      <td mat-cell *matCellDef="let element">
-          <div class="action-button">
-            <i matTooltip="Szczegóły treningu" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
-                zoom_in
-            </i>  
-            <i *appHasRole="['Trainer']" matTooltip="Edytuj trening" [routerLink]="['/training/edit/', element.id]" class="material-icons edit-icon">
-              edit
-            </i>  
-            <i *appHasRole="['Trainer']" (click)="deleteTraining(element.id)" matTooltip="Usuń trening" class="material-icons delete-icon">
-              delete_sweep
-            </i>                               
-          </div>
-      </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> 
-
-<mat-paginator #paginator [showFirstLastButtons]="true" [length]="resultLengthTraining" [pageSize]="3">
-</mat-paginator>
+  <mat-paginator #paginator [showFirstLastButtons]="true" [length]="resultLengthTraining" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" (page)="updateState($event)"></mat-paginator>
+</div>
   
 <div class="text-center mt-4">
   <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
 import { Training } from 'src/app/models/training';
 import { TrainingService } from 'src/app/services/training/training.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user/user.service';
 import { Router } from '@angular/router';
 import { merge, Observable, of as observableOf } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { startWith, switchMap, map, catchError, count } from 'rxjs/operators';
 import { ListTrainingQuery } from 'src/app/models/query/ListTrainingQuery';
 
 
@@ -22,7 +22,7 @@ export class TrainingListComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
   trainings1 = new MatTableDataSource();
   public resultLengthTraining = 0;
-  private pageSize = 3;
+  private pageSize = 5;
   private actionQuery: ListTrainingQuery = new ListTrainingQuery();
   /////////////////////////////////////////////
 
@@ -40,7 +40,51 @@ export class TrainingListComponent implements OnInit {
   ngOnInit() {
     this.fillTableColumnNames();
     // this.loadTrainings();
-    // this.paginationTraining();
+    this.paginationTraining();    
+  } 
+
+  public fillTableColumnNames(): void {
+    this.displayedColumns.push('Id');
+    this.displayedColumns.push('Name');
+    if (this.authService.decodedToken.role == 'Trainer') {
+      this.displayedColumns.push('Podopieczny');
+    }
+    this.displayedColumns.push('Data Rozpoczęcia');
+    this.displayedColumns.push('Data Zakończenia');
+    this.displayedColumns.push('Akcje');
+  }
+
+  paginationTraining(){
+    this.paginator.pageIndex = 0;
+      merge(this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.actionQuery.PageNumber = this.paginator.pageIndex;
+          this.actionQuery.Limit = this.pageSize;
+          return this.trainingService.trainingList(this.actionQuery);
+        }),
+        map(data => {         
+          this.resultLengthTraining = data.object.count;
+        //  console.log(data.object.totalPageCount);
+          return data.object;
+        }),
+        catchError((error) => {
+          return observableOf([]);
+        })
+      ).subscribe((data: Training[]) => {
+        this.trainings1.data = data;
+        console.log(this.resultLengthTraining);
+      }); 
+  }  
+
+  updateState(event: PageEvent) {
+    this.pageSize = event.pageSize;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.paginator.pageIndex = 0;
      merge(this.paginator.page)
      .pipe(
@@ -48,6 +92,7 @@ export class TrainingListComponent implements OnInit {
        switchMap(() => {
          this.actionQuery.PageNumber = this.paginator.pageIndex;
          this.actionQuery.Limit = this.pageSize;
+         this.actionQuery.Query = filterValue;
          return this.trainingService.trainingList(this.actionQuery);
        }),
        map(data => {         
@@ -62,7 +107,7 @@ export class TrainingListComponent implements OnInit {
        this.trainings1.data = data;
        console.log(this.resultLengthTraining);
       }); 
-  } 
+  }
    
   ///////////////////////// not pagination /////////////////////////
   // loadTrainings(){
@@ -72,18 +117,7 @@ export class TrainingListComponent implements OnInit {
   //   }, error => {
   //     this.alertify.error(error);
   //   });
-  // }  
-
-  public fillTableColumnNames(): void {
-    this.displayedColumns.push('Id');
-    this.displayedColumns.push('Name');
-    if (this.authService.decodedToken.role == 'Trainer') {
-      this.displayedColumns.push('Podopieczny');
-    }
-    this.displayedColumns.push('Data Rozpoczęcia');
-    this.displayedColumns.push('Data Zakończenia');
-    this.displayedColumns.push('Akcje');
-  }
+  // }    
 
   // deleteTraining(id: number) {
   //   this.trainingService.deleteTraining(id, this.authService.decodedToken.nameid).subscribe(()=>{
@@ -99,29 +133,4 @@ export class TrainingListComponent implements OnInit {
   // }
 
   ///////////////////////////////////////////////////////////////////////////
-
-
-  ///////////////////// With Pagination ////////////////////////////////////
-
-  // paginationTraining(){
-  //   this.paginatorTrainings.pageIndex = 0;
-  //    merge(this.paginatorTrainings.page)
-  //    .pipe(
-  //      startWith({}),
-  //      switchMap(() => {
-  //        this.actionQuery.PageNumber = this.paginatorTrainings.pageIndex;
-  //        this.actionQuery.pageSize = this.pageSize;
-  //        return this.trainingService.trainingList(this.actionQuery);
-  //      }),
-  //      map(data => {         
-  //        this.resultLengthTraining = data.count;
-  //        console.log(data.items);
-  //        return data.items;
-  //      }),
-  //      catchError((error) => {
-  //        console.log(error);
-  //        return Observable.throw(error);
-  //      })
-  //    ).subscribe((data: Training[]) => this.trainings1.data = data); 
-  //  }
 }
