@@ -54,4 +54,8 @@ export class DietListComponent implements OnInit {
       this.alertify.error(error);      
     });
   }
+
+  btnClick() {
+    this.router.navigateByUrl('/diets/add');
+  } 
 }

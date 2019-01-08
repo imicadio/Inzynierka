@@ -1,4 +1,7 @@
-﻿using Engineer.Models.Models.Diets;
+﻿using Engineer.Models.BindingModel;
+using Engineer.Models.Dto;
+using Engineer.Models.Dto.Diet;
+using Engineer.Models.Models.Diets;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +11,8 @@ namespace Engineer.Repositories.Interfaces
 {
     public interface IDietRepository
     {
+        SearchResult<DietForSearchDto> GetByParameters(int userId, SearchBindingModel parametes);
+
         IEnumerable<DietPlan> GetAllDiets();
         IEnumerable<DietPlan> GetAllUserDiets(int id);
 

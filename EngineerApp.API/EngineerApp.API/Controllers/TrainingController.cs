@@ -105,16 +105,14 @@ namespace EngineerApp.API.Controllers
 
         [AllowAnonymous]
         [HttpGet("Paginated")]
-        public IActionResult GetPaginationTrainings([FromQuery] SearchBindingModel parameters)        
+        public IActionResult GetPaginationTrainings(int userId, [FromQuery] SearchBindingModel parameters)        
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelStateErrors());
             }
 
-            parameters.PageNumber = parameters.PageNumber + 1;
-            var rawUserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value;
-            var userId = Convert.ToInt16(rawUserId);
+            parameters.PageNumber = parameters.PageNumber + 1;            
 
             var result = _trainingService.GetPaginationTrainings(userId, parameters);
 

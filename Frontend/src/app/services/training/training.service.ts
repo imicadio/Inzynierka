@@ -24,8 +24,8 @@ export class TrainingService {
     return this.http.get<Training>(this.baseUrl + 'Training/' + id);
   }
 
-  trainingList(query: ListTrainingQuery): Observable<PagedListDto<Training>> {
-   return this.http.get<PagedListDto<Training>>(this.baseUrl + 'Training/Paginated?' + queryStringify(query)); 
+  trainingList(userId:number, query: ListTrainingQuery): Observable<PagedListDto<Training>> {
+   return this.http.get<PagedListDto<Training>>(this.baseUrl + 'Training/Paginated?userId=' + userId + '&' + queryStringify(query)); 
   }
 
   deleteTraining(trainingId: number, trainerId: number) {

@@ -4,4 +4,5 @@ export interface Training {
     id: number;
     name: string;
     trainingDays: TrainingDays[];
+    count: number;
 }

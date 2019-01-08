@@ -99,11 +99,11 @@ namespace Engineer.Repositories.Repositories
 
             if(parametes.Query != null)
             {
-                trainings = _context.TrainingPlans.Where(b => b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query)).ToList();
+                trainings = _context.TrainingPlans.Where(b => ((b.UserId == userId) || (b.TrainerId == userId)) && ((b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query)))).ToList();
             }
             else
             {
-                trainings = _context.TrainingPlans.ToList();
+                trainings = _context.TrainingPlans.Where(u => u.UserId == userId || u.TrainerId == userId).ToList();
             }
 
             var totalPages = (int)Math.Ceiling((decimal)trainings.Count() / parametes.Limit);

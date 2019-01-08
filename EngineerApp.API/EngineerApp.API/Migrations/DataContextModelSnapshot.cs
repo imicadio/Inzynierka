@@ -75,7 +75,11 @@ namespace EngineerApp.API.Migrations
 
                     b.Property<int?>("TrainerDietId");
 
+                    b.Property<string>("TrainerName");
+
                     b.Property<int?>("UserDietId");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 

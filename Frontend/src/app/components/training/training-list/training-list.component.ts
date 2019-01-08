@@ -18,6 +18,7 @@ import { ListTrainingQuery } from 'src/app/models/query/ListTrainingQuery';
   styleUrls: ['./training-list.component.css']
 })
 export class TrainingListComponent implements OnInit {
+  value = '';
   //////////// With Pagination ////////////////
   @ViewChild('paginator') paginator: MatPaginator;
   trainings1 = new MatTableDataSource();
@@ -62,11 +63,11 @@ export class TrainingListComponent implements OnInit {
         switchMap(() => {
           this.actionQuery.PageNumber = this.paginator.pageIndex;
           this.actionQuery.Limit = this.pageSize;
-          return this.trainingService.trainingList(this.actionQuery);
+          return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
         }),
         map(data => {         
           this.resultLengthTraining = data.object.count;
-        //  console.log(data.object.totalPageCount);
+         console.log(data.object.count);
           return data.object;
         }),
         catchError((error) => {
@@ -74,7 +75,7 @@ export class TrainingListComponent implements OnInit {
         })
       ).subscribe((data: Training[]) => {
         this.trainings1.data = data;
-        console.log(this.resultLengthTraining);
+        // console.log(this.resultLengthTraining);
       }); 
   }  
 
@@ -93,7 +94,7 @@ export class TrainingListComponent implements OnInit {
          this.actionQuery.PageNumber = this.paginator.pageIndex;
          this.actionQuery.Limit = this.pageSize;
          this.actionQuery.Query = filterValue;
-         return this.trainingService.trainingList(this.actionQuery);
+         return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
        }),
        map(data => {         
          this.resultLengthTraining = data.object.count;
@@ -108,6 +109,10 @@ export class TrainingListComponent implements OnInit {
        console.log(this.resultLengthTraining);
       }); 
   }
+
+  btnClick() {
+    this.router.navigateByUrl('/training/add');
+  } 
    
   ///////////////////////// not pagination /////////////////////////
   // loadTrainings(){
@@ -126,11 +131,7 @@ export class TrainingListComponent implements OnInit {
   //   }, error => {
   //     this.alertify.error(error);      
   //   });
-  // }
-
-  // btnClick() {
-  //   this.router.navigateByUrl('/training/add');
-  // }
+  // } 
 
   ///////////////////////////////////////////////////////////////////////////
 }

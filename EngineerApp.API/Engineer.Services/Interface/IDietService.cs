@@ -1,6 +1,8 @@
 ﻿using Engineer.Models;
+using Engineer.Models.BindingModel;
 using Engineer.Models.BindingModel.Diet;
 using Engineer.Models.BindingModel.Diet.Edit;
+using Engineer.Models.Dto;
 using Engineer.Models.Dto.Diet;
 using System;
 using System.Collections.Generic;
@@ -23,5 +25,7 @@ namespace Engineer.Services.Interface
         Task<ResponseDto<BaseModelDto>> EditProduct(int id, EditDietProductBindingModel model);
 
         Task<ResponseDto<BaseModelDto>> DeleteDiet(int id);
+
+        ResponseDto<SearchResult<DietForSearchDto>> GetPaginationDiets(int userId, SearchBindingModel parametes);
     }
 }

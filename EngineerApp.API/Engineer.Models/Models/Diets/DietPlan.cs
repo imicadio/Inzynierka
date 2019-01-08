@@ -13,6 +13,8 @@ namespace Engineer.Models.Models.Diets
         public string Name { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
+        public string TrainerName { get; set; }
+        public string UserName { get; set; }
 
         public ICollection<DietDay> DietDays { get; set; }
 

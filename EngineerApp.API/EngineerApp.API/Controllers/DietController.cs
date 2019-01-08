@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Engineer.Models.BindingModel;
 using Engineer.Models.BindingModel.Diet;
 using Engineer.Models.BindingModel.Diet.Edit;
 using Engineer.Services.Interface;
@@ -99,6 +100,28 @@ namespace EngineerApp.API.Controllers
                 return BadRequest(result);
             }
 
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("Paginated")]
+        public IActionResult GetPaginationDiets(int userId, [FromQuery] SearchBindingModel parameters)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelStateErrors());
+            }
+
+            parameters.PageNumber = parameters.PageNumber + 1;
+
+            var result = _dietService.GetPaginationDiets(userId, parameters);
+
+            if (result.ErrorOccurred)
+            {
+                return BadRequest(result);
+            }
+            result.Object.CurrentPage = result.Object.CurrentPage - 1;
+            result.Object.TotalPageCount = result.Object.TotalPageCount - 1;
             return Ok(result);
         }
 

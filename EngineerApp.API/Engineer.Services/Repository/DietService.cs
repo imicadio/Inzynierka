@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Engineer.Models;
+using Engineer.Models.BindingModel;
 using Engineer.Models.BindingModel.Diet;
 using Engineer.Models.BindingModel.Diet.Edit;
+using Engineer.Models.Dto;
 using Engineer.Models.Dto.Diet;
 using Engineer.Models.Models.Diets;
 using Engineer.Repositories.Interfaces;
@@ -234,6 +236,28 @@ namespace Engineer.Services.Repository
             response.Object = _mapper.Map<DietPlanDto>(diet);
 
             return response;
+        }
+
+        public ResponseDto<SearchResult<DietForSearchDto>> GetPaginationDiets(int userId, SearchBindingModel parametes)
+        {
+            var result = new ResponseDto<SearchResult<DietForSearchDto>>();
+
+            var diets = _dietRepository.GetByParameters(userId, parametes);
+
+            if (diets.TotalPageCount == 0)
+            {
+                result.Errors.Add("Nie znaleziono takich planów dietetycznych");
+                return result;
+            }
+
+            if (parametes.PageNumber > diets.TotalPageCount)
+            {
+                result.Errors.Add($"Strona {parametes.PageNumber - 1} wykracza poza limit {diets.TotalPageCount - 1}");
+                return result;
+            }
+
+            result.Object = diets;
+            return result;
         }
 
         public async Task<ResponseDto<BaseModelDto>> InsertDiet(int idUser, int idTrainer, DietPlanBindingModel model)
