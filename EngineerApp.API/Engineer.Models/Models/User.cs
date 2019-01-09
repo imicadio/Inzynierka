@@ -1,5 +1,6 @@
 ﻿using Engineer.Models.Models.Diets;
 using Engineer.Models.Models.Trainings;
+using Engineer.Models.Models.Survey;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -41,5 +42,11 @@ namespace Engineer.Models.Models
 
         [InverseProperty("PupilTrainer")]
         public Pupil PupilsTrainer { get; set; }
+
+        [InverseProperty("UserSurvey")]
+        public Surveyy UsersSurvey { get; set; }
+
+        [InverseProperty("TrainerSurvey")]
+        public ICollection<Surveyy> TrainersSurvey { get; set; }
     }
 }

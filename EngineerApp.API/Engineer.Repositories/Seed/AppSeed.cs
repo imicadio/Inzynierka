@@ -9,6 +9,7 @@ namespace Engineer.Repositories.Seed
         public static void SeddDataBase(this DataContext context)
         {
             SeedRole.Seed(context);
+            SeedSurvey.Seed(context);
             SeedTraining.Seed(context);
             SeedDiet.Seed(context);
         }

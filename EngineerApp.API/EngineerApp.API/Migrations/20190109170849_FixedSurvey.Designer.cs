@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EngineerApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190108202838_DietPaginated")]
-    partial class DietPaginated
+    [Migration("20190109170849_FixedSurvey")]
+    partial class FixedSurvey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,6 +182,202 @@ namespace EngineerApp.API.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Biceps", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Bicepss");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.BodyFat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("BodyFats");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.BodyWeight", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("BodyWeights");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Calf", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Calfs");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Chest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Chests");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Hip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Hips");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Surveyy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("TrainerId");
+
+                    b.Property<int?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TrainerId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Surveys");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Thigh", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<double>("Size");
+
+                    b.Property<int>("SurveyId");
+
+                    b.Property<int>("TrainerId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Thighs");
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>
@@ -481,6 +677,73 @@ namespace EngineerApp.API.Migrations
                     b.HasOne("Engineer.Models.Models.User", "TrainerPupil")
                         .WithMany("TrainersPupil")
                         .HasForeignKey("TrainerId");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Biceps", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("Bicepss")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.BodyFat", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("BodyFats")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.BodyWeight", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("BodyWeights")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Calf", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("Calfs")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Chest", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("Chests")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Hip", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("Hips")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Surveyy", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.User", "TrainerSurvey")
+                        .WithMany("TrainersSurvey")
+                        .HasForeignKey("TrainerId");
+
+                    b.HasOne("Engineer.Models.Models.User", "UserSurvey")
+                        .WithOne("UsersSurvey")
+                        .HasForeignKey("Engineer.Models.Models.Survey.Surveyy", "UserId");
+                });
+
+            modelBuilder.Entity("Engineer.Models.Models.Survey.Thigh", b =>
+                {
+                    b.HasOne("Engineer.Models.Models.Survey.Surveyy", "Survey")
+                        .WithMany("Thighs")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Engineer.Models.Models.Trainings.ExerciseTraining", b =>

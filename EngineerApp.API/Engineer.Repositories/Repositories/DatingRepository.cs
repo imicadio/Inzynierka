@@ -80,5 +80,10 @@ namespace Engineer.Repositories.Repositories
 
             return user;
         }
+
+        public Pupil GetTrainer(int userId)
+        {
+            return _context.Pupils.SingleOrDefault(x => x.PupilId == userId);
+        }
     }
 }

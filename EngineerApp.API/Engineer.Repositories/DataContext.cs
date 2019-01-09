@@ -1,5 +1,6 @@
 ﻿using Engineer.Models.Models;
 using Engineer.Models.Models.Diets;
+using Engineer.Models.Models.Survey;
 using Engineer.Models.Models.Trainings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace Engineer.Repositories
 
         // Training
         public DbSet<ExerciseTraining> ExerciseTrainings { get; set; }
-        public DbSet<Serie> Series { get; set; }        
+        public DbSet<Serie> Series { get; set; }
         public DbSet<TrainingDay> TrainingDays { get; set; }
         public DbSet<TrainingPlan> TrainingPlans { get; set; }
 
@@ -29,6 +30,16 @@ namespace Engineer.Repositories
         public DbSet<DietDetail> DietDetails { get; set; }
         public DbSet<DietPlan> DietPlans { get; set; }
         public DbSet<DietProduct> DietProducts { get; set; }
+
+        // Survey
+        public DbSet<Biceps> Bicepss {get; set;}
+        public DbSet<BodyFat> BodyFats { get; set; }
+        public DbSet<BodyWeight> BodyWeights { get; set; }
+        public DbSet<Calf> Calfs { get; set; }
+        public DbSet<Chest> Chests { get; set; }
+        public DbSet<Hip> Hips { get; set; }
+        public DbSet<Surveyy> Surveys { get; set; }
+        public DbSet<Thigh> Thighs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

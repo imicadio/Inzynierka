@@ -3,6 +3,7 @@ using AutoMapper;
 using Engineer.Models;
 using Engineer.Models.Dto.User;
 using Engineer.Models.Models;
+using Engineer.Models.Models.Survey;
 using Engineer.Repositories.Interfaces;
 using Engineer.Services.Interface;
 using Microsoft.AspNetCore.Identity;
@@ -19,13 +20,15 @@ namespace Engineer.Services.Repository
         private readonly ITrainerRepository _trainerRepository;
         private readonly IMapper _mapper;
         private readonly IDatingRepository _repoUser;
+        private readonly ISurveyRepository _surveyRepository;
         private readonly UserManager<User> _userManager;
 
-        public TrainerService(ITrainerRepository trainerRepository, IMapper mapper, IDatingRepository repoUser, UserManager<User> userManager)
+        public TrainerService(ITrainerRepository trainerRepository, IMapper mapper, IDatingRepository repoUser, ISurveyRepository surveyRepository, UserManager<User> userManager)
         {
             _trainerRepository = trainerRepository;
             _mapper = mapper;
             _repoUser = repoUser;
+            _surveyRepository = surveyRepository;
             _userManager = userManager;
         }
 
@@ -73,6 +76,14 @@ namespace Engineer.Services.Repository
                 };
 
                 var addPupil = await _trainerRepository.InertPupil(newPupil);
+
+                Surveyy newSurvey = new Surveyy()
+                {
+                    TrainerId = trainer.Id,
+                    UserId = pupil.Id
+                };
+
+                var addSurvey = await _surveyRepository.InsertSurvey(newSurvey);
             }
             else
             {

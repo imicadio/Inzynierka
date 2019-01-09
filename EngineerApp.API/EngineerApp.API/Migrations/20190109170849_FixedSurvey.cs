@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EngineerApp.API.Migrations
 {
-    public partial class DietPaginated : Migration
+    public partial class FixedSurvey : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -248,6 +248,32 @@ namespace EngineerApp.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Surveys",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TrainerId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Surveys", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Surveys_AspNetUsers_TrainerId",
+                        column: x => x.TrainerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Surveys_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TrainingPlans",
                 columns: table => new
                 {
@@ -294,6 +320,174 @@ namespace EngineerApp.API.Migrations
                         name: "FK_DietDays_DietPlans_DietPlanId",
                         column: x => x.DietPlanId,
                         principalTable: "DietPlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bicepss",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bicepss", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bicepss_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BodyFats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BodyFats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BodyFats_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BodyWeights",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BodyWeights", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BodyWeights_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Calfs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Calfs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Calfs_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Chests",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chests", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Chests_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Hips",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hips", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Hips_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Thighs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Size = table.Column<double>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    TrainerId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    SurveyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Thighs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Thighs_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -448,6 +642,31 @@ namespace EngineerApp.API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bicepss_SurveyId",
+                table: "Bicepss",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BodyFats_SurveyId",
+                table: "BodyFats",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BodyWeights_SurveyId",
+                table: "BodyWeights",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Calfs_SurveyId",
+                table: "Calfs",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chests_SurveyId",
+                table: "Chests",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DietDays_DietPlanId",
                 table: "DietDays",
                 column: "DietPlanId");
@@ -478,6 +697,11 @@ namespace EngineerApp.API.Migrations
                 column: "TrainingDayId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Hips_SurveyId",
+                table: "Hips",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Photos_UserId",
                 table: "Photos",
                 column: "UserId");
@@ -498,6 +722,23 @@ namespace EngineerApp.API.Migrations
                 name: "IX_Series_ExerciseTrainingId",
                 table: "Series",
                 column: "ExerciseTrainingId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Surveys_TrainerId",
+                table: "Surveys",
+                column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Surveys_UserId",
+                table: "Surveys",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Thighs_SurveyId",
+                table: "Thighs",
+                column: "SurveyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TrainingDays_TrainingPlanId",
@@ -533,7 +774,25 @@ namespace EngineerApp.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Bicepss");
+
+            migrationBuilder.DropTable(
+                name: "BodyFats");
+
+            migrationBuilder.DropTable(
+                name: "BodyWeights");
+
+            migrationBuilder.DropTable(
+                name: "Calfs");
+
+            migrationBuilder.DropTable(
+                name: "Chests");
+
+            migrationBuilder.DropTable(
                 name: "DietProducts");
+
+            migrationBuilder.DropTable(
+                name: "Hips");
 
             migrationBuilder.DropTable(
                 name: "Photos");
@@ -545,6 +804,9 @@ namespace EngineerApp.API.Migrations
                 name: "Series");
 
             migrationBuilder.DropTable(
+                name: "Thighs");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -552,6 +814,9 @@ namespace EngineerApp.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "ExerciseTrainings");
+
+            migrationBuilder.DropTable(
+                name: "Surveys");
 
             migrationBuilder.DropTable(
                 name: "DietDays");

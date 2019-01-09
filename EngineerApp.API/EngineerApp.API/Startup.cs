@@ -48,6 +48,7 @@ namespace EngineerApp.API
             services.AddTransient<ITrainingService, TrainingService>();
             services.AddTransient<ITrainerService, TrainerService>();
             services.AddTransient<IDietService, DietService>();
+            services.AddTransient<ISurveyService, SurveyService>();
 
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("EngineerApp.API")));
             IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
@@ -121,6 +122,7 @@ namespace EngineerApp.API
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<ITrainerRepository, TrainerRepository>();
             services.AddTransient<IDietRepository, DietRepository>();
+            services.AddTransient<ISurveyRepository, SurveyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -150,14 +152,14 @@ namespace EngineerApp.API
 
             ////app.UseHttpsRedirection();
 
-            seeder.SeedUser();
+            //seeder.SeedUser();
 
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = scope.ServiceProvider.GetService<DataContext>();
-                context.Database.Migrate();
-                context.SeddDataBase();
-            }
+            //using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = scope.ServiceProvider.GetService<DataContext>();
+            //    context.Database.Migrate();
+            //    context.SeddDataBase();
+            //}
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
