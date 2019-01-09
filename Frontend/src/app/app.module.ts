@@ -43,6 +43,28 @@ import { TrainingEditComponent } from './components/training/training-edit/train
 import { TrainingAddComponent } from './components/training/training-add/training-add.component';
 import { DietEditComponent } from './components/diet/diet-edit/diet-edit.component';
 import { DietAddComponent } from './components/diet/diet-add/diet-add.component';
+import { ThighListComponent } from './components/dashboard/survey/thigh/thigh-list/thigh-list.component';
+import { ThighAddComponent } from './components/dashboard/survey/thigh/thigh-add/thigh-add.component';
+import { HipListComponent } from './components/dashboard/survey/hip/hip-list/hip-list.component';
+import { HipAddComponent } from './components/dashboard/survey/hip/hip-add/hip-add.component';
+import { HipUpdateComponent } from './components/dashboard/survey/hip/hip-update/hip-update.component';
+import { ThighUpdateComponent } from './components/dashboard/survey/thigh/thigh-update/thigh-update.component';
+import { ChestUpdateComponent } from './components/dashboard/survey/chest/chest-update/chest-update.component';
+import { ChestAddComponent } from './components/dashboard/survey/chest/chest-add/chest-add.component';
+import { ChestListComponent } from './components/dashboard/survey/chest/chest-list/chest-list.component';
+import { CalfAddComponent } from './components/dashboard/survey/calf/calf-add/calf-add.component';
+import { CalfListComponent } from './components/dashboard/survey/calf/calf-list/calf-list.component';
+import { CalfUpdateComponent } from './components/dashboard/survey/calf/calf-update/calf-update.component';
+import { BodyWeightUpdateComponent } from './components/dashboard/survey/body-weight/body-weight-update/body-weight-update.component';
+import { BodyWeightAddComponent } from './components/dashboard/survey/body-weight/body-weight-add/body-weight-add.component';
+import { BodyWeightListComponent } from './components/dashboard/survey/body-weight/body-weight-list/body-weight-list.component';
+import { BodyFatListComponent } from './components/dashboard/survey/body-fat/body-fat-list/body-fat-list.component';
+import { BodyFatAddComponent } from './components/dashboard/survey/body-fat/body-fat-add/body-fat-add.component';
+import { BodyFatUpdateComponent } from './components/dashboard/survey/body-fat/body-fat-update/body-fat-update.component';
+import { BicepsListComponent } from './components/dashboard/survey/biceps/biceps-list/biceps-list.component';
+import { BicepsAddComponent } from './components/dashboard/survey/biceps/biceps-add/biceps-add.component';
+import { BicepsUpdateComponent } from './components/dashboard/survey/biceps/biceps-update/biceps-update.component';
+import { DashboardService } from './services/dashboard/dashboard.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -64,7 +86,32 @@ export function tokenGetter() {
     AddTrainingComponent, 
     UserDetailComponent, 
     UserEditComponent, 
-    PhotoEditorComponent, TrainingEditComponent, TrainingAddComponent, DietEditComponent, DietAddComponent
+    PhotoEditorComponent, 
+    TrainingEditComponent, 
+    TrainingAddComponent, 
+    DietEditComponent, 
+    DietAddComponent, 
+    ThighListComponent, 
+    ThighAddComponent, 
+    HipListComponent,
+    HipAddComponent, 
+    HipUpdateComponent, 
+    ThighUpdateComponent, 
+    ChestUpdateComponent, 
+    ChestAddComponent, 
+    ChestListComponent, 
+    CalfAddComponent, 
+    CalfListComponent, 
+    CalfUpdateComponent, 
+    BodyWeightUpdateComponent, 
+    BodyWeightAddComponent, 
+    BodyWeightListComponent, 
+    BodyFatListComponent, 
+    BodyFatAddComponent, 
+    BodyFatUpdateComponent, 
+    BicepsListComponent,
+    BicepsAddComponent, 
+    BicepsUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -141,7 +188,8 @@ export function tokenGetter() {
     DietService,
     TrainerService,
     DietDetailResolver,
-    UserService
+    UserService,
+    DashboardService
   ],
   bootstrap: [AppComponent],
   exports:[HasRoleDirective]
