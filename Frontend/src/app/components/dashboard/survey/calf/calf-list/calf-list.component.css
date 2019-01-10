@@ -1,0 +1,11 @@
+.mat-table {
+    width: 100%;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+
+.material-icons.edit-icon {
+    margin-right: 10px;
+}

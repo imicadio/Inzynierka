@@ -338,8 +338,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/Biceps/{id}")]
-        public async Task<IActionResult> EditBiceps(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/Biceps")]
+        public async Task<IActionResult> EditBiceps(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -353,8 +353,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/BodyFats/{id}")]
-        public async Task<IActionResult> EditBodyFats(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/BodyFats")]
+        public async Task<IActionResult> EditBodyFats(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -368,8 +368,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/BodyWeight/{id}")]
-        public async Task<IActionResult> EditBodyWeight(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/BodyWeight")]
+        public async Task<IActionResult> EditBodyWeight(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -383,8 +383,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/Calf/{id}")]
-        public async Task<IActionResult> EditCalf(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/Calf")]
+        public async Task<IActionResult> EditCalf(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -398,8 +398,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/Chest/{id}")]
-        public async Task<IActionResult> EditChest(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/Chest")]
+        public async Task<IActionResult> EditChest(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -413,8 +413,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/Hip/{id}")]
-        public async Task<IActionResult> EditHip(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/Hip")]
+        public async Task<IActionResult> EditHip(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -428,8 +428,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/Thigh/{id}")]
-        public async Task<IActionResult> EditThigh(int userId, int id, SurveyEditBindingModel model)
+        [HttpPut("Edit/Thigh")]
+        public async Task<IActionResult> EditThigh(int userId, int id, [FromQuery] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();

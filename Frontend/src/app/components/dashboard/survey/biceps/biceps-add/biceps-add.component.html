@@ -1,3 +1,25 @@
-<p>
-  biceps-add works!
-</p>
+<!-- <h3>Edytuj Biceps</h3>
+<form [formGroup]="addSurvey" (ngSubmit)="addData()">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Rozmiar" formControlName="Size">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>  
+    <a mat-button (click)="onNoClick()">Anuluj</a>
+    <button mat-button (click)="addData()" cdkFocusInitial>Zapisz zmiany</button>
+  </div>
+</form> -->
+
+<h3>Dodaj Biceps</h3>
+<form [formGroup]="addSurvey" (change)="addData()">
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput formControlName="Size" placeholder="Rozmiar">
+  </mat-form-field>    
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-button (click)="updateData()" cdkFocusInitial>Zapisz zmiany</button>
+</div>
+</form>

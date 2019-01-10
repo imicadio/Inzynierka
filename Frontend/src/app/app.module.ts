@@ -65,6 +65,7 @@ import { BicepsListComponent } from './components/dashboard/survey/biceps/biceps
 import { BicepsAddComponent } from './components/dashboard/survey/biceps/biceps-add/biceps-add.component';
 import { BicepsUpdateComponent } from './components/dashboard/survey/biceps/biceps-update/biceps-update.component';
 import { DashboardService } from './services/dashboard/dashboard.service';
+import { ModalBicepsComponent } from './components/dashboard/survey/biceps/modal-biceps/modal-biceps.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -111,7 +112,7 @@ export function tokenGetter() {
     BodyFatUpdateComponent, 
     BicepsListComponent,
     BicepsAddComponent, 
-    BicepsUpdateComponent
+    BicepsUpdateComponent, ModalBicepsComponent
   ],
   imports: [
     BrowserModule,
@@ -190,6 +191,22 @@ export function tokenGetter() {
     DietDetailResolver,
     UserService,
     DashboardService
+  ],
+  entryComponents: [
+    ModalBicepsComponent,
+    BicepsAddComponent,
+    BodyFatAddComponent,
+    BodyFatUpdateComponent,
+    BodyWeightAddComponent,
+    BodyWeightUpdateComponent,
+    CalfAddComponent,
+    CalfUpdateComponent,
+    ChestAddComponent,
+    ChestUpdateComponent,
+    HipAddComponent,
+    HipUpdateComponent,
+    ThighAddComponent,
+    ThighUpdateComponent
   ],
   bootstrap: [AppComponent],
   exports:[HasRoleDirective]

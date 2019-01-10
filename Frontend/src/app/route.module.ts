@@ -14,6 +14,13 @@ import { DietListComponent } from './components/diet/diet-list/diet-list.compone
 import { DietAddComponent } from './components/diet/diet-add/diet-add.component';
 import { DietDetailComponent } from './components/diet/diet-detail/diet-detail.component';
 import { DietEditComponent } from './components/diet/diet-edit/diet-edit.component';
+import { BicepsAddComponent } from './components/dashboard/survey/biceps/biceps-add/biceps-add.component';
+import { BodyFatAddComponent } from './components/dashboard/survey/body-fat/body-fat-add/body-fat-add.component';
+import { BodyWeightAddComponent } from './components/dashboard/survey/body-weight/body-weight-add/body-weight-add.component';
+import { CalfAddComponent } from './components/dashboard/survey/calf/calf-add/calf-add.component';
+import { ChestAddComponent } from './components/dashboard/survey/chest/chest-add/chest-add.component';
+import { HipAddComponent } from './components/dashboard/survey/hip/hip-add/hip-add.component';
+import { ThighAddComponent } from './components/dashboard/survey/thigh/thigh-add/thigh-add.component';
 
 export const appRoutes: Routes = [
     { path: '', component: LoginComponent },

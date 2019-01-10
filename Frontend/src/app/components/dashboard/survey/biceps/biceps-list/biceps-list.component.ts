@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, PageEvent, MatDialog } from '@angular/material';
 import { ListSurveyQuery } from 'src/app/models/query/ListSurveyQuery';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { merge, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { Biceps } from 'src/app/models/dashboard/biceps';
+import { ModalBicepsComponent } from '../modal-biceps/modal-biceps.component';
+import { BicepsAddComponent } from '../biceps-add/biceps-add.component';
 
 @Component({
   selector: 'app-biceps-list',
@@ -17,16 +19,17 @@ import { Biceps } from 'src/app/models/dashboard/biceps';
 export class BicepsListComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
   biceps = new MatTableDataSource();
-  public resultLengthBiceps = 0;
+  public resultLength = 0;
   private pageSize = 5;
   private listQuery: ListSurveyQuery = new ListSurveyQuery();
-  public displayedColumns = new Array<string>();
+  public displayedColumns = new Array<string>(); 
 
   constructor(
     private dashboardService: DashboardService,
     private alertify: AlertifyService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -35,7 +38,6 @@ export class BicepsListComponent implements OnInit {
   }
 
   public fillTableColumnNames(): void {
-    this.displayedColumns.push('Id');
     this.displayedColumns.push('Rozmiar');    
     this.displayedColumns.push('Data Dodania');    
     this.displayedColumns.push('Akcje');   
@@ -52,7 +54,7 @@ export class BicepsListComponent implements OnInit {
         return this.dashboardService.bicepsList(this.authService.decodedToken.nameid, this.listQuery);
       }),
       map(data => {         
-        this.resultLengthBiceps = data.object.count;
+        this.resultLength = data.object.count;
        console.log(data.object.count);
         return data.object;
       }),
@@ -63,5 +65,39 @@ export class BicepsListComponent implements OnInit {
       this.biceps.data = data;
       console.log(data);
     }); 
+  }
+
+  updateState(event: PageEvent) {
+    this.pageSize = event.pageSize;
+  }  
+
+  deleteSurvey(id: number) {
+    this.dashboardService.deleteBiceps(id, this.authService.decodedToken.nameid).subscribe(()=>{
+      this.alertify.success('Pomyślnie usunięto pomiar bicepsu');
+      this.loadBiceps();
+    }, error => {
+      this.alertify.error(error);      
+    });
+  } 
+
+  editSurvey(element) {
+    const dialogRef = this.dialog.open(ModalBicepsComponent, {
+      width: '450px',
+      data: element
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadBiceps();
+    });
+  }
+
+  addSurvey() {
+    const dialogRef = this.dialog.open(BicepsAddComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadBiceps()
+    });
   }
 }

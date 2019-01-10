@@ -1,3 +1,36 @@
-<p>
-  thigh-list works!
-</p>
+<div class="mat-elevation-z8">
+  <h3 class="text-center pt-4 pb-3">Udo</h3>
+  <table mat-table [dataSource]="surveyData?.data?.results">   
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="Rozmiar">
+      <th mat-header-cell *matHeaderCellDef> Rozmiar [cm.]</th>
+      <td mat-cell *matCellDef="let element"> {{element.size}}cm. </td>
+    </ng-container>
+
+      <!-- Name Column -->
+    <ng-container matColumnDef="Data Dodania">
+      <th mat-header-cell *matHeaderCellDef> Data Dodania </th>
+      <td mat-cell *matCellDef="let element"> {{ element.dateAdded | date:'dd.MM.yyyy' }} </td>
+    </ng-container>      
+
+    <ng-container matColumnDef="Akcje">
+      <th mat-header-cell *matHeaderCellDef class="text-center"> Akcje </th>
+      <td mat-cell *matCellDef="let element">
+          <div class="action-button text-center">
+            <i matTooltip="Edytuj Pomiar" [routerLink]="['/survey/bodyFat/edit/', element.id]" class="material-icons edit-icon">
+              edit
+            </i>  
+            <i (click)="deleteSurvey(element.id)" matTooltip="Usuń Pomiar" class="material-icons delete-icon">
+              delete_sweep
+            </i>                               
+          </div>
+      </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+
+  <mat-paginator #paginator [showFirstLastButtons]="true" [length]="resultLength" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 25, 100]" (page)="updateState($event)"></mat-paginator>
+</div>
