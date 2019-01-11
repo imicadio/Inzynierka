@@ -159,7 +159,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditBiceps(data);
 
@@ -179,7 +179,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditBodyFat(data);
 
@@ -199,7 +199,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditBodyWeight(data);
 
@@ -219,7 +219,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditCalf(data);
 
@@ -239,7 +239,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditChest(data);
 
@@ -259,7 +259,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditHip(data);
 
@@ -279,7 +279,7 @@ namespace Engineer.Services.Repository
             }
 
             data.Size = model.Size;
-            data.DateAdded = model.DateAdded;
+            data.DateAdded = model.DateAdded.AddDays(1);
 
             await _surveyRepository.EditThigh(data);
 

@@ -55,7 +55,7 @@ export class BicepsListComponent implements OnInit {
       }),
       map(data => {         
         this.resultLength = data.object.count;
-       console.log(data.object.count);
+      //  console.log(data.object.count);
         return data.object;
       }),
       catchError((error) => {
@@ -63,7 +63,7 @@ export class BicepsListComponent implements OnInit {
       })
     ).subscribe((data: Biceps[]) => {
       this.biceps.data = data;
-      console.log(data);
+      // console.log(data);
     }); 
   }
 

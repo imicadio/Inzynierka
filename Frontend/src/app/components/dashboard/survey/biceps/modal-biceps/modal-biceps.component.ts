@@ -34,6 +34,7 @@ export class ModalBicepsComponent implements OnInit {
   updateData() {
     this.dashboardService.updateBiceps(this.authService.decodedToken.nameid, this.data.id, this.data).subscribe(next => {
       this.alertify.success('Pomyślnie zaktualizowano');
+      this.dialogRef.close();
     }, error => {
       this.alertify.error(error);
     })

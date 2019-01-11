@@ -4,4 +4,5 @@ export interface Diet {
     id: number;
     name: string;
     dietDays: DietDays[];
+    count: number;
 }

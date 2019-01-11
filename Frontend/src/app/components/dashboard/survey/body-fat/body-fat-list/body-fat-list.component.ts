@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
+import { MatPaginator, MatTableDataSource, PageEvent, MatDialog } from '@angular/material';
 import { ListSurveyQuery } from 'src/app/models/query/ListSurveyQuery';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { merge, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { Biceps } from 'src/app/models/dashboard/biceps';
+import { BodyFatAddComponent } from '../body-fat-add/body-fat-add.component';
+import { BodyFatUpdateComponent } from '../body-fat-update/body-fat-update.component';
 
 @Component({
   selector: 'app-body-fat-list',
@@ -26,7 +28,8 @@ export class BodyFatListComponent implements OnInit {
     private dashboardService: DashboardService,
     private alertify: AlertifyService,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -52,7 +55,7 @@ export class BodyFatListComponent implements OnInit {
       }),
       map(data => {         
         this.resultLength = data.object.count;
-       console.log(data.object.count);
+      //  console.log(data.object.count);
         return data.object;
       }),
       catchError((error) => {
@@ -60,7 +63,7 @@ export class BodyFatListComponent implements OnInit {
       })
     ).subscribe((data: Biceps[]) => {
       this.surveyData.data = data;
-      console.log(data);
+      // console.log(data);
     }); 
   }
 
@@ -76,4 +79,25 @@ export class BodyFatListComponent implements OnInit {
       this.alertify.error(error);      
     });
   } 
+
+  editSurvey(element) {
+    const dialogRef = this.dialog.open(BodyFatUpdateComponent, {
+      width: '450px',
+      data: element
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadData();
+    });
+  }
+
+  addSurvey() {
+    const dialogRef = this.dialog.open(BodyFatAddComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadData()
+    });
+  }
 }

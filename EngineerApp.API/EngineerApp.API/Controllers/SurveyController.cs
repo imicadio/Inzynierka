@@ -339,7 +339,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPut("Edit/Biceps")]
-        public async Task<IActionResult> EditBiceps(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        public async Task<IActionResult> EditBiceps(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -353,8 +353,8 @@ namespace EngineerApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("Edit/BodyFats")]
-        public async Task<IActionResult> EditBodyFats(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        [HttpPut("Edit/BodyFat")]
+        public async Task<IActionResult> EditBodyFats(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -369,7 +369,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPut("Edit/BodyWeight")]
-        public async Task<IActionResult> EditBodyWeight(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        public async Task<IActionResult> EditBodyWeight(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -384,7 +384,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPut("Edit/Calf")]
-        public async Task<IActionResult> EditCalf(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        public async Task<IActionResult> EditCalf(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -399,7 +399,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPut("Edit/Chest")]
-        public async Task<IActionResult> EditChest(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        public async Task<IActionResult> EditChest(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -414,7 +414,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPut("Edit/Hip")]
-        public async Task<IActionResult> EditHip(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        public async Task<IActionResult> EditHip(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -429,7 +429,7 @@ namespace EngineerApp.API.Controllers
         }
 
         [HttpPut("Edit/Thigh")]
-        public async Task<IActionResult> EditThigh(int userId, int id, [FromQuery] SurveyEditBindingModel model)
+        public async Task<IActionResult> EditThigh(int userId, int id, [FromBody] SurveyEditBindingModel model)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();

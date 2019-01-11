@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Diet } from 'src/app/models/diet';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { DietService } from 'src/app/services/diet/diet.service';
+import { MatPaginator, MatTableDataSource, PageEvent } from '@angular/material';
+import { ListTrainingQuery } from 'src/app/models/query/ListTrainingQuery';
+import { merge, Observable, of as observableOf } from 'rxjs';
+import { startWith, switchMap, map, catchError, count } from 'rxjs/operators';
 
 @Component({
   selector: 'app-diet-list',
@@ -11,7 +15,11 @@ import { DietService } from 'src/app/services/diet/diet.service';
   styleUrls: ['./diet-list.component.css']
 })
 export class DietListComponent implements OnInit {
-  diets: Diet[];
+  @ViewChild('paginator') paginator: MatPaginator;
+  diets = new MatTableDataSource();
+  public resultLength = 0;
+  private pageSize = 5;
+  private actionQuery: ListTrainingQuery = new ListTrainingQuery();
   public displayedColumns = new Array<string>();
 
   constructor(
@@ -27,13 +35,56 @@ export class DietListComponent implements OnInit {
   }
 
   loadDiets(){
-    this.dietService.getDiets().subscribe((diets: Diet[]) => {
-      this.diets = diets;
-      console.log(diets);
-    }, error => {
-      this.alertify.error(error);
-    });
+    this.paginator.pageIndex = 0;
+      merge(this.paginator.page)
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.actionQuery.PageNumber = this.paginator.pageIndex;
+          this.actionQuery.Limit = this.pageSize;
+          return this.dietService.dietList(this.authService.decodedToken.nameid, this.actionQuery);
+        }),
+        map(data => {         
+          this.resultLength = data.object.count;
+          return data.object;
+        }),
+        catchError((error) => {
+          return observableOf([]);
+        })
+      ).subscribe((data: Diet[]) => {
+        this.diets.data = data;
+      }); 
   }  
+
+  updateState(event: PageEvent) {
+    this.pageSize = event.pageSize;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.paginator.pageIndex = 0;
+     merge(this.paginator.page)
+     .pipe(
+       startWith({}),
+       switchMap(() => {
+         this.actionQuery.PageNumber = this.paginator.pageIndex;
+         this.actionQuery.Limit = this.pageSize;
+         this.actionQuery.Query = filterValue;
+         return this.dietService.dietList(this.authService.decodedToken.nameid, this.actionQuery);
+       }),
+       map(data => {         
+         this.resultLength = data.object.count;
+         return data.object;
+       }),
+       catchError((error) => {
+         return observableOf([]);
+       })
+     ).subscribe((data: Diet[]) => {
+       this.diets.data = data;       
+      }); 
+  }
+   
 
   public fillTableColumnNames(): void {
     this.displayedColumns.push('Id');

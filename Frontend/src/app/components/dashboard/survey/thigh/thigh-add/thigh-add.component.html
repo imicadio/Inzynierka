@@ -1,3 +1,12 @@
-<p>
-  thigh-add works!
-</p>
+<h3>Dodaj Biceps</h3>
+<form [formGroup]="addSurvey" (change)="addData()">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput formControlName="Size" placeholder="Rozmiar">
+    </mat-form-field>    
+  </div>
+  <div mat-dialog-actions>
+    <a mat-button (click)="onNoClick()">Anuluj</a>
+    <button mat-button cdkFocusInitial>Zapisz zmiany</button>
+  </div>
+</form>

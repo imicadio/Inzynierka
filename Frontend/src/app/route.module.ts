@@ -35,10 +35,10 @@ export const appRoutes: Routes = [
             { path: 'training/:id', component: TrainingDetailComponent, resolve: {training: TrainingDetailResolver} },
             { path: 'training/edit/:id', component: TrainingEditComponent, data: { roles: ['Trainer'] } },            
             { path: 'trainer', component: TrainerDashboardComponent, data: { roles: ['Trainer'] } },            
-            { path: 'diets', component: DietListComponent },
-            { path: 'diets/add', component: DietAddComponent, data: { roles: ['Trainer'] } },
-            { path: 'diets/:id', component: DietDetailComponent },
-            { path: 'diets/edit/:id', component: DietEditComponent, data: { roles: ['Trainer'] } },
+            { path: 'diet', component: DietListComponent },
+            { path: 'diet/add', component: DietAddComponent, data: { roles: ['Trainer'] } },
+            { path: 'diet/:id', component: DietDetailComponent },
+            { path: 'diet/edit/:id', component: DietEditComponent, data: { roles: ['Trainer'] } },
             { path: 'user/edit', component: UserEditComponent },
         ]
 

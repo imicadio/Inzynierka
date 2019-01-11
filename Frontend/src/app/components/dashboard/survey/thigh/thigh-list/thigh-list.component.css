@@ -9,3 +9,17 @@
 .material-icons.edit-icon {
     margin-right: 10px;
 }
+
+.mat-stroked-button.mat-primary {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    position: absolute;
+    right: 0;
+}
+
+.mat-fab.mat-primary {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 20px;
+}
