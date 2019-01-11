@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Training } from 'src/app/models/training';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class TrainerService {
 
   addTraining(trainingId: number, trainerId: number, training: Training) {
     return this.http.post(this.baseUrl + 'Training?idUser=' + trainingId + '&idTrainer=' + trainerId, training);
+  }
+
+  getPupils(id: number): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl + 'Trainer/GetPupils?id=' + id);
   }
 }

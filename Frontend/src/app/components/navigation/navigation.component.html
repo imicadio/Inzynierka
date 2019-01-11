@@ -9,9 +9,9 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/diet']">Diety</a>
       </li>
-      <li *appHasRole="['Trainer']" class="nav-item" routerLinkActive="active">
+      <!-- <li *appHasRole="['Trainer']" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['/trainer']">Trainer</a>
-      </li>
+      </li> -->
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>

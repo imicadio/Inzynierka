@@ -1,30 +1,36 @@
-<h3 class="mt-5 mb-5 h1 text-center text-primary">Tabela pomiarów</h3>
-<div class="row mt-4">
-  <div class="col-4">
-    <app-biceps-list></app-biceps-list>
+<div *appHasRole="['User']">
+  <h3 class="mt-5 mb-2 h1 text-center text-primary">Tabela pomiarów</h3>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-6 col-lg-4 mt-5">
+        <app-body-fat-list></app-body-fat-list>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4 mt-5">
+        <app-body-weight-list></app-body-weight-list>
+      </div>
+    </div>
   </div>
-  <div class="col-4">
-    <app-body-fat-list></app-body-fat-list>
-  </div>
-  <div class="col-4">
-    <app-body-weight-list></app-body-weight-list>
+
+  <div class="row justify-content-md-center mb-5">
+    <div class="col-12 col-md-6 col-xl-3 col-large-2 mt-5">
+      <app-biceps-list></app-biceps-list>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3 col-large-2 mt-5">
+      <app-chest-list></app-chest-list>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3 col-large-2 mt-5">
+      <app-hip-list></app-hip-list>
+    </div>  
+    <div class="col-12 col-md-6 col-xl-3 col-large-2 mt-5">
+      <app-thigh-list></app-thigh-list>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3 col-large-2 mt-5">
+      <app-calf-list></app-calf-list>
+    </div>  
   </div>
 </div>
 
-<div class="row mt-4">
-  <div class="col-4">
-    <app-calf-list></app-calf-list>
-  </div>
-  <div class="col-4">
-    <app-chest-list></app-chest-list>
-  </div>
-  <div class="col-4">
-    <app-hip-list></app-hip-list>
-  </div>
-</div>
-
-<div class="row mt-4">
-  <div class="col-4">
-    <app-thigh-list></app-thigh-list>
-  </div>
+<div *appHasRole="['Trainer']">
+  <app-trainer-dashboard></app-trainer-dashboard>
 </div>

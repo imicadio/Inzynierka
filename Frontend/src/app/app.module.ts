@@ -22,7 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatListModule, MatMenuModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatToolbarModule, MatTooltipModule, MatTreeModule } from '@angular/material';
+import { MatInputModule, MatTabsModule, MatTableModule, MatSortModule, MatPaginatorModule, MatProgressSpinnerModule, MatCardModule, MatDialogModule, MatButtonModule, MatIconModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCheckboxModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatGridListModule, MatListModule, MatMenuModule, MatProgressBarModule, MatRadioModule, MatRippleModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatStepperModule, MatToolbarModule, MatTooltipModule, MatTreeModule, MAT_DATE_LOCALE } from '@angular/material';
 import { TrainingListComponent } from './components/training/training-list/training-list.component';
 import { TrainingDetailComponent } from './components/training/training-detail/training-detail.component';
 import { TrainingDetailResolver } from './resolvers/training-detail.resolver';
@@ -66,6 +66,9 @@ import { BicepsAddComponent } from './components/dashboard/survey/biceps/biceps-
 import { BicepsUpdateComponent } from './components/dashboard/survey/biceps/biceps-update/biceps-update.component';
 import { DashboardService } from './services/dashboard/dashboard.service';
 import { ModalBicepsComponent } from './components/dashboard/survey/biceps/modal-biceps/modal-biceps.component';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { PupilListComponent } from './components/trainer/pupil-list/pupil-list.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -112,7 +115,10 @@ export function tokenGetter() {
     BodyFatUpdateComponent, 
     BicepsListComponent,
     BicepsAddComponent, 
-    BicepsUpdateComponent, ModalBicepsComponent
+    BicepsUpdateComponent, 
+    ModalBicepsComponent, 
+    PupilListComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -125,7 +131,7 @@ export function tokenGetter() {
     ReactiveFormsModule,    
     RouterModule,    
     FormsModule,
-    HttpClientModule,
+    HttpClientModule, 
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -161,6 +167,7 @@ export function tokenGetter() {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    MatMomentDateModule,
     DragDropModule,
     FileUploadModule,
     AlertModule.forRoot(),
@@ -180,6 +187,7 @@ export function tokenGetter() {
     })
   ],
   providers: [
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
     AuthService,
     ErrorInterceptorProvider, 
     AlertifyService,

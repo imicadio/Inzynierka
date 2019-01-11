@@ -1,0 +1,11 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media only screen and (min-width: 1499px) {
+    .col-large-2 {
+        flex: 0 0 22%;
+        max-width: 20%;
+    }
+}

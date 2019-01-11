@@ -29,13 +29,15 @@ namespace EngineerApp.API.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IDatingRepository _repo;
 
-        public AuthController(IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AuthController(IConfiguration config, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IDatingRepository repo)
         {
             _config = config;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
+            _repo = repo;
         }
 
         [HttpPost("register")]
@@ -70,6 +72,10 @@ namespace EngineerApp.API.Controllers
                     .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
 
                 var userToReturn = _mapper.Map<UserForListDto>(appUser);
+
+                var userActive = await _repo.GetUser(user.Id);
+                user.LastActive = DateTime.Now;
+                await _repo.SaveAll();
 
                 return Ok(new
                 {

@@ -5,6 +5,7 @@
     </div>
   </div>
 </div> -->
+<div class="container">
 <div class="row align-items-center">
   <div class="col-12 col-sm-7 mt-3 mb-4">
     <div class="example-header">
@@ -17,7 +18,7 @@
     </div>
   </div>
   <div class="col-12 col-sm-5 text-center">
-    <button mat-stroked-button color="primary" [routerLink]="['']" (click)="btnClick()">Dodaj nowy trening</button>
+    <button *appHasRole="['Trainer']" mat-stroked-button color="primary" [routerLink]="['']" (click)="btnClick()">Dodaj nowy trening</button>
   </div>
 </div>
 
@@ -82,4 +83,5 @@
   </table> 
 
   <mat-paginator #paginator [showFirstLastButtons]="true" [length]="resultLengthTraining" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 25, 100]" (page)="updateState($event)"></mat-paginator>
+</div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { Biceps } from 'src/app/models/dashboard/biceps';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -20,7 +20,7 @@ export class BodyFatUpdateComponent implements OnInit {
     private dashboardService: DashboardService,
     public authService: AuthService,
     private alertify: AlertifyService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
     ) { }
 
   ngOnInit() {
@@ -35,6 +35,7 @@ export class BodyFatUpdateComponent implements OnInit {
     this.dashboardService.updateBodyFat(this.authService.decodedToken.nameid, this.data.id, this.data).subscribe(next => {
       this.alertify.success('Pomyślnie zaktualizowano');
       this.dialogRef.close();
+      console.log(this.data);
     }, error => {
       this.alertify.error(error);
     })

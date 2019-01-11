@@ -1,36 +1,58 @@
-<div class="container mt-5">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <div class="row">
-      <div class="col-6 col-sm-6 add_user">
-        <h5 class="text-primary mb-5">Dodaj nowego podopiecznego</h5>
-        <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Podpopieczny</button>
+<div class="container mb-5">
+  <div class="mt-5 mb-5">
+    <div *ngIf="!registerMode" style="text-align: center">
+      <div class="row">
+        <div class="col-6 col-sm-6 add_user">
+          <h5 class="text-primary mb-5">Dodaj nowego podopiecznego</h5>
+          <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;Podpopieczny</button>
+        </div>
+        <div class="col-6 col-sm-6 add_training">
+          <h5 class="text-primary mb-5">Dodaj nowy trening</h5>
+          <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()"><i class="fa fa-paint-brush" aria-hidden="true"></i>&nbsp;Trening</button>
+        </div>
       </div>
-      <div class="col-6 col-sm-6 add_training">
-        <h5 class="text-primary mb-5">Dodaj nowy trening</h5>
-        <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()"><i class="fa fa-paint-brush" aria-hidden="true"></i>&nbsp;Trening</button>
+    </div>  
+    <div *ngIf="registerMode" class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <app-add-user (cancelRegister)="cancelRegisterMode($event)"></app-add-user>
+        </div>
       </div>
     </div>
-  </div>  
-  <div *ngIf="registerMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-4">
-        <app-add-user (cancelRegister)="cancelRegisterMode($event)"></app-add-user>
+
+    <!-- <div *ngIf="!trainingMode" style="text-align: center">
+      <h5 class="text-primary mt-5 mb-5">Dodaj nowy trening</h5>
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>
       </div>
-    </div>
+    </div>   -->
+
+    <!-- <div *ngIf="trainingMode" class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <app-add-training (cancelTraining)="cancelTrainingMode($event)"></app-add-training>
+        </div>
+      </div>
+    </div> -->
   </div>
 
-  <!-- <div *ngIf="!trainingMode" style="text-align: center">
-    <h5 class="text-primary mt-5 mb-5">Dodaj nowy trening</h5>
-    <div class="text-center">
-      <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>
-    </div>
-  </div>   -->
+  <hr>
 
-  <!-- <div *ngIf="trainingMode" class="container">
-    <div class="row justify-content-center">
-      <div class="col-12">
-        <app-add-training (cancelTraining)="cancelTrainingMode($event)"></app-add-training>
-      </div>
+  <div class="row mt-5 mb-5">    
+    <div class="col-12">
+        <h3 class="text-primary text-center mb-5">Podopieczni</h3>
+      <app-pupil-list></app-pupil-list>
     </div>
-  </div> -->
+  </div>
+  <hr>
+  <div class="mt-5 mb-5">
+    <h3 class="text-center text-primary mb-5">Treingi podopiecznych</h3>
+      <app-training-list></app-training-list>
+  </div>
+  <hr>
+  <div class="mt-5">
+    <h3 class="text-center text-primary mb-5">Diety podopiecznych</h3>
+      <app-diet-list></app-diet-list>
+  </div>
 </div>
+

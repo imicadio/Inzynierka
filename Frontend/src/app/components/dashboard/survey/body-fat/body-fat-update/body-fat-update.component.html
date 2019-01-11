@@ -8,7 +8,15 @@
     <input matInput [matDatepicker]="DateAdded" [(ngModel)]="data.dateAdded" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="DateAdded"></mat-datepicker-toggle>
     <mat-datepicker #DateAdded></mat-datepicker>
-  </mat-form-field>    
+  </mat-form-field>  
+  <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
+    <input               
+            type="text"
+            placeholder="Datepicker"
+            class="form-control"
+            bsDatepicker
+            [(ngModel)]="data.dateAdded">
+  </div>   -->
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Anuluj</button>
