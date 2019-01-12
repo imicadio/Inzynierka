@@ -25,6 +25,8 @@ export class TrainingListComponent implements OnInit {
   public resultLengthTraining = 0;
   private pageSize = 5;
   private actionQuery: ListTrainingQuery = new ListTrainingQuery();
+  public sortAscending = false;
+  private filterValuets: string = "";
   /////////////////////////////////////////////
 
   trainings: Training[];    
@@ -63,6 +65,7 @@ export class TrainingListComponent implements OnInit {
         switchMap(() => {
           this.actionQuery.PageNumber = this.paginator.pageIndex;
           this.actionQuery.Limit = this.pageSize;
+          this.actionQuery.Ascending = this.sortAscending;
           return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
         }),
         map(data => {         
@@ -93,7 +96,9 @@ export class TrainingListComponent implements OnInit {
        switchMap(() => {
          this.actionQuery.PageNumber = this.paginator.pageIndex;
          this.actionQuery.Limit = this.pageSize;
-         this.actionQuery.Query = filterValue;
+         this.actionQuery.Ascending = this.sortAscending;
+         this.filterValuets = filterValue;
+         this.actionQuery.Query = filterValue;         
          return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
        }),
        map(data => {         
@@ -106,7 +111,35 @@ export class TrainingListComponent implements OnInit {
        })
      ).subscribe((data: Training[]) => {
        this.trainings1.data = data;
-       console.log(this.resultLengthTraining);
+      //  console.log(this.resultLengthTraining);
+      }); 
+  }
+
+  changeClient(sortAscending) {   
+    console.log(sortAscending);
+    console.log();
+    this.paginator.pageIndex = 0;
+     merge(this.paginator.page)
+     .pipe(
+       startWith({}),
+       switchMap(() => {
+         this.actionQuery.PageNumber = this.paginator.pageIndex;
+         this.actionQuery.Limit = this.pageSize;
+         this.actionQuery.Ascending = sortAscending;
+         this.actionQuery.Query = this.filterValuets;         
+         return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
+       }),
+       map(data => {         
+         this.resultLengthTraining = data.object.count;
+        //  console.log(data.object.totalPageCount);
+         return data.object;
+       }),
+       catchError((error) => {
+         return observableOf([]);
+       })
+     ).subscribe((data: Training[]) => {
+       this.trainings1.data = data;
+      //  console.log(this.resultLengthTraining);
       }); 
   }
 

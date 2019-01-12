@@ -17,7 +17,7 @@ export class DashboardService {
   constructor(private http: HttpClient) { }
 
   bicepsList(userId:number, query: ListSurveyQuery): Observable<PagedListDto<Biceps>> {
-    return this.http.get<PagedListDto<Biceps>>(this.baseUrl + 'Survey/Biceps?userId=' + userId + '&' + queryStringify(query) + '&Ascending=false' + '&Ascending=false'); 
+    return this.http.get<PagedListDto<Biceps>>(this.baseUrl + 'Survey/Biceps?userId=' + userId + '&' + queryStringify(query) + '&Ascending=false'); 
    }
 
   addBiceps(userId: number, size: number) {

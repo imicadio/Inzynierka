@@ -7,7 +7,7 @@
 </div> -->
 <div class="container">
 <div class="row align-items-center">
-  <div class="col-12 col-sm-7 mt-3 mb-4">
+  <div class="col-12 col-sm-6 mt-3 mb-4">
     <div class="example-header">
         <mat-form-field class="example-form-field">
           <input matInput type="text" (keyup)="applyFilter($event.target.value)" placeholder="Szukaj treningu" [(ngModel)]="value">
@@ -17,8 +17,17 @@
         </mat-form-field>      
     </div>
   </div>
-  <div class="col-12 col-sm-5 text-center">
+  <div class="col-12 col-sm-3 text-center">
     <button *appHasRole="['Trainer']" mat-stroked-button color="primary" [routerLink]="['']" (click)="btnClick()">Dodaj nowy trening</button>
+  </div>
+  <div class="col-12 col-sm-3">
+    <h4>Sortuj według daty</h4>
+      <mat-form-field>
+        <select matNativeControl [(value)]="sortAscending" required (change)="changeClient($event.target.value)">
+          <option [value]="false">od najnowszej</option>
+          <option [value]="true">od najstarszej</option>
+        </select>
+      </mat-form-field>
   </div>
 </div>
 

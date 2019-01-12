@@ -21,7 +21,7 @@ namespace Engineer.Repositories.Repositories
         public IEnumerable<User> GetAllPupils(int id)
         {
             return _context.Users
-                .Include(x => x.PupilsTrainer).Where(x => x.PupilsTrainer.TrainerId == id);
+                .Include(x => x.PupilsTrainer).OrderByDescending(x => x.LastActive).Where(x => x.PupilsTrainer.TrainerId == id);
         }
 
         public async Task<Pupil> InertPupil(Pupil pupils)
