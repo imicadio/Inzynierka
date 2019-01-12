@@ -119,8 +119,8 @@ namespace Engineer.Repositories.Repositories
             }
 
             trainings = parametes.Ascending
-                ? trainings.OrderBy(b => property.GetValue(b))
-                : trainings.OrderByDescending(b => property.GetValue(b));
+                ? trainings.OrderByDescending(b => property.GetValue(b))
+                : trainings.OrderBy(b => property.GetValue(b));
 
             trainings = trainings.Skip(parametes.Limit * (parametes.PageNumber - 1)).Take(parametes.Limit);
 

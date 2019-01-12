@@ -21,6 +21,9 @@ export class DietListComponent implements OnInit {
   private pageSize = 5;
   private actionQuery: ListTrainingQuery = new ListTrainingQuery();
   public displayedColumns = new Array<string>();
+  private sortAscending = true;
+  private filterValuets: string = "";
+  test = 'true';
 
   constructor(
     private dietService: DietService,
@@ -34,6 +37,17 @@ export class DietListComponent implements OnInit {
     this.loadDiets();
   }
 
+  public fillTableColumnNames(): void {
+    this.displayedColumns.push('Id');
+    this.displayedColumns.push('Name');
+    if (this.authService.decodedToken.role == 'Trainer') {
+      this.displayedColumns.push('Podopieczny');
+    }
+    this.displayedColumns.push('Data Rozpoczęcia');
+    this.displayedColumns.push('Data Zakończenia');
+    this.displayedColumns.push('Akcje');
+  }
+
   loadDiets(){
     this.paginator.pageIndex = 0;
       merge(this.paginator.page)
@@ -42,6 +56,8 @@ export class DietListComponent implements OnInit {
         switchMap(() => {
           this.actionQuery.PageNumber = this.paginator.pageIndex;
           this.actionQuery.Limit = this.pageSize;
+          this.actionQuery.Query = this.filterValuets;   
+          this.actionQuery.Ascending = this.sortAscending;
           return this.dietService.dietList(this.authService.decodedToken.nameid, this.actionQuery);
         }),
         map(data => {         
@@ -61,40 +77,16 @@ export class DietListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    console.log('applyfilter: ' + this.sortAscending);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.paginator.pageIndex = 0;
-     merge(this.paginator.page)
-     .pipe(
-       startWith({}),
-       switchMap(() => {
-         this.actionQuery.PageNumber = this.paginator.pageIndex;
-         this.actionQuery.Limit = this.pageSize;
-         this.actionQuery.Query = filterValue;
-         return this.dietService.dietList(this.authService.decodedToken.nameid, this.actionQuery);
-       }),
-       map(data => {         
-         this.resultLength = data.object.count;
-         return data.object;
-       }),
-       catchError((error) => {
-         return observableOf([]);
-       })
-     ).subscribe((data: Diet[]) => {
-       this.diets.data = data;       
-      }); 
+    this.filterValuets = filterValue;
+    this.loadDiets();
   }
-   
 
-  public fillTableColumnNames(): void {
-    this.displayedColumns.push('Id');
-    this.displayedColumns.push('Name');
-    if (this.authService.decodedToken.role == 'Trainer') {
-      this.displayedColumns.push('Podopieczny');
-    }
-    this.displayedColumns.push('Data Rozpoczęcia');
-    this.displayedColumns.push('Data Zakończenia');
-    this.displayedColumns.push('Akcje');
+  changeClient(sort) {       
+    this.sortAscending = sort;   
+    this.loadDiets();
   }
 
   deleteDiet(id: number) {

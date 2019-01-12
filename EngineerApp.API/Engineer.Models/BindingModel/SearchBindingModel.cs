@@ -8,7 +8,7 @@ namespace Engineer.Models.BindingModel
     {
         public int PageNumber { get; set; } = 1;
         public int Limit { get; set; } = 25;
-        public string Sort { get; set; } = "Name";
+        public string Sort { get; set; } = "DateStart";
         public string Query { get; set; } = "";
         public bool Ascending { get; set; } = true;
     }

@@ -25,8 +25,9 @@ export class TrainingListComponent implements OnInit {
   public resultLengthTraining = 0;
   private pageSize = 5;
   private actionQuery: ListTrainingQuery = new ListTrainingQuery();
-  public sortAscending = false;
+  private sortAscending = true;
   private filterValuets: string = "";
+  test = 'true';
   /////////////////////////////////////////////
 
   trainings: Training[];    
@@ -42,7 +43,6 @@ export class TrainingListComponent implements OnInit {
 
   ngOnInit() {
     this.fillTableColumnNames();
-    // this.loadTrainings();
     this.paginationTraining();    
   } 
 
@@ -58,6 +58,7 @@ export class TrainingListComponent implements OnInit {
   }
 
   paginationTraining(){
+    console.log('pagination training: ' + this.sortAscending);
     this.paginator.pageIndex = 0;
       merge(this.paginator.page)
       .pipe(
@@ -65,12 +66,13 @@ export class TrainingListComponent implements OnInit {
         switchMap(() => {
           this.actionQuery.PageNumber = this.paginator.pageIndex;
           this.actionQuery.Limit = this.pageSize;
+          this.actionQuery.Query = this.filterValuets;   
           this.actionQuery.Ascending = this.sortAscending;
           return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
         }),
         map(data => {         
           this.resultLengthTraining = data.object.count;
-         console.log(data.object.count);
+        //  console.log(data.object.count);
           return data.object;
         }),
         catchError((error) => {
@@ -87,60 +89,16 @@ export class TrainingListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    console.log('applyfilter: ' + this.sortAscending);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.paginator.pageIndex = 0;
-     merge(this.paginator.page)
-     .pipe(
-       startWith({}),
-       switchMap(() => {
-         this.actionQuery.PageNumber = this.paginator.pageIndex;
-         this.actionQuery.Limit = this.pageSize;
-         this.actionQuery.Ascending = this.sortAscending;
-         this.filterValuets = filterValue;
-         this.actionQuery.Query = filterValue;         
-         return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
-       }),
-       map(data => {         
-         this.resultLengthTraining = data.object.count;
-        //  console.log(data.object.totalPageCount);
-         return data.object;
-       }),
-       catchError((error) => {
-         return observableOf([]);
-       })
-     ).subscribe((data: Training[]) => {
-       this.trainings1.data = data;
-      //  console.log(this.resultLengthTraining);
-      }); 
+    this.filterValuets = filterValue;
+    this.paginationTraining();
   }
 
-  changeClient(sortAscending) {   
-    console.log(sortAscending);
-    console.log();
-    this.paginator.pageIndex = 0;
-     merge(this.paginator.page)
-     .pipe(
-       startWith({}),
-       switchMap(() => {
-         this.actionQuery.PageNumber = this.paginator.pageIndex;
-         this.actionQuery.Limit = this.pageSize;
-         this.actionQuery.Ascending = sortAscending;
-         this.actionQuery.Query = this.filterValuets;         
-         return this.trainingService.trainingList(this.authService.decodedToken.nameid, this.actionQuery);
-       }),
-       map(data => {         
-         this.resultLengthTraining = data.object.count;
-        //  console.log(data.object.totalPageCount);
-         return data.object;
-       }),
-       catchError((error) => {
-         return observableOf([]);
-       })
-     ).subscribe((data: Training[]) => {
-       this.trainings1.data = data;
-      //  console.log(this.resultLengthTraining);
-      }); 
+  changeClient(sort) {       
+    this.sortAscending = sort;   
+    this.paginationTraining();
   }
 
   btnClick() {
