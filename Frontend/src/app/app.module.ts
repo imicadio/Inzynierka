@@ -74,6 +74,13 @@ import { DietDashboardComponent } from './components/diet/diet-dashboard/diet-da
 import { TrainingUserComponent } from './components/user/training-user/training-user.component';
 import { DietUserComponent } from './components/user/diet-user/diet-user.component';
 import { SurveyUserComponent } from './components/user/survey-user/survey-user.component';
+import { ThighListComponent1 } from './components/user/survey/thigh/thigh-list/thigh-list.component1';
+import { HipListComponent1 } from './components/user/survey/hip/hip-list/hip-list.component1';
+import { ChestListComponent1 } from './components/user/survey/chest/chest-list/chest-list.component1';
+import { CalfListComponent1 } from './components/user/survey/calf/calf-list/calf-list.component1';
+import { BodyWeightListComponent1 } from './components/user/survey/body-weight/body-weight-list/body-weight-list.component1';
+import { BodyFatListComponent1 } from './components/user/survey/body-fat/body-fat-list/body-fat-list.component1';
+import { BicepsListComponent1 } from './components/user/survey/biceps/biceps-list/biceps-list.component1';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -100,25 +107,32 @@ export function tokenGetter() {
     TrainingAddComponent, 
     DietEditComponent, 
     DietAddComponent, 
-    ThighListComponent, 
+    ThighListComponent,
+    ThighListComponent1, 
     ThighAddComponent, 
     HipListComponent,
+    HipListComponent1,
     HipAddComponent, 
     HipUpdateComponent, 
     ThighUpdateComponent, 
     ChestUpdateComponent, 
     ChestAddComponent, 
-    ChestListComponent, 
+    ChestListComponent,
+    ChestListComponent1, 
     CalfAddComponent, 
-    CalfListComponent, 
+    CalfListComponent,
+    CalfListComponent1, 
     CalfUpdateComponent, 
     BodyWeightUpdateComponent, 
     BodyWeightAddComponent, 
-    BodyWeightListComponent, 
-    BodyFatListComponent, 
+    BodyWeightListComponent,
+    BodyWeightListComponent1, 
+    BodyFatListComponent,
+    BodyFatListComponent1, 
     BodyFatAddComponent, 
     BodyFatUpdateComponent, 
     BicepsListComponent,
+    BicepsListComponent1,
     BicepsAddComponent, 
     BicepsUpdateComponent, 
     ModalBicepsComponent, 

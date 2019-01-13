@@ -40,8 +40,8 @@ export const appRoutes: Routes = [
             { path: 'diet/add', component: DietAddComponent, data: { roles: ['Trainer'] } },
             { path: 'diet/:id', component: DietDetailComponent },
             { path: 'diet/edit/:id', component: DietEditComponent, data: { roles: ['Trainer'] } },
-            { path: 'user/:id', component: UserDetailComponent },
-            { path: 'user/edit', component: UserEditComponent },
+            { path: 'user/edit', component: UserEditComponent }, 
+            { path: 'user/:id', component: UserDetailComponent },                       
         ]
 
     },
