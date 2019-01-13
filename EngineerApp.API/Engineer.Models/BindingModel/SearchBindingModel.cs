@@ -11,5 +11,7 @@ namespace Engineer.Models.BindingModel
         public string Sort { get; set; } = "DateStart";
         public string Query { get; set; } = "";
         public bool Ascending { get; set; } = true;
+        public DateTime? PresentDay { get; set; } = null;
+        public DateTime? EndDay { get; set; } = null;
     }
 }

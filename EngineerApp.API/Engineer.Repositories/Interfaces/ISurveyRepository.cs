@@ -32,6 +32,14 @@ namespace Engineer.Repositories.Interfaces
         Hip GetByHipId(int id);
         Thigh GetByThighId(int id);
 
+        Biceps GetCurrentBiceps(int userId);
+        BodyFat GetCurrentBodyFat(int userId);
+        BodyWeight GetCurrentBodyWeight(int userId);
+        Calf GetCurrentCalf(int userId);
+        Chest GetCurrentChest(int userId);
+        Hip GetCurrentHip(int userId);
+        Thigh GetCurrentThigh(int userId);
+
 
         Task<Biceps> InsertBiceps(Biceps data);
         Task<BodyFat> InsertBodyFat(BodyFat data);

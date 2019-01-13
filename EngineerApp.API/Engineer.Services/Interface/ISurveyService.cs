@@ -28,6 +28,8 @@ namespace Engineer.Services.Interface
         ResponseDto<SurveyForSearchDto> GetHip(int id);
         ResponseDto<SurveyForSearchDto> GetThigh(int id);
 
+        ResponseDto<CurrentSurveyDto> GetCurrentSurveys(int userId);
+
         Task<ResponseDto<BaseModelDto>> InsertBiceps(int idUser, SurveyBindingModel model);
         Task<ResponseDto<BaseModelDto>> InsertBodyFat(int idUser, SurveyBindingModel model);
         Task<ResponseDto<BaseModelDto>> InsertBodyWeight(int idUser, SurveyBindingModel model);

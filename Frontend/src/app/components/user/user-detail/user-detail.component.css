@@ -1,0 +1,17 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.tab-panel {
+    min-height: 100vh;
+}
+
+.mat-tab-body-wrapper{
+    flex-grow: 1;
+    min-height: 100vh;
+  }
+
+  .height {
+      min-height: 90vh;
+  }

@@ -1,0 +1,71 @@
+<!-- <div class="container">
+  <div class="row">
+    <div *ngFor="let training of trainings?.object?.trainings" class="col-lg-2 col-md-3 col-sm-6">
+      <h1>{{ training?.name }}</h1>
+    </div>
+  </div>
+</div> -->
+<div class="container mt-5">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-12 col-sm-3 text-center mb-5">
+        <button *appHasRole="['Trainer']" mat-stroked-button color="primary" [routerLink]="['']" (click)="btnClick()">Dodaj nowy trening</button>
+      </div>
+    </div>
+    
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="trainings1?.data?.results">
+        
+        <!-- Position Column -->
+        <ng-container matColumnDef="Id">
+          <th mat-header-cell *matHeaderCellDef> # </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container *appHasRole="['Trainer']" matColumnDef="Podopieczny">
+            <th mat-header-cell *matHeaderCellDef> Podopieczny</th>
+            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+          </ng-container>
+    
+          <!-- Name Column -->
+        <ng-container matColumnDef="Data Rozpoczęcia">
+            <th mat-header-cell *matHeaderCellDef> Data Rozpoczęcia </th>
+            <td mat-cell *matCellDef="let element"> {{ element.dateStart | date:'dd.MM.yyyy' }} </td>
+          </ng-container>
+    
+          <!-- Name Column -->
+        <ng-container matColumnDef="Data Zakończenia">
+            <th mat-header-cell *matHeaderCellDef> Data Zakończenia </th>
+            <td mat-cell *matCellDef="let element"> {{ element.dateEnd | date:'dd/MM/yyyy' }} </td>
+          </ng-container>
+    
+        <!-- Name Description -->
+        <!-- <ng-container matColumnDef="Description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.exerciseTrainings[0]?.description?.length > 20 ? (element.exerciseTrainings[0]?.description | slice:0:40) + '...' : element.exerciseTrainings[0]?.description}} </td>
+          </ng-container> -->
+    
+          <ng-container matColumnDef="Akcje">
+            <th mat-header-cell *matHeaderCellDef class="text-center"> Action </th>
+            <td mat-cell *matCellDef="let element">
+                <div class="action-button">
+                  <i matTooltip="Szczegóły treningu" [routerLink]="['/training/', element.id]" class="material-icons details-icon">
+                      zoom_in
+                  </i>                              
+                </div>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table> 
+    
+      <mat-paginator #paginator [showFirstLastButtons]="true" [length]="resultLengthTraining" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 25, 100]" (page)="updateState($event)"></mat-paginator>
+    </div>
+    </div>

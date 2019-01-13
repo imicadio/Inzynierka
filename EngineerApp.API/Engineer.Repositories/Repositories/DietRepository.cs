@@ -78,7 +78,11 @@ namespace Engineer.Repositories.Repositories
         {
             IEnumerable<DietPlan> diets;
 
-            if (parametes.Query != null)
+            if (parametes.Query != null && parametes.PresentDay != null && parametes.EndDay != null)
+            {
+                diets = _context.DietPlans.Where(b => ((b.UserDietId == userId) || (b.TrainerDietId == userId)) && ((b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query))) && ((b.DateEnd >= parametes.PresentDay) && (b.DateEnd <= parametes.EndDay))).ToList();
+            }
+            else if (parametes.Query != null)
             {
                 diets = _context.DietPlans.Where(b => ((b.UserDietId == userId) || (b.TrainerDietId == userId)) && ((b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query)))).ToList();
             }

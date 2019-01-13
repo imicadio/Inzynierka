@@ -42,11 +42,22 @@ namespace EngineerApp.API.Controllers
             result.Object.TotalPageCount = result.Object.TotalPageCount - 1;
             return Ok(result);
         }
-
+        
         [HttpGet("Biceps/{id}")]
         public IActionResult GetBiceps(int id)
         {
             var result = _surveyService.GetBiceps(id);
+            if (result.ErrorOccurred)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("CurrentSurveys")]
+        public IActionResult GetCurrentSurveys(int userId)
+        {
+            var result = _surveyService.GetCurrentSurveys(userId);
             if (result.ErrorOccurred)
                 return BadRequest(result);
 

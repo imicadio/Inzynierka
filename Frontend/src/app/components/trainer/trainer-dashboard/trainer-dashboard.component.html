@@ -19,21 +19,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div *ngIf="!trainingMode" style="text-align: center">
-      <h5 class="text-primary mt-5 mb-5">Dodaj nowy trening</h5>
-      <div class="text-center">
-        <button class="btn btn-primary btn-lg mr-2" [routerLink]="['']" (click)="btnClick()">Dodaj</button>
-      </div>
-    </div>   -->
-
-    <!-- <div *ngIf="trainingMode" class="container">
-      <div class="row justify-content-center">
-        <div class="col-12">
-          <app-add-training (cancelTraining)="cancelTrainingMode($event)"></app-add-training>
-        </div>
-      </div>
-    </div> -->
   </div>
 
   <hr>
@@ -46,13 +31,13 @@
   </div>
   <hr>
   <div class="mt-5 mb-5">
-    <h3 class="text-center text-primary mb-5">Treingi podopiecznych</h3>
-      <app-training-list></app-training-list>
+    <h3 class="text-center text-primary mb-5">Kończące się treningi w tygodniu</h3>
+      <app-training-dashboard></app-training-dashboard>
   </div>
   <hr>
   <div class="mt-5">
-    <h3 class="text-center text-primary mb-5">Diety podopiecznych</h3>
-      <app-diet-list></app-diet-list>
+    <h3 class="text-center text-primary mb-5">Kończące się diety w tygodniu</h3>
+      <app-diet-dashboard></app-diet-dashboard>
   </div>
 </div>
 

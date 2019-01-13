@@ -97,7 +97,11 @@ namespace Engineer.Repositories.Repositories
         {
             IEnumerable<TrainingPlan> trainings;
 
-            if(parametes.Query != null)
+            if((parametes.Query != null && parametes.PresentDay != null && parametes.EndDay != null))
+            {
+                trainings = _context.TrainingPlans.Where(b => ((b.UserId == userId) || (b.TrainerId == userId)) && ((b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query))) && ((b.DateEnd >= parametes.PresentDay) && (b.DateEnd <= parametes.EndDay))).ToList();
+            }
+            else if (parametes.Query != null)
             {
                 trainings = _context.TrainingPlans.Where(b => ((b.UserId == userId) || (b.TrainerId == userId)) && ((b.Name.Contains(parametes.Query) || b.UserName.Contains(parametes.Query)))).ToList();
             }
@@ -116,11 +120,13 @@ namespace Engineer.Repositories.Repositories
             {
                 var defaultParameters = new SearchBindingModel();
                 property = typeof(TrainingPlan).GetProperty(defaultParameters.Sort);
-            }
+            }           
 
             trainings = parametes.Ascending
                 ? trainings.OrderByDescending(b => property.GetValue(b))
                 : trainings.OrderBy(b => property.GetValue(b));
+
+            
 
             trainings = trainings.Skip(parametes.Limit * (parametes.PageNumber - 1)).Take(parametes.Limit);
 

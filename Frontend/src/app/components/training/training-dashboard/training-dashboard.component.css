@@ -1,0 +1,34 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-cell:last-child {
+    width: 130px;
+  }
+  
+  .material-icons {
+    line-height: inherit;
+    cursor: pointer;
+  }
+  
+  .action-button {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  

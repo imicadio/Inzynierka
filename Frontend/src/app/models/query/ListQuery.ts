@@ -4,4 +4,6 @@ export class ListQuery {
     Sort: string;
     Query: string;
     Ascending: boolean;
+    PresentDay: string;
+    EndDay: string;
 }

@@ -69,6 +69,11 @@ import { ModalBicepsComponent } from './components/dashboard/survey/biceps/modal
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { PupilListComponent } from './components/trainer/pupil-list/pupil-list.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { TrainingDashboardComponent } from './components/training/training-dashboard/training-dashboard.component';
+import { DietDashboardComponent } from './components/diet/diet-dashboard/diet-dashboard.component';
+import { TrainingUserComponent } from './components/user/training-user/training-user.component';
+import { DietUserComponent } from './components/user/diet-user/diet-user.component';
+import { SurveyUserComponent } from './components/user/survey-user/survey-user.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -118,7 +123,12 @@ export function tokenGetter() {
     BicepsUpdateComponent, 
     ModalBicepsComponent, 
     PupilListComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    TrainingDashboardComponent,
+    DietDashboardComponent,
+    TrainingUserComponent,
+    DietUserComponent,
+    SurveyUserComponent
   ],
   imports: [
     BrowserModule,

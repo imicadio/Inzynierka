@@ -504,6 +504,41 @@ namespace Engineer.Repositories.Repositories
             return _context.Thighs.SingleOrDefault(s => s.Id == id);
         }
 
+        public Biceps GetCurrentBiceps(int userId)
+        {
+            return _context.Bicepss.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
+        public BodyFat GetCurrentBodyFat(int userId)
+        {
+            return _context.BodyFats.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
+        public BodyWeight GetCurrentBodyWeight(int userId)
+        {
+            return _context.BodyWeights.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
+        public Calf GetCurrentCalf(int userId)
+        {
+            return _context.Calfs.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
+        public Chest GetCurrentChest(int userId)
+        {
+            return _context.Chests.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
+        public Hip GetCurrentHip(int userId)
+        {
+            return _context.Hips.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
+        public Thigh GetCurrentThigh(int userId)
+        {
+            return _context.Thighs.OrderByDescending(x => x.DateAdded).Take(1).SingleOrDefault(s => s.UserId == userId);
+        }
+
         public Surveyy GetSurvey(int userId)
         {
             return _context.Surveys.FirstOrDefault(x => x.UserId == userId);

@@ -1,3 +1,72 @@
-<p>
-  user-detail works!
-</p>
+<div class="row">
+<div class="col-md-2">
+    <div class="card">
+      <img class="card-img-top img-thumbnail" src="{{ user.photoUrl || '../../../assets/user.png' }}" alt="{{ user.knownAs }}">
+      <div class="card-body">
+      <div>
+          <strong>Nazwa:</strong>
+          <p>{{ user.userName }}</p>
+        </div>
+        <div>
+          <strong>Lokalizacja:</strong>
+          <p>{{ user.city }}, {{ user.country }}</p>
+        </div>
+        <div>
+          <strong>Age:</strong>
+          <p>{{ user.age }}</p>
+        </div>
+        <div>
+          <strong>Ostatnio aktywny:</strong>
+          <p>{{ user.lastActive | timeAgo }}</p>
+        </div>
+        <div>
+          <strong>Aktualne pomiary:</strong>
+          <div *ngFor="let item of currentSurveys?.object?.currentSurvey; let ix=index;">  
+              <p *ngIf="ix != 0 && ix != 1">{{ item.userName }}: {{ item.size }}cm.</p>
+              <p *ngIf="ix === 0">{{ item.userName }}: {{ item.size }}kg.</p>
+              <p *ngIf="ix === 1">{{ item.userName }}: {{ item.size }}%</p>
+          </div>
+        </div>       
+      </div>      
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="tab-panel">
+        <mat-tab-group class="member-tabset">
+          <mat-tab label="Informacje o osobie">
+            <div class="row mt-3">
+              <div class="col-12">
+                <h4>Historia z życia</h4>
+                <p>{{ user.introduction }}</p>
+                <h4>Co lubi jeść?</h4>
+                <p>{{ user.lookingFor }}</p>  
+                <h4>Zainteresowania</h4>
+                <p>{{ user.interests }}</p>
+              </div>
+            </div>         
+          </mat-tab>
+          <mat-tab label="Plany treningowe">
+              <div class="row mt-3">
+                <div class="col-12">
+                  <app-training-user></app-training-user>
+                </div>
+              </div>
+          </mat-tab>    
+          <mat-tab label="Plany dietetyczne"> 
+            <div class="wor mt-3">
+              <div class="col-12">
+                <app-diet-user></app-diet-user>
+              </div>
+            </div>
+          </mat-tab>    
+          <mat-tab label="Historia Pomiarów"> 
+            <div class="row mt-3">
+              <div class="col-12 height">
+                <app-survey-user></app-survey-user>
+              </div>
+            </div>
+          </mat-tab>   
+        </mat-tab-group>
+      </div>
+    </div>
+</div>
