@@ -4,7 +4,7 @@ import { ListSurveyQuery } from 'src/app/models/query/ListSurveyQuery';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { merge, of as observableOf } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { Biceps } from 'src/app/models/dashboard/biceps';
@@ -27,10 +27,15 @@ export class ThighListComponent1 implements OnInit {
     private alertify: AlertifyService,
     public authService: AuthService,
     private router: Router,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+    private route: ActivatedRoute
+    ) { }
+
+    private userId: number;
 
   ngOnInit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.userId = id;
     this.fillTableColumnNames();
     this.loadData();
   }
@@ -48,7 +53,7 @@ export class ThighListComponent1 implements OnInit {
       switchMap(() => {
         this.listQuery.PageNumber = this.paginator.pageIndex;
         this.listQuery.Limit = this.pageSize;
-        return this.dashboardService.ThighList(this.authService.decodedToken.nameid, this.listQuery);
+        return this.dashboardService.ThighList(this.userId, this.listQuery);
       }),
       map(data => {         
         this.resultLength = data.object.count;

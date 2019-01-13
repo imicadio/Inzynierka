@@ -43,7 +43,6 @@ export const appRoutes: Routes = [
             { path: 'user/edit', component: UserEditComponent }, 
             { path: 'user/:id', component: UserDetailComponent },                       
         ]
-
     },
     { path: '404', component: NotFoundComponent },
     { path: '**', redirectTo: '/404', pathMatch: 'full' }

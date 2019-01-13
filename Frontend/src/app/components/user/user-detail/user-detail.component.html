@@ -22,9 +22,9 @@
         <div>
           <strong>Aktualne pomiary:</strong>
           <div *ngFor="let item of currentSurveys?.object?.currentSurvey; let ix=index;">  
-              <p *ngIf="ix != 0 && ix != 1">{{ item.userName }}: {{ item.size }}cm.</p>
-              <p *ngIf="ix === 0">{{ item.userName }}: {{ item.size }}kg.</p>
-              <p *ngIf="ix === 1">{{ item.userName }}: {{ item.size }}%</p>
+              <p *ngIf="ix != 0 && ix != 1">{{ item?.userName }}: {{ item?.size }}cm.</p>
+              <p *ngIf="ix === 0">{{ item?.userName }}: {{ item?.size }}kg.</p>
+              <p *ngIf="ix === 1">{{ item?.userName }}: {{ item?.size }}%</p>
           </div>
         </div>       
       </div>      

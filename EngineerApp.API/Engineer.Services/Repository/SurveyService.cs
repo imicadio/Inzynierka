@@ -396,31 +396,94 @@ namespace Engineer.Services.Repository
             List<SurveyForSearchDto> typo = new List<SurveyForSearchDto>();
 
             var currentBodyWeight = _surveyRepository.GetCurrentBodyWeight(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentBodyWeight));
+            if(currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentBodyWeight));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }
             typo[0].UserName = "Masa ciała";
 
             var currentBodyFat = _surveyRepository.GetCurrentBodyFat(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentBodyFat));
+            if (currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentBodyFat));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }            
             typo[1].UserName = "Tkanka tłuszczowa";
 
             var currentBiceps = _surveyRepository.GetCurrentBiceps(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentBiceps));
+            if (currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentBiceps));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }            
             typo[2].UserName = "Biceps";
 
             var currentChest = _surveyRepository.GetCurrentChest(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentChest));
+            if (currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentChest));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }            
             typo[3].UserName = "Klatka piersiowa";
 
             var currentHip = _surveyRepository.GetCurrentHip(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentHip));
+            if (currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentHip));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }            
             typo[4].UserName = "Biodra";
 
             var currentThigh = _surveyRepository.GetCurrentThigh(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentThigh));
+            if (currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentThigh));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }            
             typo[5].UserName = "Łydka";
 
             var currentCalf = _surveyRepository.GetCurrentCalf(userId);
-            typo.Add(_mapper.Map<SurveyForSearchDto>(currentCalf));
+            if (currentBodyWeight != null)
+                typo.Add(_mapper.Map<SurveyForSearchDto>(currentCalf));
+            else
+            {
+                SurveyForSearchDto puste = new SurveyForSearchDto()
+                {
+                    Size = 0
+                };
+                typo.Add(puste);
+            }            
             typo[6].UserName = "Udo";
 
             response.Object.currentSurvey = _mapper.Map<List<SurveyForSearchDto>>(typo);
