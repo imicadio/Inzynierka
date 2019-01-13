@@ -7,6 +7,8 @@ import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { User } from 'src/app/models/user';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import * as moment from 'moment'
+import { CurrentSurvey } from 'src/app/models/currentSurvey';
 
 @Component({
   selector: 'app-training-add',
@@ -17,8 +19,23 @@ export class TrainingAddComponent implements OnInit {
   @Output() cancelTraining = new EventEmitter();
   myForm: FormGroup;    // inicjalizacja formularza
   pupils: User[];
+  user: User;
+  currentSurveys: CurrentSurvey[];
   selection: number;
+  minDateStart = moment().format('YYYY-MM-DD');
+  minDateEnd = moment().add(3, 'days').format("YYYY-MM-DD");
   selectionControl = new FormControl('', [Validators.required]);
+  dayControl = new FormControl('', [Validators.required]);
+
+  daysWeek = [
+    {value: 'Poniedziałek', viewValue: 'Poniedziałek'},
+    {value: 'Wtorek', viewValue: 'Wtorek'},
+    {value: 'Środa', viewValue: 'Środa'},
+    {value: 'Czwartek', viewValue: 'Czwartek'},
+    {value: 'Piątek', viewValue: 'Piątek'},
+    {value: 'Sobota', viewValue: 'Sobota'},
+    {value: 'Niedziela', viewValue: 'Niedziela'}
+  ];
  
   constructor(
     private trainerService: TrainerService,
@@ -31,12 +48,29 @@ export class TrainingAddComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.loadUsers();
+    console.log(this.user == null);
+  }
+
+  changePupil(event) {
+    this.userService.getUser(event.value).subscribe((user: User) => {
+      this.user = user;
+      console.log(user);
+    }, error => {
+      this.alertify.error(error);
+    });
+
+    this.userService.getCurrentSurveys(event.value).subscribe((currentSurvey: CurrentSurvey[]) => {
+      this.currentSurveys = currentSurvey;
+      // console.log(this.currentSurveys);
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
   loadUsers() {
     this.userService.getPupils(this.authService.decodedToken.nameid).subscribe((pupils: User[]) => {
       this.pupils = pupils;
-      console.log(pupils);
+      // console.log(pupils);
     }, error => {
       this.alertify.error(error);
     })
@@ -162,4 +196,9 @@ export class TrainingAddComponent implements OnInit {
   cancel() {
     this.cancelTraining.emit(false);
   }
+}
+
+export interface Day {
+  value: string;
+  viewValue: string;
 }

@@ -1,6 +1,37 @@
-<div class="container">
     <div class="row mt-5">
-        <div class="col-12">
+        <div class="col-3">
+            <div class="card" *ngIf="user != null">
+                <img class="card-img-top img-thumbnail" src="{{ user.photoUrl || '../../../assets/user.png' }}" alt="{{ user.knownAs }}">
+                <div class="card-body">
+                <div>
+                    <strong>Nazwa:</strong>
+                        <p>{{ user.userName }}</p>
+                    </div>
+                    <div>
+                        <strong>Lokalizacja:</strong>
+                        <p>{{ user.city }}, {{ user.country }}</p>
+                    </div>
+                    <div>
+                        <strong>Age:</strong>
+                        <p>{{ user.age }}</p>
+                    </div>
+                    <div>
+                        <strong>Ostatnio aktywny:</strong>
+                        <p>{{ user.lastActive | timeAgo }}</p>
+                    </div>
+                    <div>
+                        <strong>Aktualne pomiary:</strong>
+                        <div *ngFor="let item of currentSurveys?.object?.currentSurvey; let ix=index;">  
+                            <p *ngIf="ix != 0 && ix != 1">{{ item?.userName }}: {{ item?.size }}cm.</p>
+                            <p *ngIf="ix === 0">{{ item?.userName }}: {{ item?.size }}kg.</p>
+                            <p *ngIf="ix === 1">{{ item?.userName }}: {{ item?.size }}%</p>
+                        </div>
+                    </div>       
+                </div> 
+            </div>
+            <div *ngIf="user == null"><h2>Wybierz podopiecznego któremu układasz dietę</h2></div>                
+        </div>
+        <div class="col-8">
             <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
             <h2 class="text-center text-primary mb-5">Dodaj Nowy trening</h2>
             <!-- <hr>    
@@ -12,7 +43,7 @@
                 <div class="col-12 col-md-3">
                     <!-- <h4>Wybierz podopiecznego</h4> -->
                     <mat-form-field>
-                    <mat-select placeholder="Podopieczny" [(value)]="selection" [formControl]="selectionControl" required>
+                    <mat-select placeholder="Podopieczny" [(value)]="selection" [formControl]="selectionControl" (selectionChange)="changePupil($event)" required>
                         <mat-option>None</mat-option>
                         <mat-option *ngFor="let pupil of pupils?.object?.users" [value]="pupil.id">{{ pupil.userName }}</mat-option>
                     </mat-select>
@@ -29,7 +60,7 @@
                 <div class="col-12 col-md-3">
                     <!-- <h4>Data rozpoczęcia</h4> -->
                     <mat-form-field>
-                        <input matInput [matDatepicker]="startDate" formControlName="dateStart" placeholder="Data rozpoczęcia" required> 
+                        <input matInput [min]="minDateStart" [matDatepicker]="startDate" formControlName="dateStart" placeholder="Data rozpoczęcia" required> 
                         <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                         <mat-datepicker #startDate></mat-datepicker>
                     </mat-form-field>
@@ -37,7 +68,7 @@
                 <div class="col-12 col-md-3">
                     <!-- <h4>Data zakończenia</h4> -->
                     <mat-form-field>
-                        <input matInput [matDatepicker]="endDate" formControlName="dateEnd" placeholder="Data zakończenia" required>
+                        <input matInput [min]="minDateEnd" [matDatepicker]="endDate" formControlName="dateEnd" placeholder="Data zakończenia" required>
                         <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
                         <mat-datepicker #endDate></mat-datepicker>
                     </mat-form-field>
@@ -61,8 +92,25 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-4 margin">
-                                    <mat-form-field class="xs">
+                                    <!-- <mat-form-field class="xs">
                                         <input matInput placeholder="Dzień treningowy" formControlName="day" required>
+                                    </mat-form-field> -->
+
+                                    <!-- <mat-form-field>
+                                    <mat-select placeholder="Dzień treningowy" [formControl]="dayControl" formControlName="day" required>
+                                        <mat-option *ngFor="let day of days" [value]="day">
+                                        {{day.viewValue}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="dayControl.hasError('required')">Please choose an animal</mat-error>
+                                    </mat-form-field> -->
+
+                                    <mat-form-field>
+                                    <mat-select placeholder="Dzień treningowy" formControlName="day" [formControl]="dayControl" required ngDefaultControl>
+                                        <mat-option>None</mat-option>
+                                        <mat-option *ngFor="let dayWeek of daysWeek" [value]="dayWeek.value">{{ dayWeek.viewValue }}</mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="dayControl.hasError('required')">Musisz wybrać dzień treningowy</mat-error>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-12 col-md-4 margin">
@@ -178,4 +226,3 @@
             </form>              
         </div>
     </div>
-</div>

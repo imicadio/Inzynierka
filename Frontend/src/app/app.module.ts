@@ -81,6 +81,8 @@ import { CalfListComponent1 } from './components/user/survey/calf/calf-list/calf
 import { BodyWeightListComponent1 } from './components/user/survey/body-weight/body-weight-list/body-weight-list.component1';
 import { BodyFatListComponent1 } from './components/user/survey/body-fat/body-fat-list/body-fat-list.component1';
 import { BicepsListComponent1 } from './components/user/survey/biceps/biceps-list/biceps-list.component1';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { TrainingAddUserComponent } from './components/training/training-add-user/training-add-user.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -142,7 +144,8 @@ export function tokenGetter() {
     DietDashboardComponent,
     TrainingUserComponent,
     DietUserComponent,
-    SurveyUserComponent
+    SurveyUserComponent,
+    TrainingAddUserComponent
   ],
   imports: [
     BrowserModule,
@@ -192,6 +195,7 @@ export function tokenGetter() {
     MatTooltipModule,
     MatTreeModule,
     MatMomentDateModule,
+    ScrollingModule,
     DragDropModule,
     FileUploadModule,
     AlertModule.forRoot(),
