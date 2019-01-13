@@ -1,0 +1,161 @@
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.trainingDay {
+    background-color: #cfd8dc4d;
+}
+
+.exercise {
+    background-color: #eaeaea;
+    margin: 0 35px;
+}
+
+.serie {
+    border: 1px solid #f8f8f8;
+    background-color: #fff;
+}
+
+.margin {
+    margin: 5px;
+}
+
+.test {
+    margin: 20px 0;
+}
+
+.xs {
+    width: 100%;
+}
+
+.delete {
+    cursor: pointer;
+}
+
+.add {
+    float: right;
+    margin: 10px;
+}
+
+.fa {
+    cursor: pointer;
+    margin: 10px;
+}
+
+.serie_icon {
+    width: 30px;
+    height: 30px;
+    background-color: darkslateblue;
+    border-radius: 100%;
+    font-size: 20px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    float: right;
+    margin-top: -20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.serie_icon:hover {
+    background-color: #5f48ea;
+}
+
+.exercise_ic {
+    display: flex;
+    justify-content: center;
+}
+
+.exercise_icon {
+    width: 40px;
+    height: 40px;
+    background-color: darkblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin-top: -18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.exercise_icon:hover {
+    background-color: #0e0eff;
+}
+
+._day_icon {
+    display: flex;
+    justify-content: right;
+}
+
+.day_icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: orange;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+    margin-top: -10px;
+}
+
+.day_icon:hover {
+    background-color: #ffe000;
+}
+
+.list {
+    width: 500px;
+    max-width: 100%;
+    border: solid 1px #ccc;
+    min-height: 60px;
+    display: block;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .box:last-child {
+    border: none;
+  }
+  
+  .list.cdk-drop-dragging .box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  

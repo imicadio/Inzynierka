@@ -290,7 +290,11 @@ namespace Engineer.Services.Repository
 
             DietPlan diet = new DietPlan()
             {
-                Name = model.Name
+                Name = model.Name,
+                DateStart = model.DateStart,
+                DateEnd = model.DateEnd,
+                UserDietId = userId.Id,
+                TrainerDietId = trainerId.Id
             };
 
             var insertDiet = await _dietRepository.InsertAsync(diet);

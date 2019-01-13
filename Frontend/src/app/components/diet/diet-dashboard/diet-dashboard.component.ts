@@ -75,7 +75,7 @@ export class DietDashboardComponent implements OnInit {
   }
 
   btnClick() {
-    this.router.navigateByUrl('/diets/add');
+    this.router.navigateByUrl('/diet/add');
   } 
 
 }

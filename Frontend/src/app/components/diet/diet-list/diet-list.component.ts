@@ -21,9 +21,9 @@ export class DietListComponent implements OnInit {
   private pageSize = 5;
   private actionQuery: ListTrainingQuery = new ListTrainingQuery();
   public displayedColumns = new Array<string>();
-  private sortAscending = true;
+  private sortAscending = false;
   private filterValuets: string = "";
-  test = 'true';
+  test = 'false';
 
   constructor(
     private dietService: DietService,
@@ -99,6 +99,6 @@ export class DietListComponent implements OnInit {
   }
 
   btnClick() {
-    this.router.navigateByUrl('/diets/add');
+    this.router.navigateByUrl('/diet/add');
   } 
 }

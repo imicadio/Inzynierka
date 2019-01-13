@@ -1,3 +1,249 @@
-<p>
-  diet-add works!
-</p>
+<div class="row mt-5">
+  <div class="col-3">
+      <div class="card" *ngIf="user != null">
+          <img class="card-img-top img-thumbnail" src="{{ user.photoUrl || '../../../assets/user.png' }}" alt="{{ user.knownAs }}">
+          <div class="card-body">
+          <div>
+              <strong>Nazwa:</strong>
+                  <p>{{ user.userName }}</p>
+              </div>
+              <div>
+                  <strong>Lokalizacja:</strong>
+                  <p>{{ user.city }}, {{ user.country }}</p>
+              </div>
+              <div>
+                  <strong>Age:</strong>
+                  <p>{{ user.age }}</p>
+              </div>
+              <div>
+                  <strong>Ostatnio aktywny:</strong>
+                  <p>{{ user.lastActive | timeAgo }}</p>
+              </div>
+              <div>
+                  <strong>Aktualne pomiary:</strong>
+                  <div *ngFor="let item of currentSurveys?.object?.currentSurvey; let ix=index;">  
+                      <p *ngIf="ix != 0 && ix != 1">{{ item?.userName }}: {{ item?.size }}cm.</p>
+                      <p *ngIf="ix === 0">{{ item?.userName }}: {{ item?.size }}kg.</p>
+                      <p *ngIf="ix === 1">{{ item?.userName }}: {{ item?.size }}%</p>
+                  </div>
+              </div>       
+          </div> 
+      </div>
+      <div *ngIf="user == null"><h2>Wybierz podopiecznego któremu układasz dietę</h2></div>                
+  </div>
+  <div class="col-8">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <h2 class="text-center text-primary mb-5">Dodaj Nowy trening</h2>
+      <!-- <hr>    
+      Value: {{ myForm.value | json }}    
+      <hr>   -->
+
+      <div class="row">
+          <!-- Podopieczny  -->
+          <div class="col-12 col-md-3">
+              <!-- <h4>Wybierz podopiecznego</h4> -->
+              <mat-form-field>
+              <mat-select placeholder="Podopieczny" [(value)]="selection" [formControl]="selectionControl" (selectionChange)="changePupil($event)" required>
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let pupil of pupils?.object?.users" [value]="pupil.id">{{ pupil.userName }}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="selectionControl.hasError('required')">Musisz wybrać podopiecznego</mat-error>
+              </mat-form-field>
+          </div>
+          <!-- Nazwa treningu -->
+          <div class="col-12 col-md-3">
+              <!-- <h4>Podaj nazwę treningu</h4> -->
+              <mat-form-field class="full">
+                  <input matInput placeholder="Podaj nazwę diety" formControlName="name" required> 
+              </mat-form-field>
+          </div>
+          <div class="col-12 col-md-3">
+              <!-- <h4>Data rozpoczęcia</h4> -->
+              <mat-form-field>
+                  <input matInput [min]="minDateStart" [matDatepicker]="startDate" formControlName="dateStart" placeholder="Data rozpoczęcia" required> 
+                  <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                  <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
+          </div>
+          <div class="col-12 col-md-3">
+              <!-- <h4>Data zakończenia</h4> -->
+              <mat-form-field>
+                  <input matInput [min]="minDateEnd" [matDatepicker]="endDate" formControlName="dateEnd" placeholder="Data zakończenia" required>
+                  <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                  <mat-datepicker #endDate></mat-datepicker>
+              </mat-form-field>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div cdkDropList class="example-list" (cdkDropListDropped)="drop1($event)" formArrayName="dietDayBindingModels">
+                  <div [id]="ix" *ngFor="let days of myForm['controls'].dietDayBindingModels['controls']; let ix=index" [formGroupName]="ix" class="trainingDay" cdkDrag #elem="cdkDrag" (mouseenter)="enter1(ix)">                      
+
+                      <div class="row mb-3 mt-3 justify-content-between">
+                          <div class="col-1 text-center mt-3">
+                              <i class="fa fa-arrows" aria-hidden="true"></i>
+                          </div>
+                          <div class="col-1 text-center mt-3">                                  
+                              <i *appHasRole="['Trainer']" (click)="deleteX(ix)" matTooltip="Usuń trening" class="material-icons clear-icon delete">
+                                  clear
+                              </i>    
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-12 col-md-4 margin">
+                              <!-- <mat-form-field class="xs">
+                                  <input matInput placeholder="Dzień treningowy" formControlName="day" required>
+                              </mat-form-field> -->
+
+                              <!-- <mat-form-field>
+                              <mat-select placeholder="Dzień treningowy" [formControl]="dayControl" formControlName="day" required>
+                                  <mat-option *ngFor="let day of days" [value]="day">
+                                  {{day.viewValue}}
+                                  </mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="dayControl.hasError('required')">Please choose an animal</mat-error>
+                              </mat-form-field> -->
+
+                              <mat-form-field>
+                              <mat-select placeholder="Dzień" formControlName="name" [formControl]="dayControl" required ngDefaultControl>
+                                  <mat-option>None</mat-option>
+                                  <mat-option *ngFor="let dayWeek of daysWeek" [value]="dayWeek.value">{{ dayWeek.viewValue }}</mat-option>
+                              </mat-select>
+                              <mat-error *ngIf="dayControl.hasError('required')">Musisz wybrać dzień</mat-error>
+                              </mat-form-field>
+                          </div>                          
+                      </div>  
+
+                      <!-- exercisex -->
+                      <div class="row">
+                          <div class="col-12">
+                              <div cdkDropList class="example-list" (cdkDropListDropped)="drop2(ix, $event)" formArrayName="dietDetailBindingModels">                
+                                  <div [id]="iy" *ngFor="let exercises of days['controls'].dietDetailBindingModels['controls']; let iy=index" [formGroupName]="iy" class="exercise" cdkDrag #elem="cdkDrag" (mouseenter)="enter2(ix, iy)">
+                                      
+                                      <div class="row mb-3 mt-3 justify-content-between">
+                                              <div class="col-1 text-center mt-3">
+                                                  <i class="fa fa-arrows" aria-hidden="true"></i>
+                                              </div>
+                                              <div class="col-1 text-center mt-3">                                  
+                                                  <i *appHasRole="['Trainer']" (click)="deleteY(ix, iy)" matTooltip="Usuń ćwiczenie" class="material-icons clear-icon delete">
+                                                      clear
+                                                  </i>    
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-4">
+                                                  <div class="row">
+                                                      <div class="col-12">
+                                                          <mat-form-field class="xs">
+                                                              <input matInput placeholder="Nazwa posiłku" formControlName="meal" required>
+                                                          </mat-form-field>
+                                                      </div>
+                                                      <div class="col-12">
+                                                        <mat-form-field class="xs">
+                                                          <input matInput placeholder="Godzina posiłku" type="time" formControlName="hour">
+                                                        </mat-form-field>   
+                                                    </div>   
+                                                    <div class="col-12">
+                                                      <mat-form-field class="xs">
+                                                          <textarea matInput placeholder="Danie" formControlName="dish"></textarea>
+                                                      </mat-form-field>   
+                                                  </div> 
+                                                  <div class="col-12">
+                                                    <mat-form-field class="xs">
+                                                        <textarea matInput placeholder="Przepis" formControlName="recipe"></textarea>
+                                                    </mat-form-field>   
+                                                </div> 
+                                                <div class="col-12">
+                                                  <mat-form-field class="xs">
+                                                      <textarea matInput placeholder="Komentarz" formControlName="comments"></textarea>
+                                                  </mat-form-field>   
+                                              </div>   
+                                                  </div>       
+                                              </div> 
+                                              <!-- series -->  
+                                              <div class="col-8">
+                                                  <div class="row">                                                        
+                                                      <div class="col-12">    
+                                                          <h5 style="margin-top: -31px;">Produkty:</h5>       
+                                                          <div cdkDropList class="example-list" (cdkDropListDropped)="drop3(ix, iy, $event)" formArrayName="dietProductBindingModels">                
+                                                              <div [id]="iz" *ngFor="let serie of exercises['controls'].dietProductBindingModels['controls']; let iz=index" [formGroupName]="iz" class="serie" cdkDrag #elem="cdkDrag" (mouseenter)="enter3(ix, iy, iz)">   
+                                                                                                                                      
+                                                                  <div class="row">  
+                                                                      <div class="col-3">                                                         
+                                                                          <mat-form-field class="xs">
+                                                                              <input matInput placeholder="Nazwa" formControlName="name" required>
+                                                                          </mat-form-field>
+                                                                      </div>                                                                      
+                                                                      <div class="col-2">                                                         
+                                                                          <mat-form-field class="xs">
+                                                                              <input matInput placeholder="Ilość w [g.]" formControlName="quantity" required>
+                                                                          </mat-form-field>
+                                                                      </div>
+                                                                      
+                                                                    <div class="col-2">                                                         
+                                                                      <mat-form-field class="xs">
+                                                                          <input matInput placeholder="Miara domowa" formControlName="homeMeasure" required>
+                                                                      </mat-form-field>
+                                                                  </div>
+                                                                      
+                                                                      <!-- <div class="col-4 align-self-center"> 
+                                                                          <mat-radio-group formControlName="unit">
+                                                                              <mat-radio-button  value="powt." class="mr-3">powt.</mat-radio-button>
+                                                                              <mat-radio-button  value="min.">min.</mat-radio-button>
+                                                                          </mat-radio-group>
+                                                                      </div>  -->
+
+                                                                      <div class="col-4 align-self-center">
+                                                                          <div class="row">
+                                                                              <div class="col-6">
+                                                                                  <!-- <i class="fa fa-arrows" aria-hidden="true"></i> -->
+                                                                                  <i *appHasRole="['Trainer']" matTooltip="Zamień serię" class="material-icons swap_vert-icon">
+                                                                                      swap_vert
+                                                                                  </i>
+                                                                              </div>
+                                                                              <div class="col-6">
+                                                                                  <i *appHasRole="['Trainer']" (click)="deleteZ(ix, iy, iz)" matTooltip="Usuń serię" class="material-icons delete_sweep-icon delete">
+                                                                                      delete_sweep
+                                                                                  </i> 
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>                                                                               
+                                                              </div>                                            
+                                                          </div>
+                                                          <i *appHasRole="['Trainer']" matTooltip="Dodaj serię" (click)="addZ(ix ,iy)" class="material-icons add-icon serie_icon">
+                                                              add
+                                                          </i>
+                                                      </div>                                                        
+                                                  </div>                                                    
+                                              </div>                                                                                
+                                          </div>                                               
+                                      <!-- end series -->                
+                                  </div>            
+                              </div>
+                              <div class="col-12 exercise_ic">
+                                  <i *appHasRole="['Trainer']" matTooltip="Dodaj ćwiczenie" (click)="addY(ix)" class="material-icons add-icon exercise_icon">
+                                      add
+                                  </i>
+                              </div>         
+                          </div>
+                      </div>    
+                      <!-- end exercises -->                          
+                  </div>                            
+              </div>    
+              <div class="row">
+                  <div class="col-12 _day_icon">
+                      <i *appHasRole="['Trainer']" matTooltip="Dodaj dzień" (click)="addX()" class="material-icons add-icon day_icon">
+                          add
+                      </i>
+                  </div>
+              </div>            
+          </div> 
+      </div> 
+
+      <!-- <button mat-raised-button color="warn" >Add</button> -->
+      <button type="button" class="btn btn-success" type="submit">Zapisz Dietę</button>
+      </form>              
+  </div>
+</div>
