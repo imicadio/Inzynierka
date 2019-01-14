@@ -1,11 +1,11 @@
 
-<h3>Edytuj Biceps</h3>
+<h3>Edytuj rozmiar klatki piersiowej</h3>
 <div mat-dialog-content>
   <mat-form-field>
     <input matInput [(ngModel)]="data.size" placeholder="Rozmiar">
   </mat-form-field>
   <mat-form-field>
-    <input matInput [matDatepicker]="DateAdded" [(ngModel)]="data.dateAdded" placeholder="Choose a date">
+    <input matInput [max]="minDateEnd" [matDatepicker]="DateAdded" [(ngModel)]="data.dateAdded" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="DateAdded"></mat-datepicker-toggle>
     <mat-datepicker #DateAdded></mat-datepicker>
   </mat-form-field>    

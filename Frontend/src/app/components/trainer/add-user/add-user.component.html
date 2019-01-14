@@ -1,14 +1,14 @@
 <form [formGroup]="userForm" (ngSubmit)="register()">
-  <h2 class="text-center text-primary">Dodaj nowego użytkownika</h2>
+  <h2 class="text-center text-primary">Dodaj nowego podopiecznego</h2>
   <hr>
 
   <div class="form-group">
-    <label class="control-label" style="margin-right:10px">I am a: </label>
+    <label class="control-label" style="margin-right:10px">Płeć: </label>
     <label class="radio-inline">
-      <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+      <input class="mr-3" type="radio" value="male" formControlName="gender">Mężczyzna
     </label>
     <label class="radio-inline ml-3">
-      <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+      <input class="mr-3" type="radio" value="female" formControlName="gender">Kobieta
     </label>
   </div>
 
@@ -17,8 +17,8 @@
     [ngClass]="{'is-invalid': userForm.get('username').errors && userForm.get('username').touched}"
     class="form-control" 
     formControlName="username" 
-    placeholder="Username">
-    <div class="invalid-feedback">Please choose a username</div>
+    placeholder="Nick">
+    <div class="invalid-feedback">Nick</div>
   </div>  
 
   <div class="form-group">
@@ -26,22 +26,22 @@
     [ngClass]="{'is-invalid': userForm.get('password').errors && userForm.get('password').touched}"
     class="form-control" 
     formControlName="password" 
-    placeholder="Password"
+    placeholder="Haslo"
     autocomplete="off">
     <div class="invalid-feedback" 
       *ngIf="userForm.get('password').hasError('required') 
       && userForm.get('password').touched">
-      Password is required
+      Hasło jest wymagane
     </div>
     <div class="invalid-feedback" 
       *ngIf="userForm.get('password').hasError('minlength') 
       && userForm.get('password').touched">
-      Password must be at least 4 characters
+      Hasło musi zawierać więcej niż 4 znaki
     </div>
     <div class="invalid-feedback" 
       *ngIf="userForm.get('password').hasError('maxlength') 
       && userForm.get('password').touched">
-      Password cannot exceed 8 characters
+      Hasło nie może mieć więcej niż 8 znaków
     </div>
   </div>
 
@@ -52,24 +52,24 @@
     || userForm.get('confirmPassword').touched && userForm.hasError('mismatch')}"
     class="form-control" 
     formControlName="confirmPassword" 
-    placeholder="Confirm password">
+    placeholder="Powtórz hasło">
     <div class="invalid-feedback" 
       *ngIf="userForm.get('confirmPassword').hasError('required') 
       && userForm.get('confirmPassword').touched">
-      Password is required
+      Hasło jest wymagane
     </div>
     <div class="invalid-feedback" 
       *ngIf="userForm.hasError('mismatch') 
       && userForm.get('confirmPassword').touched">
-      Password must match
+      Podane hasła nie są takie same
     </div>
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success" [disabled]="!userForm.valid" type="submit">Register</button>
-    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-success" [disabled]="!userForm.valid" type="submit">Dodaj podopiecznego</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Anuluj</button>
   </div>
   
 </form>
-<p>{{ userForm.value | json }}</p>
-<p>{{ userForm.status | json}}</p>
+<!-- <p>{{ userForm.value | json }}</p>
+<p>{{ userForm.status | json}}</p> -->

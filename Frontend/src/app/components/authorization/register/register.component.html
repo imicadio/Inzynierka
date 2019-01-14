@@ -1,14 +1,15 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()">
-  <h2 class="text-center text-primary">Sign Up</h2>
+  <h2 class="text-center text-primary">Zarejestruj się jako trener personalny</h2>
+  <p>I prowadź swoich podopiecznych już dziś!</p>
   <hr>
 
   <div class="form-group">
-    <label class="control-label" style="margin-right:10px">I am a: </label>
+    <label class="control-label" style="margin-right:10px">Płeć: </label>
     <label class="radio-inline">
-      <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+      <input class="mr-3" type="radio" value="male" formControlName="gender">Mężczyzna
     </label>
     <label class="radio-inline ml-3">
-      <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+      <input class="mr-3" type="radio" value="female" formControlName="gender">Kobieta
     </label>
   </div>
 
@@ -17,32 +18,32 @@
     [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}"
     class="form-control" 
     formControlName="username" 
-    placeholder="Username">
-    <div class="invalid-feedback">Please choose a username</div>
+    placeholder="Nick">
+    <div class="invalid-feedback">Musisz podać swój Nick</div>
   </div>
 
   <div class="form-group">
     <input [ngClass]="{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}" class="form-control"
-      placeholder="Known as" formControlName="knownAs">
-    <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">Known as is required</div>
+      placeholder="Imię i nazwisko" formControlName="knownAs">
+    <div class="invalid-feedback" *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">Imię i nazwisko</div>
   </div>
 
   <div class="form-group">
     <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}" class="form-control"
-      placeholder="Date of Birth" formControlName="dateOfBirth" type="text" bsDatepicker [bsConfig]="bsConfig">
-    <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Date of Birth is required</div>
+      placeholder="Data urodzenia" formControlName="dateOfBirth" type="text" bsDatepicker [bsConfig]="bsConfig">
+    <div class="invalid-feedback" *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">Data urodzenia jest wymagana</div>
   </div>
 
   <div class="form-group">
     <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}" class="form-control"
-      placeholder="City" formControlName="city">
-    <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">City is required</div>
+      placeholder="Miasto" formControlName="city">
+    <div class="invalid-feedback" *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">Miejsce zamieszkania jest wyamagane</div>
   </div>
 
   <div class="form-group">
     <input [ngClass]="{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}" class="form-control"
-      placeholder="Country" formControlName="country">
-    <div class="invalid-feedback" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">Country is required</div>
+      placeholder="Kraj pochodzenia" formControlName="country">
+    <div class="invalid-feedback" *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">Kraj pochodzenia jest wymagany</div>
   </div>
 
   <div class="form-group">
@@ -50,21 +51,21 @@
     [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}"
     class="form-control" 
     formControlName="password" 
-    placeholder="Password">
+    placeholder="Hasło">
     <div class="invalid-feedback" 
       *ngIf="registerForm.get('password').hasError('required') 
       && registerForm.get('password').touched">
-      Password is required
+      Hasło jest wymagane
     </div>
     <div class="invalid-feedback" 
       *ngIf="registerForm.get('password').hasError('minlength') 
       && registerForm.get('password').touched">
-      Password must be at least 4 characters
+      Hasło musi zawierać więcej niż 4 znaki
     </div>
     <div class="invalid-feedback" 
       *ngIf="registerForm.get('password').hasError('maxlength') 
       && registerForm.get('password').touched">
-      Password cannot exceed 8 characters
+      Hasło musi być mniejsze niż 8 znaków
     </div>
   </div>
 
@@ -75,24 +76,24 @@
     || registerForm.get('confirmPassword').touched && registerForm.hasError('mismatch')}"
     class="form-control" 
     formControlName="confirmPassword" 
-    placeholder="Confirm password">
+    placeholder="Powtórz hasło">
     <div class="invalid-feedback" 
       *ngIf="registerForm.get('confirmPassword').hasError('required') 
       && registerForm.get('confirmPassword').touched">
-      Password is required
+      Hasło jest wymagane
     </div>
     <div class="invalid-feedback" 
       *ngIf="registerForm.hasError('mismatch') 
       && registerForm.get('confirmPassword').touched">
-      Password must match
+      Hasła nie są takie same
     </div>
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
-    <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Zarejestruj się</button>
+    <button class="btn btn-default" type="button" (click)="cancel()">Anuluj</button>
   </div>
   
 </form>
-<p>{{ registerForm.value | json }}</p>
-<p>{{ registerForm.status | json}}</p>
+<!-- <p>{{ registerForm.value | json }}</p>
+<p>{{ registerForm.status | json}}</p> -->

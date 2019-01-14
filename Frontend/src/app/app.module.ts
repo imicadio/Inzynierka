@@ -83,6 +83,7 @@ import { BodyFatListComponent1 } from './components/user/survey/body-fat/body-fa
 import { BicepsListComponent1 } from './components/user/survey/biceps/biceps-list/biceps-list.component1';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TrainingAddUserComponent } from './components/training/training-add-user/training-add-user.component';
+import { PreventUnsevedChanges } from './_guards/preved-unsaved-changes.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -226,7 +227,8 @@ export function tokenGetter() {
     TrainerService,
     DietDetailResolver,
     UserService,
-    DashboardService
+    DashboardService,
+    PreventUnsevedChanges
   ],
   entryComponents: [
     ModalBicepsComponent,

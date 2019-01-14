@@ -69,6 +69,7 @@ export class DietListComponent implements OnInit {
         })
       ).subscribe((data: Diet[]) => {
         this.diets.data = data;
+        console.log(this.diets.data.length == 0);
       }); 
   }  
 

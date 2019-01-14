@@ -22,6 +22,7 @@ import { ChestAddComponent } from './components/dashboard/survey/chest/chest-add
 import { HipAddComponent } from './components/dashboard/survey/hip/hip-add/hip-add.component';
 import { ThighAddComponent } from './components/dashboard/survey/thigh/thigh-add/thigh-add.component';
 import { UserDetailComponent } from './components/user/user-detail/user-detail.component';
+import { PreventUnsevedChanges } from './_guards/preved-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -40,7 +41,7 @@ export const appRoutes: Routes = [
             { path: 'diet/add', component: DietAddComponent, data: { roles: ['Trainer'] } },
             { path: 'diet/:id', component: DietDetailComponent },
             { path: 'diet/edit/:id', component: DietEditComponent, data: { roles: ['Trainer'] } },
-            { path: 'user/edit', component: UserEditComponent }, 
+            { path: 'user/edit', component: UserEditComponent, canDeactivate: [PreventUnsevedChanges] }, 
             { path: 'user/:id', component: UserDetailComponent },                       
         ]
     },

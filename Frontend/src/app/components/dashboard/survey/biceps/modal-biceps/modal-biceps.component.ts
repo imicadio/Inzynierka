@@ -5,6 +5,7 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AlertifyService } from 'src/app/services/alertify/alertify.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import * as moment from 'moment'
 
 @Component({
   selector: 'app-modal-biceps',
@@ -13,6 +14,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ModalBicepsComponent implements OnInit {
   UpdateSurvey: FormGroup;
+  minDateEnd = moment().format('YYYY-MM-DD');
 
   constructor(
     public dialogRef: MatDialogRef<ModalBicepsComponent>,
